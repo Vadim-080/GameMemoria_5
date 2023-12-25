@@ -122,5 +122,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/igrovoePole" />
 
+    <Button
+        android:id="@+id/buMenu"
+        style="@style/styleStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="меню"
+        android:textSize="10dp"
+        android:onClick="clickMenu"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.9"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.95" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

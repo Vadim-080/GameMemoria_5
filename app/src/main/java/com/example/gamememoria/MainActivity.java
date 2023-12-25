@@ -28,18 +28,15 @@ import java.util.Calendar;
 public class MainActivity extends AppCompatActivity {
 
     int timeGame;  // Задаём время игры на разных уровнях
-    private int Uroven=1;  // Задаём уровень в игре
     long timeStopped = 0; // для остановки времени во время паузы
     boolean sostoyniePause = false; // для переключения надписи кнопки пвуза-продолжить
     private TextView stepScreen;
     private Button buPause;
     private Chronometer timeScreen;
     private Integer StepCount; // кол-во ходов
-
     private GridView mGrid;
     private Pole mAdapter;
     private static final int NOTIFICATION_REMINDER = 4;
-
     private void ShowGameOver() {
 
         // Диалоговое окно
@@ -143,7 +140,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onChronometerTick(Chronometer chronometer) {
                         if (chronometer.getText().toString().equalsIgnoreCase("00:00") || StepCount == 0) {
 
-                            gameOver (null);
+                            gameOver(null);
                         }
 
                     }
@@ -185,13 +182,12 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
-    public void gameOver (View view) {      // Переход на другой класс (сдесь класс Vvod)
+    public void gameOver(View view) {      // Переход на другой класс (сдесь класс Vvod)
         Intent intent = new Intent(this, GameOver.class);
-        startActivity(intent);}
+        startActivity(intent);
+    }
 
 
     public void clickPause(View view) {
@@ -223,6 +219,10 @@ public class MainActivity extends AppCompatActivity {
             a1.animate().alpha(1f).setDuration(1000);
         }
     }
+    public void clickMenu(View view) {
 
+        Intent intent = new Intent(this, Menu.class);    // Переход на другой класс (сдесь класс Vvod)
+        startActivity(intent);
+    }
 
 }
