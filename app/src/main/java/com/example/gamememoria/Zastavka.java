@@ -37,7 +37,7 @@ public class Zastavka extends AppCompatActivity {
         Thread timer = new Thread() {
             public void run() {
                 try {
-                    sleep(6000);
+                    sleep(1000);  // Время продолжительности заставки
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {

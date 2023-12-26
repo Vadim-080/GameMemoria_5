@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +21,8 @@ public class Menu extends AppCompatActivity {
     public static SharedPreferences mSettings;  // Создаём переменную, представляющую экземпляр класса SharedPreferences, который отвечает за работу с настройками
     public static int uroven;  // Задаём уровень в игре
 
+    private ImageView monet;
+
     Button start;
     Button exit;
     TextView namberUroven;
@@ -27,6 +32,12 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        monet = findViewById(R.id.monet_viev);
+
+        Animation myanim1 = AnimationUtils.loadAnimation(this, R.anim.anim_monet);
+
+        monet.startAnimation(myanim1);
+
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
         start = (Button) findViewById(R.id.buStart);
@@ -34,7 +45,7 @@ public class Menu extends AppCompatActivity {
         namberUroven = (TextView) findViewById(R.id.nadpNamberUroven_view);
 
         onResume();
-        namberUroven.setText(""+uroven);
+        namberUroven.setText("" + uroven);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override

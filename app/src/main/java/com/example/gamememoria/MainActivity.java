@@ -75,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        //  УВЕДОМЛЕНИЯ
+//  УВЕДОМЛЕНИЯ
         // https://stackru.com/questions/54083216/sozdanie-uvedomleniya-android-kotoroe-povtoryaetsya-kazhdyij-den-v-opredelennoe?ysclid=lplngnkswq786714462
 
         Intent notifyIntent = new Intent(this, ReceiverNapomin.class);
@@ -114,7 +113,6 @@ public class MainActivity extends AppCompatActivity {
         stepScreen = (TextView) findViewById(R.id.step_view);
         buPause = (Button) findViewById(R.id.buPause);
 
-
         // шрифт
         /* Typeface type = Typeface.createFromAsset(getAssets(),"komi.ttf");*/
 
@@ -132,10 +130,8 @@ public class MainActivity extends AppCompatActivity {
 
         timeScreen.start();
 
-
         timeScreen   // Определение проигрыша
                 .setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
-
                     @Override
                     public void onChronometerTick(Chronometer chronometer) {
                         if (chronometer.getText().toString().equalsIgnoreCase("00:00") || StepCount == 0) {
@@ -145,7 +141,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-
 
         mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -178,7 +173,6 @@ public class MainActivity extends AppCompatActivity {
                         timeScreen.stop();
                         ShowGameOver();
                     }
-
                 }
             }
         });
@@ -189,6 +183,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+// ПАУЗА - ПРОДОЛЖИТЬ
 
     public void clickPause(View view) {
 
