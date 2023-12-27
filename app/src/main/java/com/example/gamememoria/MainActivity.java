@@ -3,7 +3,9 @@
 package com.example.gamememoria;
 
 import static com.example.gamememoria.Menu.Key_Score;
+import static com.example.gamememoria.Menu.Key_Time;
 import static com.example.gamememoria.Menu.Key_Uroven;
+import static com.example.gamememoria.Menu.bonusTime;
 import static com.example.gamememoria.Menu.mSettings;
 import static com.example.gamememoria.Menu.score;
 import static com.example.gamememoria.Menu.uroven;
@@ -38,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     boolean sostoyniePause = false; // для переключения надписи кнопки пвуза-продолжить
     private TextView stepScreen;
     private Button buPause;
-    private Chronometer timeScreen, timeItog;
+    private Chronometer timeScreen, timeItog, qwe;
     private Integer StepCount; // кол-во ходов
     private Integer StepCountStart; // начальное число ходов, для вычислений
     private Integer StepCountIspolz; // Использованное за игру число ходов, для вычислений
@@ -188,12 +190,16 @@ public class MainActivity extends AppCompatActivity {
         String time = timeItog.getText().toString();
 
         uroven = uroven + 1;
+
+        int bonusStep = StepCount;
+        long bonusTimeViv = (SystemClock.elapsedRealtime() - timeScreen.getBase())*(-1);
         score = score + StepCount;
+        bonusTime = bonusTime + (int) (bonusTimeViv/1000);
 
         onPause();
 
-        String TextToast = "ВЫ ПОБЕДИЛИ \n \n Сделано ходов: " + StepCountIspolz + " \n\n Истрачено времени: " + time +
-                " \n\n Вы перешли на уровень: " + uroven;
+        String TextToast = "ВЫ ПОБЕДИЛИ"+ "\n \n" +"Открыт уровень: " + uroven + " \n \n"+ "Сделано ходов: " + StepCountIspolz + " \n\n " +
+                "Истрачено времени: " + time + " \n\n " + "Бонусные очки: " + bonusStep + " \n\n " + "Бонусное время: " + (bonusTimeViv/1000)+" сек";
 
         alertbox.setMessage(TextToast);
 
@@ -201,7 +207,9 @@ public class MainActivity extends AppCompatActivity {
         alertbox.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
             public void onClick(DialogInterface arg0, int arg1) {
                 // закрываем текущюю Activity
-                finish();
+              /*  finish();*/
+
+                clickMenu(null);
 
                 /*  gameOver(null);*/
             }
@@ -228,6 +236,10 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor a2 = mSettings.edit();
         a2.putInt(String.valueOf(Key_Score), score);
         a2.apply();
+
+        SharedPreferences.Editor a3 = mSettings.edit();
+        a3.putInt(String.valueOf(Key_Time), bonusTime);
+        a3.apply();
     }
 
 // ПАУЗА - ПРОДОЛЖИТЬ

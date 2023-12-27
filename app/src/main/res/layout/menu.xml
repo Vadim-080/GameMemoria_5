@@ -50,8 +50,8 @@
 
     <ImageView
         android:id="@+id/monet_viev"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="30dp"
         android:autoSizeTextType="uniform"
@@ -72,14 +72,12 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="110dp"
         android:layout_marginTop="30dp"
-
         android:gravity="center_horizontal|center_vertical"
         android:text="125354"
         android:textColor="@color/CV4"
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -102,21 +100,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nadpUrovenGame_view" />
 
-    <TextView
-        android:id="@+id/timeBonus"
+    <Chronometer
+        android:id="@+id/timeBonus_view"
         style="@style/stylChronom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
-
         android:gravity="center_horizontal|center_vertical"
-        android:text="9999"
         android:textColor="@color/CV4"
         android:textSize="22dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintHorizontal_bias="1"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
