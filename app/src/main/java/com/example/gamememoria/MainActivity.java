@@ -33,23 +33,20 @@ import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
 
-    long timeGame;  // Задаём время игры на разных уровнях
+    int timeGame;  // Задаём время игры на разных уровнях
     long timeStopped = 0; // для остановки времени во время паузы
     boolean sostoyniePause = false; // для переключения надписи кнопки пвуза-продолжить
     private TextView stepScreen;
     private Button buPause;
     private Chronometer timeScreen, timeItog;
-
-    TextView namberUroven;
-
-
     private Integer StepCount; // кол-во ходов
-
     private Integer StepCountStart; // начальное число ходов, для вычислений
     private Integer StepCountIspolz; // Использованное за игру число ходов, для вычислений
     private GridView mGrid;
     private Pole mAdapter;
     private static final int NOTIFICATION_REMINDER = 4;
+
+    TextView namberUroven;
 
 
     // Поворот экрана
@@ -68,16 +65,13 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+// https://developer.alexanderklimov.ru/android/games/memoria.php?ysclid=lq527nk13p378087110
+// https://ru-code-android.livejournal.com/2665.html
 
-        // https://developer.alexanderklimov.ru/android/games/memoria.php?ysclid=lq527nk13p378087110
-
-        // https://ru-code-android.livejournal.com/2665.html
-
-        mGrid = (GridView) findViewById(R.id.igrovoePole);
-        namberUroven = (TextView) findViewById(R.id.NamberUroven_view);
+        mGrid = findViewById(R.id.igrovoePole);
+        namberUroven = findViewById(R.id.NamberUroven_view);
 
         namberUroven.setText("" + uroven);
-
 
         mGrid.setNumColumns(2);
 
@@ -90,10 +84,10 @@ public class MainActivity extends AppCompatActivity {
         mAdapter = new Pole(this, 2, 2);
         mGrid.setAdapter(mAdapter);
 
-        timeScreen = (Chronometer) findViewById(R.id.time_view);
-        timeItog = (Chronometer) findViewById(R.id.timeItog);
-        stepScreen = (TextView) findViewById(R.id.step_view);
-        buPause = (Button) findViewById(R.id.buPause);
+        timeScreen = findViewById(R.id.time_view);
+        timeItog = findViewById(R.id.timeItog);
+        stepScreen = findViewById(R.id.step_view);
+        buPause = findViewById(R.id.buPause);
 
         // шрифт
         /* Typeface type = Typeface.createFromAsset(getAssets(),"komi.ttf");*/
@@ -194,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
         String time = timeItog.getText().toString();
 
         uroven = uroven + 1;
-        score =score+StepCount;
+        score = score + StepCount;
 
         onPause();
 
@@ -209,14 +203,13 @@ public class MainActivity extends AppCompatActivity {
                 // закрываем текущюю Activity
                 finish();
 
-              /*  gameOver(null);*/
+                /*  gameOver(null);*/
             }
         });
         // показываем окно
         alertbox.show();
 
     }
-
 
 
     public void gameOver(View view) {      // Переход на другой класс (сдесь класс Vvod)
@@ -228,13 +221,13 @@ public class MainActivity extends AppCompatActivity {
     public void onPause() {    // Запоминаем данные
         super.onPause();
 
-        SharedPreferences.Editor editor1 = mSettings.edit();
-        editor1.putInt(String.valueOf(Key_Uroven), uroven);
-        editor1.apply();
+        SharedPreferences.Editor a1 = mSettings.edit();
+        a1.putInt(String.valueOf(Key_Uroven), uroven);
+        a1.apply();
 
-        SharedPreferences.Editor editor2 = mSettings.edit();
-        editor2.putInt(String.valueOf(Key_Score), score);
-        editor2.apply();
+        SharedPreferences.Editor a2 = mSettings.edit();
+        a2.putInt(String.valueOf(Key_Score), score);
+        a2.apply();
     }
 
 // ПАУЗА - ПРОДОЛЖИТЬ

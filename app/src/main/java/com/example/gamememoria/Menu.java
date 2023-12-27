@@ -18,12 +18,19 @@ public class Menu extends AppCompatActivity {
     public static final String APP_PREFERENCES = "PAPKA_MEMORI_GAME_MEMOR";  // константа для имени файла настроек
     public static int Key_Uroven=1; //  ключ текущий уровень,
     public static int Key_Score=2; //  ключ текущие очки,
+    public static int Key_Time=3; //  ключ бонусные очки,
+
+    public static int Key_Uroven_Max=11; //  ключ максимального уровня,
+    public static int Key_Score_Max=12; //  ключ максимальных очков,
+    public static int Key_Time_Max=13; //  ключ бонусные очки,
+
     public static final String APP_PREFERENCES_COUNTER_Uroven = String.valueOf(Key_Uroven); // Создадим параметр, который мы хотим сохранять в настройках
     public static SharedPreferences mSettings;  // Создаём переменную, представляющую экземпляр класса SharedPreferences, который отвечает за работу с настройками
     public static int uroven;  // Задаём уровень в игре
     public static int score;  // Задаём количество очков в игре
 
     private ImageView monet;
+    private ImageView time;
 
     Button start, exit, newGame;
 
@@ -35,21 +42,20 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         monet = findViewById(R.id.monet_viev);
-        score_viev = (TextView)  findViewById(R.id.score_viev);
-        start = (Button) findViewById(R.id.buStart);
-        exit = (Button) findViewById(R.id.buExit);
-        newGame = (Button) findViewById(R.id.buNewGame);
-        namberUroven = (TextView) findViewById(R.id.NamberUroven_view);
+        time = findViewById(R.id.time_viev);
+        score_viev =   findViewById(R.id.score_viev);
+        start =  findViewById(R.id.buStart);
+        exit =  findViewById(R.id.buExit);
+        newGame = findViewById(R.id.buNewGame);
+        namberUroven =  findViewById(R.id.NamberUroven_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
         onResume();
         namberUroven.setText("" + uroven);
         score_viev.setText("" + score);
 
-        Animation myanim1 = AnimationUtils.loadAnimation(this, R.anim.anim_monet);
-
-        monet.startAnimation(myanim1);
-
+        Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_monet);
+        monet.startAnimation(a1);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,8 +77,6 @@ public class Menu extends AppCompatActivity {
                 newGame();
             }
         });
-
-
     }
 
     private void startGame() {
@@ -81,14 +85,12 @@ public class Menu extends AppCompatActivity {
     }
 
     private void newGame() {
+        uroven = 1;
+        score=0;
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
-    private void clickRedaktor (View v) {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
 
     @Override
     public void onResume() {    // Получаем число из настроек
