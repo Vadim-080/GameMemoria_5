@@ -1,5 +1,8 @@
 package com.example.gamememoria;
 
+import static com.example.gamememoria.Menu.Shirin_fishek;
+import static com.example.gamememoria.Menu.Visot_fishek;
+
 import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
@@ -13,8 +16,6 @@ import java.util.Collections;
 
 public class Pole extends BaseAdapter {
 
-    int a = 150; // размер фишек
-    int b = 150; // размер фишек
     private Context mContext;
     private Integer mCols, mRows;
 
@@ -37,6 +38,7 @@ public class Pole extends BaseAdapter {
         PictureCollection = "animal";
         // Получаем все ресурсы приложения
         mRes = mContext.getResources();
+
 
         // Метод заполняющий массив vecPict
         makePictArray();
@@ -82,9 +84,10 @@ public class Pole extends BaseAdapter {
 
         ImageView view; // для вывода картинки
 
+
         if (convertView == null) {
             view = new ImageView(mContext);
-            view.setLayoutParams(new GridView.LayoutParams(a, b));  // Задаём размеры элемента
+            view.setLayoutParams(new GridView.LayoutParams(Shirin_fishek, Visot_fishek));  // Задаём размеры элемента
             view.setScaleType(ImageView.ScaleType.CENTER_CROP);
             view.setPadding(8, 8, 8, 8);
         } else
