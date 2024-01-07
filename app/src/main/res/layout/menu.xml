@@ -33,15 +33,13 @@
         style="@style/stylChronom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="5dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="0"
         android:textColor="@color/CV4"
         android:textSize="50dp"
         android:textStyle="bold"
-
-
         app:layout_constraintStart_toEndOf="@+id/nadpUrovenGame_view"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -49,7 +47,7 @@
         android:id="@+id/monet_viev"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="50dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="30dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
@@ -67,67 +65,72 @@
         style="@style/stylChronom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="92dp"
-
-        android:gravity="center_horizontal|center_vertical"
-        android:textColor="@color/CV4"
-        android:textSize="30dp"
         android:layout_marginLeft="5dp"
-        app:layout_constraintHorizontal_bias="0.116"
-
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="85dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="0"
+        android:textColor="@color/CV4"
+        android:textSize="40dp"
         android:textStyle="bold"
+        app:layout_constraintHorizontal_bias="0.116"
         app:layout_constraintStart_toEndOf="@+id/monet_viev"
+        app:layout_constraintTop_toTopOf="parent"
         tools:layout_editor_absoluteY="93dp" />
 
     <ImageView
         android:id="@+id/time_viev"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginLeft="260dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="92dp"
+        android:layout_marginRight="5dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/time"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nadpUrovenGame_view" />
+
+        app:layout_constraintRight_toLeftOf="@+id/timeBonus_view"
+
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Chronometer
         android:id="@+id/timeBonus_view"
         style="@style/stylChronom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="92dp"
-
-
-
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:autoSizeTextType="uniform"
         android:gravity="center_horizontal|center_vertical"
-
         android:textColor="@color/CV4"
-
-
+        android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintHorizontal_bias="0.116"
-
-
-        app:layout_constraintStart_toEndOf="@+id/time_viev"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nadpUrovenGame_view" />
 
     <Button
         android:id="@+id/buStart"
         style="@style/styleStart"
         android:layout_width="128dp"
         android:layout_height="120dp"
+        android:layout_marginLeft="40dp"
         android:text="Старт"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.234" />
+
+    <Button
+        android:id="@+id/buStart1"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:layout_marginLeft="160dp"
+        android:layout_marginRight="70dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

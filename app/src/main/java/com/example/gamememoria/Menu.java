@@ -22,35 +22,24 @@ public class Menu extends AppCompatActivity {
     public static int Key_Uroven = 1; //  ключ текущий уровень
     public static int Key_Score = 2; //  ключ текущие очки
     public static int Key_Time = 3; //  ключ бонусное время
-
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
-
-    /* public static final String APP_PREFERENCES_COUNTER_Uroven = String.valueOf(Key_Uroven); // Создадим параметр, который мы хотим сохранять в настройках*/
-
     public static int uroven;  // Задаём уровень в игре
     public static int score;  // Задаём количество очков в игре
     public static int bonusTime;  // Задаём количество бонусного времени
-
     public static int urovenMax;  // Для хранения максимального достигнутого в игре уровня
     public static int scoreMax;  // Для хранения набранных на максимальн уровне очков
     public static int bonusTimeMax;  // Для хранения набранного на максимальн уровне времени
+    public static String PrichinGameOver;
+    public static int Visot_fishek; // высота фишек
+    public static int Shirin_fishek; // высота фишек
 
     private ImageView monet;
     private ImageView time;
 
-    public static String PrichinGameOver;
-
-
-    public static int Visot_fishek; // высота фишек
-    public static int Shirin_fishek; // высота фишек
-
-
-    Button start, exit, newGame;
-
+    Button start, start1, exit, newGame;
     Chronometer timeBonus;
-
     TextView namberUroven, score_viev;
 
     @Override
@@ -63,6 +52,7 @@ public class Menu extends AppCompatActivity {
         timeBonus = findViewById(R.id.timeBonus_view);
         score_viev = findViewById(R.id.score_viev);
         start = findViewById(R.id.buStart);
+        start1 = findViewById(R.id.buStart1);
         exit = findViewById(R.id.buExit);
         newGame = findViewById(R.id.buNewGame);
         namberUroven = findViewById(R.id.NamberUroven_view);
@@ -73,12 +63,29 @@ public class Menu extends AppCompatActivity {
         score_viev.setText("" + score);
         timeBonus.setBase(SystemClock.elapsedRealtime() - bonusTime * 1000);
 
-        Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_monet);
-        monet.startAnimation(a1);
-        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_time);
+       /* Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_monet);
+        monet.startAnimation(a1);*/
+
+        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_time2);
         time.startAnimation(a2);
 
+        View a3 = findViewById(R.id.monet_viev);                   // ПОВОРОТ КНОПКИ
+        a3.animate().rotationYBy(99720).setDuration(300000);
+
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start);
+        start.startAnimation(a4);
+
+        Animation a5 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
+        namberUroven.startAnimation(a5);
+
         start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
+
+        start1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startGame();
@@ -101,6 +108,7 @@ public class Menu extends AppCompatActivity {
     }
 
     private void startGame() {
+
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }

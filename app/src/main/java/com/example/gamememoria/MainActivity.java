@@ -33,6 +33,8 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
@@ -89,6 +91,9 @@ public class MainActivity extends AppCompatActivity {
         namberUroven = findViewById(R.id.NamberUroven_view);
 
         namberUroven.setText("" + uroven);
+
+        Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
+        namberUroven.startAnimation(a1);
 
         if (uroven == 1) {
             mGrid.setNumColumns(3);
@@ -256,12 +261,17 @@ public class MainActivity extends AppCompatActivity {
                 .setOnChronometerTickListener(new Chronometer.OnChronometerTickListener() {
                     @Override
                     public void onChronometerTick(Chronometer chronometer) {
-                        if (chronometer.getText().toString().equalsIgnoreCase("00:00") ) {
-                            PrichinGameOver = "ВРЕМЯ ИГРЫ ИСТЕКЛО";
+
+                        long provOkonshTimeVZdushemRezime = SystemClock.elapsedRealtime()
+                                -  timeScreen.getBase();
+
+                        if (chronometer.getText().toString().equalsIgnoreCase("00:00")
+                                | (provOkonshTimeVZdushemRezime >=0)) {
+                            PrichinGameOver = "ВРЕМЯ  ИГРЫ  ИСТЕКЛО";
                             gameOver(null);
                         }
-                        if ( StepCount == 0) {
-                            PrichinGameOver = "ИЗРАСХОДОВАНО ЗАДАННОЕ ЧИСЛО ХОДОВ";
+                        if ( StepCount <= 0) {
+                            PrichinGameOver = "ИЗРАСХОДОВАНО  ЗАДАННОЕ  ЧИСЛО  ХОДОВ";
                             gameOver(null);
                         }
                     }
