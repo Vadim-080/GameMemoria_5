@@ -4,6 +4,9 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 import static com.example.gamememoria.Menu.PrichinGameOver;
 
@@ -11,7 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class GameOver extends AppCompatActivity {
 
-    private TextView PrichinGameOver_view;
+    private TextView PrichinGameOver_view, ViProigrali;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -20,7 +23,12 @@ public class GameOver extends AppCompatActivity {
         setContentView(R.layout.gameover);
 
         PrichinGameOver_view = findViewById(R.id.PrichinGameOver_view);
+        ViProigrali = findViewById(R.id.nadpViProigrali_view);
+
         PrichinGameOver_view.setText("" + PrichinGameOver);
+
+        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_proigr);
+        ViProigrali.startAnimation(a2);
 
     }
 

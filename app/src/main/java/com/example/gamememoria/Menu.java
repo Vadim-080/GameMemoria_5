@@ -22,10 +22,15 @@ public class Menu extends AppCompatActivity {
     public static int Key_Uroven = 1; //  ключ текущий уровень
     public static int Key_Score = 2; //  ключ текущие очки
     public static int Key_Time = 3; //  ключ бонусное время
+    public static int Key_Slognost_time = 4; //  ключ Сложность время
+    public static int Key_Slognost_step = 5; //  ключ Сложность ходы
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
+
     public static int uroven;  // Задаём уровень в игре
+    public static int slognost_game_time;  // Задаём сложность игры - время
+    public static int slognost_game_step;  // Задаём сложность игры - ходы
     public static int score;  // Задаём количество очков в игре
     public static int bonusTime;  // Задаём количество бонусного времени
     public static int urovenMax;  // Для хранения максимального достигнутого в игре уровня
@@ -35,10 +40,15 @@ public class Menu extends AppCompatActivity {
     public static int Visot_fishek; // высота фишек
     public static int Shirin_fishek; // высота фишек
 
+    public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
+
     private ImageView monet;
     private ImageView time;
 
-    Button start, start1, exit, newGame;
+
+
+
+    Button start, start1, exit, newGame, slogn;
     Chronometer timeBonus;
     TextView namberUroven, score_viev;
 
@@ -53,6 +63,7 @@ public class Menu extends AppCompatActivity {
         score_viev = findViewById(R.id.score_viev);
         start = findViewById(R.id.buStart);
         start1 = findViewById(R.id.buStart1);
+        slogn = findViewById(R.id.buSlognost);
         exit = findViewById(R.id.buExit);
         newGame = findViewById(R.id.buNewGame);
         namberUroven = findViewById(R.id.NamberUroven_view);
@@ -92,6 +103,20 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        newGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame();
+            }
+        });
+
+        slogn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slognost();
+            }
+        });
+
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -99,17 +124,18 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        newGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newGame();
-            }
-        });
+
     }
 
     private void startGame() {
 
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    private void slognost() {
+
+        Intent i = new Intent(this, Slognost.class);
         startActivity(i);
     }
 

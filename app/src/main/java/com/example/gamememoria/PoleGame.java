@@ -14,7 +14,7 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class Pole extends BaseAdapter {
+public class PoleGame extends BaseAdapter {
 
     private Context mContext;
     private Integer mCols, mRows;
@@ -27,7 +27,7 @@ public class Pole extends BaseAdapter {
 
     private ArrayList<Status> arrStatus; // состояние ячеек
 
-    public Pole(Context context, int cols, int rows) {
+    public PoleGame(Context context, int cols, int rows) {
         mContext = context;
         mCols = cols;
         mRows = rows;
