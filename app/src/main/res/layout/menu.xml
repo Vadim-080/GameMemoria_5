@@ -30,18 +30,34 @@
 
     <TextView
         android:id="@+id/NamberUroven_view"
-        style="@style/stylChronom"
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="0"
-        android:textColor="@color/CV4"
+        android:textColor="@color/CV1"
         android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/nadpUrovenGame_view"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/slogn_viev"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/slogn1"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.005" />
 
     <ImageView
         android:id="@+id/monet_viev"
@@ -116,7 +132,10 @@
         android:layout_width="128dp"
         android:layout_height="120dp"
         android:layout_marginLeft="40dp"
-        android:text="Старт"
+        android:text="СТАРТ"
+        android:textColor="@color/CV5"
+        android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"

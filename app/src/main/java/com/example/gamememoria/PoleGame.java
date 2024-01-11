@@ -19,6 +19,7 @@ public class PoleGame extends BaseAdapter {
     private Context mContext;
     private Integer mCols, mRows;
 
+    byte rubashka, naborKartinKart;
     private ArrayList<String> arrPict; // массив картинок
     private String PictureCollection; // Префикс набора картинок
     private Resources mRes; // Ресурсы приложени
@@ -32,10 +33,23 @@ public class PoleGame extends BaseAdapter {
         mCols = cols;
         mRows = rows;
 
+        rubashka = (byte) (Math.random() * 6); // Случайное число от 0 до 5 -- Для выбора рубашки карт
+        naborKartinKart = (byte) (Math.random() * 3); // Случайное число от 0 до 2 -- Для выбора картинок карт
+
         arrPict = new ArrayList<String>();
         arrStatus = new ArrayList<Status>();
         // Пока определяем префикс так, позже он будет браться из настроек
-        PictureCollection = "animal";
+
+        if (naborKartinKart == 0) {
+            PictureCollection = "animal";
+        }
+        if (naborKartinKart == 1) {
+            PictureCollection = "animal_a";
+        }
+        if (naborKartinKart == 2) {
+            PictureCollection = "animal_b";
+        }
+
         // Получаем все ресурсы приложения
         mRes = mContext.getResources();
 
@@ -84,7 +98,6 @@ public class PoleGame extends BaseAdapter {
 
         ImageView view; // для вывода картинки
 
-
         if (convertView == null) {
             view = new ImageView(mContext);
             view.setLayoutParams(new GridView.LayoutParams(Shirin_fishek, Visot_fishek));  // Задаём размеры элемента
@@ -102,7 +115,25 @@ public class PoleGame extends BaseAdapter {
                 view.setImageResource(drawableId);
                 break;
             case CELL_CLOSE:
-                view.setImageResource(R.drawable.close);
+
+                if (rubashka == 0) {
+                    view.setImageResource(R.drawable.close1);
+                }
+                if (rubashka == 1) {
+                    view.setImageResource(R.drawable.close2);
+                }
+                if (rubashka == 2) {
+                    view.setImageResource(R.drawable.close3);
+                }
+                if (rubashka == 3) {
+                    view.setImageResource(R.drawable.close4);
+                }
+                if (rubashka == 4) {
+                    view.setImageResource(R.drawable.close5);
+                }
+                if (rubashka == 5) {
+                    view.setImageResource(R.drawable.close6);
+                }
                 break;
             default:
                 view.setImageResource(R.drawable.none);
@@ -142,6 +173,5 @@ public class PoleGame extends BaseAdapter {
             return true;
         return false;
     }
-
 
 }

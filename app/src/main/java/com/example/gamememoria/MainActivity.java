@@ -4,6 +4,9 @@ package com.example.gamememoria;
 
 import static com.example.gamememoria.Menu.Key_Score;
 import static com.example.gamememoria.Menu.Key_Score_Max;
+import static com.example.gamememoria.Menu.Key_Slognost_game;
+import static com.example.gamememoria.Menu.Key_Slognost_step;
+import static com.example.gamememoria.Menu.Key_Slognost_time;
 import static com.example.gamememoria.Menu.Key_Time;
 import static com.example.gamememoria.Menu.Key_Time_Max;
 import static com.example.gamememoria.Menu.Key_Uroven;
@@ -18,6 +21,7 @@ import static com.example.gamememoria.Menu.koef_slogn_time;
 import static com.example.gamememoria.Menu.mSettings;
 import static com.example.gamememoria.Menu.score;
 import static com.example.gamememoria.Menu.scoreMax;
+import static com.example.gamememoria.Menu.slognost_game;
 import static com.example.gamememoria.Menu.uroven;
 import static com.example.gamememoria.Menu.urovenMax;
 import static com.example.gamememoria.Menu.PrichinGameOver;
@@ -28,6 +32,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -38,6 +43,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
@@ -46,11 +52,10 @@ public class MainActivity extends AppCompatActivity {
     long timeStopped = 0; // для остановки времени во время паузы
     boolean sostoyniePause = false; // для переключения надписи кнопки пвуза-продолжить
     private TextView stepScreen;
-
+    private ImageView iconSlogn;
 
     private Button buPause;
     private Chronometer timeScreen, timeItog;
-
 
     private Integer StepCount; // кол-во ходов
     private Integer StepCountStart; // начальное число ходов, для вычислений
@@ -59,10 +64,11 @@ public class MainActivity extends AppCompatActivity {
     private PoleGame mAdapter;
     private static final int NOTIFICATION_REMINDER = 3;
 
-
     int koef_timeGame; // Коэфициент для задания времени игры
 
-    TextView namberUroven;
+    TextView namberUroven, step, time;
+
+    int bonusStep;
 
 
     // Поворот экрана
@@ -81,11 +87,31 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        iconSlogn = findViewById(R.id.slogn_viev);
+
 // https://developer.alexanderklimov.ru/android/games/memoria.php?ysclid=lq527nk13p378087110
 // https://ru-code-android.livejournal.com/2665.html
 
+
         mGrid = findViewById(R.id.igrovoePole);
         namberUroven = findViewById(R.id.NamberUroven_view);
+        step = findViewById(R.id.step_view);
+        time = findViewById(R.id.time_view);
+
+        onResume();
+
+        if (slognost_game == 1) {
+            iconSlogn.setImageResource(R.drawable.slogn1);
+        }
+        if (slognost_game == 2) {
+            iconSlogn.setImageResource(R.drawable.slogn2);
+        }
+        if (slognost_game == 3) {
+            iconSlogn.setImageResource(R.drawable.slogn3);
+        }
+        if (slognost_game == 4) {
+            iconSlogn.setImageResource(R.drawable.slogn4);
+        }
 
         namberUroven.setText("" + uroven);
 
@@ -99,13 +125,14 @@ public class MainActivity extends AppCompatActivity {
             StepCount = 20 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 300;
             Shirin_fishek = 300;
+
         }
 
         if (uroven == 2) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 4);
-            koef_timeGame = 8+ koef_slogn_time;
-            StepCount = 28+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 8 + koef_slogn_time;
+            StepCount = 28 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 260;
             Shirin_fishek = 260;
         }
@@ -113,8 +140,8 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 3) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 5);
-            koef_timeGame = 11+ koef_slogn_time;
-            StepCount = 36+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 11 + koef_slogn_time;
+            StepCount = 36 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 260;
             Shirin_fishek = 260;
         }
@@ -122,26 +149,26 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 4) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 6);
-            koef_timeGame = 13+ koef_slogn_time;
-            StepCount = 46+ koef_slogn_step;  // Задаём максимальное количество ходов
-            Visot_fishek = 260;
+            koef_timeGame = 13 + koef_slogn_time;
+            StepCount = 46 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 250;
             Shirin_fishek = 260;
         }
 
         if (uroven == 5) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 7);
-            koef_timeGame = 15+ koef_slogn_time;
-            StepCount = 54+ koef_slogn_step;  // Задаём максимальное количество ходов
-            Visot_fishek = 260;
-            Shirin_fishek = 260;
+            koef_timeGame = 15 + koef_slogn_time;
+            StepCount = 54 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 240;
+            Shirin_fishek = 250;
         }
 
         if (uroven == 6) {
             mGrid.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 6);
-            koef_timeGame = 17+ koef_slogn_time;
-            StepCount = 56+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 17 + koef_slogn_time;
+            StepCount = 56 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 230;
             Shirin_fishek = 220;
         }
@@ -149,48 +176,48 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 7) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 8);
-            koef_timeGame = 19+ koef_slogn_time;
-            StepCount = 60+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 19 + koef_slogn_time;
+            StepCount = 60 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 210;
-            Shirin_fishek = 230;
+            Shirin_fishek = 220;
         }
         if (uroven == 8) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 6);
-            koef_timeGame = 23+ koef_slogn_time;
-            StepCount = 66+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 23 + koef_slogn_time;
+            StepCount = 66 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 180;
             Shirin_fishek = 170;
         }
         if (uroven == 9) {
             mGrid.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 8);
-            koef_timeGame = 75+ koef_slogn_time;
-            StepCount = 70+ koef_slogn_step;  // Задаём максимальное количество ходов
-            Visot_fishek = 220;
+            koef_timeGame = 75 + koef_slogn_time;
+            StepCount = 70 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 210;
             Shirin_fishek = 220;
         }
         if (uroven == 10) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 7);
-            koef_timeGame = 78+ koef_slogn_time;
-            StepCount = 74+ koef_slogn_step;  // Задаём максимальное количество ходов
-            Visot_fishek = 150;
-            Shirin_fishek = 150;
+            koef_timeGame = 78 + koef_slogn_time;
+            StepCount = 74 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 180;
+            Shirin_fishek = 170;
         }
         if (uroven == 11) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 11);
-            koef_timeGame = 33+ koef_slogn_time;
-            StepCount = 78+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 33 + koef_slogn_time;
+            StepCount = 78 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 150;
-            Shirin_fishek = 150;
+            Shirin_fishek = 160;
         }
         if (uroven == 12) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 8);
-            koef_timeGame = 38+ koef_slogn_time;
-            StepCount = 86+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 38 + koef_slogn_time;
+            StepCount = 86 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 180;
             Shirin_fishek = 170;
         }
@@ -198,8 +225,8 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 13) {
             mGrid.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 10);
-            koef_timeGame = 42+ koef_slogn_time;
-            StepCount = 90+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 42 + koef_slogn_time;
+            StepCount = 90 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 170;
             Shirin_fishek = 190;
         }
@@ -207,19 +234,28 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 14) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 9);
-            koef_timeGame = 47+ koef_slogn_time;
-            StepCount = 96+ koef_slogn_step; // Задаём максимальное количество ходов
-            Visot_fishek = 190;
-            Shirin_fishek = 190;
+            koef_timeGame = 47 + koef_slogn_time;
+            StepCount = 96 + koef_slogn_step; // Задаём максимальное количество ходов
+            Visot_fishek = 170;
+            Shirin_fishek = 160;
         }
 
         if (uroven == 15) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 10);
-            koef_timeGame = 55+ koef_slogn_time;
-            StepCount = 100+ koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = 55 + koef_slogn_time;
+            StepCount = 100 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 170;
-            Shirin_fishek = 180;
+            Shirin_fishek = 170;
+        }
+
+        if (uroven == 16) {
+            mGrid.setNumColumns(6);
+            mAdapter = new PoleGame(this, 6, 11);
+            koef_timeGame = 60 + koef_slogn_time;
+            StepCount = 110 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 150;
+            Shirin_fishek = 160;
         }
 
    /*     mGrid.setHorizontalSpacing(10); // расстояние между иконками
@@ -259,20 +295,62 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onChronometerTick(Chronometer chronometer) {
 
-                        long provOkonshTimeVZdushemRezime = SystemClock.elapsedRealtime()
-                                - timeScreen.getBase();
+                        long provOkonshTimeVZdushemRezime = SystemClock.elapsedRealtime() - timeScreen.getBase();
 
-                        if (chronometer.getText().toString().equalsIgnoreCase("00:00")
-                                | (provOkonshTimeVZdushemRezime >= 0)) {
-                            PrichinGameOver = "ВРЕМЯ  ИГРЫ  ИСТЕКЛО";
+                        if (StepCount <= 6) {
+                            step.setTextColor(Color.BLUE);
+                            miganStep1(null);
+                        }
+                        if (StepCount <= 4) {
+                            step.setTextColor(Color.MAGENTA);
+                            miganStep1(null);
+                        }
+                        if (StepCount <= 2) {
+                            step.setTextColor(Color.RED);
+                            miganStep1(null);
+                        }
+
+
+                        if (chronometer.getText().toString().equalsIgnoreCase("00:10")) {
+                            time.setTextColor(Color.DKGRAY);
+                            miganTime1(null);
+                        }
+                        if (chronometer.getText().toString().equalsIgnoreCase("00:08")) {
+                            time.setTextColor(Color.BLUE);
+                            miganTime1(null);
+                        }
+                        if (chronometer.getText().toString().equalsIgnoreCase("00:06")) {
+                            time.setTextColor(Color.MAGENTA);
+                            miganTime1(null);
+                        }
+                        if (chronometer.getText().toString().equalsIgnoreCase("00:04")) {
+                            time.setTextColor(Color.RED);
+                            miganTime1(null);
+                        }
+
+
+                        if (StepCount <= 0 & score != 0) {    // Предлаг использ бонус очки
+                            ProdolGameStep();
+                        }
+
+                        if (chronometer.getText().toString().equalsIgnoreCase("00:00") & bonusTime != 0) {  // Предлаг использ бонус время
+                            timeScreen.stop();
+                            ProdolGameTime();
+                        }
+
+
+                        if (StepCount <= 0 & score == 0) {
+                            PrichinGameOver = "ИЗРАСХОДОВАНО  ЗАДАННОЕ  ЧИСЛО  ХОДОВ";
                             gameOver(null);
                         }
-                        if (StepCount <= 0) {
-                            PrichinGameOver = "ИЗРАСХОДОВАНО  ЗАДАННОЕ  ЧИСЛО  ХОДОВ";
+                        if ((chronometer.getText().toString().equalsIgnoreCase("00:00")
+                                | (provOkonshTimeVZdushemRezime >= 0)) & bonusTime == 0) {
+                            PrichinGameOver = "ВРЕМЯ  ИГРЫ  ИСТЕКЛО";
                             gameOver(null);
                         }
                     }
                 });
+
 
         mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -286,12 +364,12 @@ public class MainActivity extends AppCompatActivity {
                 if (mAdapter.checkGameOver()) {
                     timeScreen.stop();
 
-                    ShowGameOver();
+                    GamePobeda();
                 }
             }
         });
 
-        //  УВЕДОМЛЕНИЯ
+//  УВЕДОМЛЕНИЯ
         // https://stackru.com/questions/54083216/sozdanie-uvedomleniya-android-kotoroe-povtoryaetsya-kazhdyij-den-v-opredelennoe?ysclid=lplngnkswq786714462
 
       /*  Intent notifyIntent = new Intent(this, ReceiverNapomin.class);
@@ -307,35 +385,15 @@ public class MainActivity extends AppCompatActivity {
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(), AlarmManager.INTERVAL_DAY, pendingIntent);*/
     }
 
-    private void ShowGameOver() {
+    private void ProdolGameStep() {
 
         // Диалоговое окно
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
 
         // Заголовок и текст
-        alertbox.setTitle("ПОЗДРАВЛЯЕМ!");
-        StepCountIspolz = StepCountStart - StepCount; // Подсчет количества использованных ходов
+        alertbox.setTitle("ХОДЫ!");
 
-        String time = timeItog.getText().toString();
-
-        uroven = uroven + 1;
-
-
-        int bonusStep = StepCount;
-        long bonusTimeViv = (SystemClock.elapsedRealtime() - timeScreen.getBase()) * (-1);
-        score = score + StepCount;
-        bonusTime = bonusTime + (int) (bonusTimeViv / 1000);
-
-        if (urovenMax < uroven) {
-            urovenMax = uroven;
-            scoreMax = score;
-            bonusTimeMax = bonusTime;
-        }
-
-        onPause();
-
-        String TextToast = "ВЫ ПОБЕДИЛИ" + "\n \n" + "Открыт уровень: " + uroven + " \n \n" + "Сделано ходов: " + StepCountIspolz + " \n\n " +
-                "Истрачено времени: " + time + " \n\n " + "Бонусные очки: " + bonusStep + " \n\n " + "Бонусное время: " + (bonusTimeViv / 1000) + " сек";
+        String TextToast = "МОЖНО ИСПОЛЬЗ " + score + "  БОН ОЧКОВ";
 
         alertbox.setMessage(TextToast);
 
@@ -349,14 +407,93 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+
         // показываем окно
         alertbox.show();
 
     }
 
+    private void ProdolGameTime() {
+
+        // Диалоговое окно
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this);
+
+        // Заголовок и текст
+        alertbox.setTitle("ВРЕМЯ!");
+
+        String TextToast = "МОЖНО ИСПОЛЬЗ " + bonusTime + " сек  БОН врем";
+
+        alertbox.setMessage(TextToast);
+
+        // Добавляем кнопки
+        alertbox.setNeutralButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                // закрываем текущюю Activity
+                /*  finish();*/
+
+                clickMenu(null);
+
+            }
+        });
+
+        alertbox.setNeutralButton("НЕТ", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                clickMenu(null);
+
+            }
+        });
+
+
+        // показываем окно
+        alertbox.show();
+
+    }
+
+    private void GamePobeda() {
+        StepCountIspolz = StepCountStart - StepCount; // Подсчет количества использованных ходов
+
+        String time = timeItog.getText().toString();
+
+        uroven = uroven + 1;
+
+        bonusStep = StepCount;
+        long bonusTimeViv = (SystemClock.elapsedRealtime() - timeScreen.getBase()) * (-1);
+        score = score + StepCount;
+        bonusTime = bonusTime + (int) (bonusTimeViv / 1000);
+
+        if (urovenMax < uroven) {
+            urovenMax = uroven;
+            scoreMax = score;
+            bonusTimeMax = bonusTime;
+        }
+
+        onPause();
+
+        Intent intent = new Intent(this, Pobeda.class);    // Переход на другой класс
+        startActivity(intent);
+
+        /*String TextToast = "ВЫ ПОБЕДИЛИ" + "\n \n" + "Открыт уровень: " + uroven + " \n \n" + "Сделано ходов: " + StepCountIspolz + " \n\n " +
+                "Истрачено времени: " + time + " \n\n " + "Бонусные очки: " + bonusStep + " \n\n " + "Бонусное время: " + (bonusTimeViv / 1000) + " сек";
+        */
+    }
+
+
     public void gameOver(View view) {      // Переход на другой класс (сдесь класс Vvod)
         Intent intent = new Intent(this, GameOver.class);
         startActivity(intent);
+    }
+
+    public void miganStep1(View view) {
+
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_mig_step1);
+        step.startAnimation(a);
+    }
+
+    public void miganTime1(View view) {
+
+        Animation a = AnimationUtils.loadAnimation(this, R.anim.anim_mig_time1);
+        time.startAnimation(a);
     }
 
     @Override
@@ -392,9 +529,27 @@ public class MainActivity extends AppCompatActivity {
     public void onResume() {    // Получаем число из настроек
         super.onResume();
 
-        if (mSettings.contains(String.valueOf(Key_Uroven))) {
-            uroven = mSettings.getInt(String.valueOf(Key_Uroven), 0);
-        } else uroven = 1;}
+        if (mSettings.contains(String.valueOf(Key_Time))) {
+            bonusTime = mSettings.getInt(String.valueOf(Key_Time), 0);
+        } else bonusTime = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_time))) {
+            koef_slogn_time = mSettings.getInt(String.valueOf(Key_Slognost_time), 0);
+        } else {
+            Intent i = new Intent(this, Slognost.class);
+            startActivity(i);
+        }
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_step))) {
+            koef_slogn_step = mSettings.getInt(String.valueOf(Key_Slognost_step), 0);
+        } else {
+            Intent i = new Intent(this, Slognost.class);
+            startActivity(i);
+        }
+        if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
+            slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
+        } else slognost_game = 1;
+    }
 
 // ПАУЗА - ПРОДОЛЖИТЬ
 
@@ -428,8 +583,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickMenu(View view) {
 
-        Intent intent = new Intent(this, Menu.class);    // Переход на другой класс (сдесь класс Vvod)
+        Intent intent = new Intent(this, Menu.class);    // Переход на другой класс
         startActivity(intent);
     }
+
 
 }

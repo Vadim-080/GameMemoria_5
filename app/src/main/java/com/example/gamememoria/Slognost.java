@@ -3,6 +3,7 @@ package com.example.gamememoria;
 
 
 
+import static com.example.gamememoria.Menu.Key_Slognost_game;
 import static com.example.gamememoria.Menu.Key_Slognost_step;
 import static com.example.gamememoria.Menu.Key_Slognost_time;
 import static com.example.gamememoria.Menu.Key_Uroven;
@@ -10,7 +11,7 @@ import static com.example.gamememoria.Menu.koef_slogn_step;
 import static com.example.gamememoria.Menu.koef_slogn_time;
 import static com.example.gamememoria.Menu.mSettings;
 
-import static com.example.gamememoria.Menu.uroven;
+import static com.example.gamememoria.Menu.slognost_game;
 
 import android.content.Context;
 import android.content.Intent;
@@ -82,9 +83,9 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Zabiv() {
-
-        koef_slogn_time = 2;
-        koef_slogn_step = 6;
+        slognost_game = 1;
+        koef_slogn_time = 3;
+        koef_slogn_step = 8;
 
         onPause();
 
@@ -93,9 +94,9 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Novi() {
-
+        slognost_game = 2;
         koef_slogn_time = 1;
-        koef_slogn_step = 2;
+        koef_slogn_step = 4;
 
         onPause();
 
@@ -104,8 +105,8 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Opit() {
-
-        koef_slogn_time = -1;
+        slognost_game = 3;
+        koef_slogn_time = 0;
         koef_slogn_step = 0;
 
         onPause();
@@ -115,7 +116,7 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Mast() {
-
+        slognost_game = 4;
         koef_slogn_time = -1;
         koef_slogn_step= -2;
 
@@ -136,6 +137,10 @@ public class Slognost extends AppCompatActivity {
         SharedPreferences.Editor a2 = mSettings.edit();
         a2.putInt(String.valueOf(Key_Slognost_step), koef_slogn_step);
         a2.apply();
+
+        SharedPreferences.Editor a3 = mSettings.edit();
+        a3.putInt(String.valueOf(Key_Slognost_game), slognost_game);
+        a3.apply();
 
     }
 
