@@ -4,7 +4,7 @@
     android:shareInterpolator="false" >
 
     <scale
-        android:duration="5000"
+        android:duration="2000"
         android:fillAfter="false"
         android:fromXScale="0.1"
         android:fromYScale="0.1"

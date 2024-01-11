@@ -24,13 +24,15 @@ public class Menu extends AppCompatActivity {
     public static int Key_Time = 3; //  ключ бонусное время
     public static int Key_Slognost_time = 4; //  ключ Сложность время
     public static int Key_Slognost_step = 5; //  ключ Сложность ходы
+    public static int Key_Slognost_game = 6; //  ключ Сложность Игры
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
 
     public static int uroven;  // Задаём уровень в игре
-    public static int slognost_game_time;  // Задаём сложность игры - время
-    public static int slognost_game_step;  // Задаём сложность игры - ходы
+
+    public static int slognost_game;  // Задаём сложность игры
+
     public static int score;  // Задаём количество очков в игре
     public static int bonusTime;  // Задаём количество бонусного времени
     public static int urovenMax;  // Для хранения максимального достигнутого в игре уровня
@@ -42,11 +44,8 @@ public class Menu extends AppCompatActivity {
 
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
 
-    private ImageView monet;
+    private ImageView iconSlogn;
     private ImageView time;
-
-
-
 
     Button start, start1, exit, newGame, slogn;
     Chronometer timeBonus;
@@ -57,7 +56,8 @@ public class Menu extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        monet = findViewById(R.id.monet_viev);
+        iconSlogn = findViewById(R.id.slogn_viev);
+
         time = findViewById(R.id.time_viev);
         timeBonus = findViewById(R.id.timeBonus_view);
         score_viev = findViewById(R.id.score_viev);
@@ -70,12 +70,24 @@ public class Menu extends AppCompatActivity {
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
         onResume();
+
+        if (slognost_game == 1) {
+            iconSlogn.setImageResource(R.drawable.slogn1);
+        }
+        if (slognost_game == 2) {
+            iconSlogn.setImageResource(R.drawable.slogn2);
+        }
+        if (slognost_game == 3) {
+            iconSlogn.setImageResource(R.drawable.slogn3);
+        }
+        if (slognost_game == 4) {
+            iconSlogn.setImageResource(R.drawable.slogn4);
+        }
+
         namberUroven.setText("" + uroven);
+
         score_viev.setText("" + score);
         timeBonus.setBase(SystemClock.elapsedRealtime() - bonusTime * 1000);
-
-       /* Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_monet);
-        monet.startAnimation(a1);*/
 
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_time2);
         time.startAnimation(a2);
@@ -124,7 +136,6 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-
     }
 
     private void startGame() {
@@ -143,7 +154,7 @@ public class Menu extends AppCompatActivity {
         uroven = 1;
         score = 0;
         bonusTime = 0;
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, Slognost.class);
         startActivity(i);
     }
 
@@ -170,5 +181,9 @@ public class Menu extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Time_Max))) {
             bonusTimeMax = mSettings.getInt(String.valueOf(Key_Time_Max), 0);
         } else bonusTimeMax = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
+            slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
+        } else slognost_game = 1;
     }
 }

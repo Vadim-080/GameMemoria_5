@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Zastavka extends AppCompatActivity {
 
-    private TextView tv;
-    private ImageView iv1, iv2;
+    private TextView nazvGame, stimulirNadp;
+    private ImageView emblema;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -21,23 +21,24 @@ public class Zastavka extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zastavka);
 
-        tv = findViewById(R.id.tv);
-        iv1 = findViewById(R.id.iv1);
-        iv2 = findViewById(R.id.iv2);
+        nazvGame = findViewById(R.id.nazvGame_view);
+        emblema = findViewById(R.id.emblem_view);
+        stimulirNadp = (TextView) findViewById(R.id.stimulirNadp_view);
 
-        tv.setText("ТРЕНЕР  \n  ПАМЯТИ");
+        Animation m1 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim1);
+        emblema.startAnimation(m1);
 
-        Animation myanim1 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim1);
-        Animation myanim2 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim2);
-        Animation myanim3 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim3);
-        iv1.startAnimation(myanim1);
-        iv2.startAnimation(myanim2);
-        tv.startAnimation(myanim3);
+        Animation m2 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim2);   // Плавное появление экрана
+        stimulirNadp.startAnimation(m2);
+
+        Animation m3 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim3);
+        nazvGame.startAnimation(m3);
+
         final Intent i = new Intent(this, Menu.class);
         Thread timer = new Thread() {
             public void run() {
                 try {
-                    sleep(1000);  // Время продолжительности заставки
+                    sleep(6000);  // Время продолжительности заставки
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } finally {

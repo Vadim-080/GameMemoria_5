@@ -8,54 +8,16 @@
     android:background="@drawable/polezastavka"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:id="@+id/iv1"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="160dp"
-        android:adjustViewBounds="false"
-        android:background="@android:color/transparent"
-        android:cropToPadding="false"
-
-        android:src="@drawable/zz2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv2"
-        android:layout_width="match_parent"
-        android:layout_height="330dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="4dp"
-        android:adjustViewBounds="false"
-        android:background="@android:color/transparent"
-        android:cropToPadding="false"
-        android:src="@drawable/zz2"
-        app:layout_constraintBottom_toBottomOf="parent"
-        tools:layout_editor_absoluteX="32dp" />
-
     <TextView
-        android:id="@+id/tv"
+        android:id="@+id/nazvGame_view"
         android:layout_width="290dp"
         android:layout_height="70dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:adjustViewBounds="false"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
-        android:cropToPadding="false"
         android:gravity="center"
-        android:text="Я ТВОЙ ФИНАНСИСТ"
         android:textColor="@color/CV4"
         android:textStyle="bold"
+        android:text ="ТРЕНЕР ПАМЯТИ"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
@@ -63,5 +25,45 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.069" />
+
+    <ImageView
+        android:id="@+id/emblem_view"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:adjustViewBounds="false"
+        android:layout_marginTop="100dp"
+        android:background="@android:color/transparent"
+        android:cropToPadding="false"
+        android:src="@drawable/icon_mem3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nazvGame_view" />
+
+    <TextView
+        android:id="@+id/stimulirNadp_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginTop="90dp"
+        android:layout_marginBottom="60dp"
+        android:adjustViewBounds="false"
+        android:background="@android:color/transparent"
+        android:cropToPadding="false"
+        android:gravity="center_horizontal|center_vertical"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        android:textColor="@color/CV6"
+        android:text="ТРЕНИРОВКА ПАМЯТИ ПОМОГАЕТ УВЕЛИЧИТЬ БАГАЖ ЗНАНИЙ"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/emblem_view" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
