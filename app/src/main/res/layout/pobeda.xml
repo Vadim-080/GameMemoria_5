@@ -5,14 +5,30 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/nadpUrovenGame_view"
+        android:id="@+id/nadpPobed_view"
         style="@style/stylChronom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="40dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="ПОБЕДА"
         android:textColor="@color/CV4"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.079" />
+
+    <TextView
+        android:id="@+id/Result_view"
+        style="@style/stylChronom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:gravity="center_horizontal|center_vertical"
+
+        android:textColor="#AA00FF"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -20,6 +36,40 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.431" />
+        app:layout_constraintVertical_bias="0.305" />
+
+    <Button
+        android:id="@+id/buProdolgitGame"
+        style="@style/styleStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickProdolgitGame"
+        android:text="ПРОДОЛЖИТЬ ИГРУ"
+        android:textSize="8dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.02"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.997" />
+
+    <Button
+        android:id="@+id/buMenu"
+        style="@style/styleStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="clickMenu"
+        android:text="МЕНЮ"
+        android:textSize="8dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.986"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.996" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

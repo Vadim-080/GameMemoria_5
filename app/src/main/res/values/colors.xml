@@ -3,10 +3,17 @@
     <color name="CV1">#FF8225</color>
     <color name="CV2">#6200EA</color>
     <color name="CV3">#63FF00</color>
-    <color name="CV4">#FF0073</color>
+    <color name="CV4">#FD137C</color>
     <color name="CV5">#FF318E</color>
     <color name="CV6">#00DDFF</color>
-
+    <color name="CV7">#00FF00</color>
+    <color name="CV8">#BBFD8F</color>
+    <color name="CV9">#12A5FF</color>
+    <color name="CV10">#FDE97D</color>
+    <color name="CV11">#B39D2A</color>
+    <color name="CV12">#00672B</color>
+    <color name="CV13">#CC5801</color>
+    <color name="CV14">#FF4699</color>
 
 
     <color name="black">#FF000000</color>

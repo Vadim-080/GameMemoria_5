@@ -3,6 +3,7 @@ package com.example.gamememoria;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -49,7 +50,7 @@ public class Menu extends AppCompatActivity {
 
     Button start, start1, exit, newGame, slogn;
     Chronometer timeBonus;
-    TextView namberUroven, score_viev;
+    TextView namberUroven, score_viev, nadpUrovenGame;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -57,7 +58,7 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         iconSlogn = findViewById(R.id.slogn_viev);
-
+        nadpUrovenGame= findViewById(R.id. nadpUrovenGame_view);
         time = findViewById(R.id.time_viev);
         timeBonus = findViewById(R.id.timeBonus_view);
         score_viev = findViewById(R.id.score_viev);
@@ -68,6 +69,11 @@ public class Menu extends AppCompatActivity {
         newGame = findViewById(R.id.buNewGame);
         namberUroven = findViewById(R.id.NamberUroven_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
+
+        Typeface type1 = getResources().getFont(R.font.komi);    // шрифт
+        nadpUrovenGame.setTypeface(type1);
+        Typeface type2 = getResources().getFont(R.font.vanowitsch);    // шрифт
+        namberUroven.setTypeface(type2);
 
         onResume();
 
@@ -135,7 +141,6 @@ public class Menu extends AppCompatActivity {
                 finish();
             }
         });
-
     }
 
     private void startGame() {
@@ -154,6 +159,7 @@ public class Menu extends AppCompatActivity {
         uroven = 1;
         score = 0;
         bonusTime = 0;
+        onPause();
         Intent i = new Intent(this, Slognost.class);
         startActivity(i);
     }
@@ -189,5 +195,22 @@ public class Menu extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
             slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
         } else slognost_game = 1;
+    }
+
+    @Override
+    public void onPause() {    // Запоминаем данные
+        super.onPause();
+
+        SharedPreferences.Editor a1 = mSettings.edit();
+        a1.putInt(String.valueOf(Key_Uroven), uroven);
+        a1.apply();
+
+        SharedPreferences.Editor a2 = mSettings.edit();
+        a2.putInt(String.valueOf(Key_Score), score);
+        a2.apply();
+
+        SharedPreferences.Editor a3 = mSettings.edit();
+        a3.putInt(String.valueOf(Key_Time), bonusTime);
+        a3.apply();
     }
 }
