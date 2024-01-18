@@ -28,18 +28,18 @@
 
     <TextView
         android:id="@+id/NamberUroven_view"
-        style="@style/stylChronom"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="-15dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="-10dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="0"
-        android:textSize="35dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="@color/CV4"
+        android:textColor="@color/CV1"
+        android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintStart_toEndOf="@+id/nadpUrovenGame_view"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintLeft_toRightOf="@+id/nadpUrovenGame_view"
+        app:layout_constraintTop_toTopOf="parent"
+         />
 
     <ImageView
         android:id="@+id/slogn_viev"
@@ -159,6 +159,7 @@
         android:gravity="center"
         android:onClick="clickPause"
         android:text="ПАУЗА"
+        android:textSize="15dp"
         android:textStyle="bold"
         android:textColor="@color/CV1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -173,7 +174,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="МЕНЮ"
-        android:textSize="8dp"
+        android:textSize="15dp"
         android:textStyle="bold"
         android:onClick="clickMenu"
         app:layout_constraintBottom_toBottomOf="parent"

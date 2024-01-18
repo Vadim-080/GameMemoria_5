@@ -1,11 +1,15 @@
 package com.example.gamememoria;
 
+import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
+import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
+
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -16,7 +20,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Menu extends AppCompatActivity {
+public class Menu1 extends AppCompatActivity {
 
     public static final String APP_PREFERENCES = "PAPKA_MEMORI_GAME_MEMOR";  // константа для имени файла настроек
     public static SharedPreferences mSettings;  // Создаём переменную, представляющую экземпляр класса SharedPreferences, который отвечает за работу с настройками
@@ -29,6 +33,7 @@ public class Menu extends AppCompatActivity {
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
+    public static int Key_Slognost_Max = 14; //  ключ набранного на максимальн уровне времени
 
     public static int uroven;  // Задаём уровень в игре
 
@@ -39,16 +44,21 @@ public class Menu extends AppCompatActivity {
     public static int urovenMax;  // Для хранения максимального достигнутого в игре уровня
     public static int scoreMax;  // Для хранения набранных на максимальн уровне очков
     public static int bonusTimeMax;  // Для хранения набранного на максимальн уровне времени
+    public static int slognostMax;  // Для хранения набранного на максимальн уровне времени
     public static String PrichinGameOver;
     public static int Visot_fishek; // высота фишек
     public static int Shirin_fishek; // высота фишек
+
+    public static int kolvoGameOverPodrad; // количество проигрышей подряд
+
+
 
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
 
     private ImageView iconSlogn;
     private ImageView time;
 
-    Button start, start1, exit, newGame, slogn;
+    Button start, start1, exit, newGame, slogn, vosstsnovlMaxGame;
     Chronometer timeBonus;
     TextView namberUroven, score_viev, nadpUrovenGame;
 
@@ -67,6 +77,7 @@ public class Menu extends AppCompatActivity {
         slogn = findViewById(R.id.buSlognost);
         exit = findViewById(R.id.buExit);
         newGame = findViewById(R.id.buNewGame);
+        vosstsnovlMaxGame = findViewById(R.id.buVosstsnovlMaxGame);
         namberUroven = findViewById(R.id.NamberUroven_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
@@ -128,6 +139,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        vosstsnovlMaxGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vosstsnovlMaxGame();
+            }
+        });
+
         slogn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -156,11 +174,27 @@ public class Menu extends AppCompatActivity {
     }
 
     private void newGame() {
+        promegutGameOverPodrad = 0;
+        povtorTriGameOverPodrad = false;
         uroven = 1;
         score = 0;
         bonusTime = 0;
         onPause();
         Intent i = new Intent(this, Slognost.class);
+        startActivity(i);
+    }
+
+    private void vosstsnovlMaxGame() {
+        promegutGameOverPodrad = 0;
+        povtorTriGameOverPodrad = false;
+        onResume();
+
+        uroven = urovenMax;
+        score = scoreMax;
+        bonusTime = bonusTimeMax;
+        slognost_game = slognostMax;
+
+        Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
@@ -195,6 +229,10 @@ public class Menu extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
             slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
         } else slognost_game = 1;
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_Max))) {
+            slognostMax = mSettings.getInt(String.valueOf(Key_Slognost_Max), 0);
+        } else slognostMax = 1;
     }
 
     @Override

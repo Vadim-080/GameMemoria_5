@@ -1,30 +1,23 @@
 package com.example.gamememoria;
 
 
+import static com.example.gamememoria.Menu1.Key_Slognost_game;
+import static com.example.gamememoria.Menu1.Key_Slognost_step;
+import static com.example.gamememoria.Menu1.Key_Slognost_time;
+import static com.example.gamememoria.Menu1.koef_slogn_step;
+import static com.example.gamememoria.Menu1.koef_slogn_time;
+import static com.example.gamememoria.Menu1.mSettings;
 
+import static com.example.gamememoria.Menu1.slognost_game;
+import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
+import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 
-import static com.example.gamememoria.Menu.Key_Slognost_game;
-import static com.example.gamememoria.Menu.Key_Slognost_step;
-import static com.example.gamememoria.Menu.Key_Slognost_time;
-import static com.example.gamememoria.Menu.Key_Uroven;
-import static com.example.gamememoria.Menu.koef_slogn_step;
-import static com.example.gamememoria.Menu.koef_slogn_time;
-import static com.example.gamememoria.Menu.mSettings;
-
-import static com.example.gamememoria.Menu.slognost_game;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Chronometer;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +25,6 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Slognost extends AppCompatActivity {
 
     Button zabiv, novi, opit, mast, exit;
-    Chronometer timeBonus;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +36,9 @@ public class Slognost extends AppCompatActivity {
         opit = findViewById(R.id.buOpitn);
         mast = findViewById(R.id.buMaster);
         exit = findViewById(R.id.buExit);
+
+        onResume();
+        povtorTriGameOverPodrad = false;
 
         zabiv.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +78,11 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Zabiv() {
+
+        if (slognost_game > 1) {
+            promegutGameOverPodrad = 0;
+        }
+
         slognost_game = 1;
         koef_slogn_time = 3;
         koef_slogn_step = 8;
@@ -94,6 +94,9 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Novi() {
+        if (slognost_game > 2) {
+            promegutGameOverPodrad = 0;
+        }
         slognost_game = 2;
         koef_slogn_time = 1;
         koef_slogn_step = 4;
@@ -105,6 +108,9 @@ public class Slognost extends AppCompatActivity {
     }
 
     private void Opit() {
+        if (slognost_game > 3) {
+            promegutGameOverPodrad = 0;
+        }
         slognost_game = 3;
         koef_slogn_time = 0;
         koef_slogn_step = 0;
@@ -118,7 +124,7 @@ public class Slognost extends AppCompatActivity {
     private void Mast() {
         slognost_game = 4;
         koef_slogn_time = -1;
-        koef_slogn_step= -2;
+        koef_slogn_step = -2;
 
         onPause();
 
@@ -142,6 +148,14 @@ public class Slognost extends AppCompatActivity {
         a3.putInt(String.valueOf(Key_Slognost_game), slognost_game);
         a3.apply();
 
+    }
+
+    public void onResume() {    // Получаем число из настроек
+        super.onResume();
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
+            slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
+        } else slognost_game = 1;
     }
 
 }

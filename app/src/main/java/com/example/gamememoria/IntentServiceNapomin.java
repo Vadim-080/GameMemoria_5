@@ -49,7 +49,7 @@ public class IntentServiceNapomin extends android.app.IntentService {
 
         /*  int bigIcon = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP ? R.drawable.ic_not : R.drawable.ic_not2;*/
 
-        Intent intent1 = new Intent(getApplicationContext(), Menu.class);
+        Intent intent1 = new Intent(getApplicationContext(), Menu1.class);
 
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
         mBuilder.setContentIntent(pi);

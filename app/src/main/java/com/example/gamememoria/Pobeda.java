@@ -4,9 +4,8 @@ import static com.example.gamememoria.MainActivity.StepCountIspolz;
 import static com.example.gamememoria.MainActivity.bonusStep;
 import static com.example.gamememoria.MainActivity.bonusTimeViv;
 import static com.example.gamememoria.MainActivity.timeIstr;
-import static com.example.gamememoria.Menu.uroven;
+import static com.example.gamememoria.Menu1.uroven;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -31,7 +30,7 @@ public class Pobeda extends AppCompatActivity {
     }
 
     public void clickMenu(View v) {
-        Intent intent = new Intent(this, Menu.class);   // Переход на другой класс
+        Intent intent = new Intent(this, Menu1.class);   // Переход на другой класс
         startActivity(intent);
     }
 

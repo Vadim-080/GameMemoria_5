@@ -1,7 +1,7 @@
 package com.example.gamememoria;
 
-import static com.example.gamememoria.Menu.Shirin_fishek;
-import static com.example.gamememoria.Menu.Visot_fishek;
+import static com.example.gamememoria.Menu1.Shirin_fishek;
+import static com.example.gamememoria.Menu1.Visot_fishek;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -33,26 +33,27 @@ public class PoleGame extends BaseAdapter {
         mCols = cols;
         mRows = rows;
 
-        rubashka = (byte) (Math.random() * 6); // Случайное число от 0 до 5 -- Для выбора рубашки карт
+        rubashka = (byte) (Math.random() * 10); // Случайное число от 0 до 9 -- Для выбора рубашки карт
         naborKartinKart = (byte) (Math.random() * 3); // Случайное число от 0 до 2 -- Для выбора картинок карт
 
         arrPict = new ArrayList<String>();
         arrStatus = new ArrayList<Status>();
         // Пока определяем префикс так, позже он будет браться из настроек
 
-        if (naborKartinKart == 0) {
-            PictureCollection = "animal";
-        }
-        if (naborKartinKart == 1) {
-            PictureCollection = "animal_a";
-        }
-        if (naborKartinKart == 2) {
-            PictureCollection = "animal_b";
+        switch (naborKartinKart) {
+            case 0:
+                PictureCollection = "animal";
+                break;
+            case 1:
+                PictureCollection = "animal_a";
+                break;
+            case 2:
+                PictureCollection = "animal_b";
+                break;
         }
 
         // Получаем все ресурсы приложения
         mRes = mContext.getResources();
-
 
         // Метод заполняющий массив vecPict
         makePictArray();
@@ -116,23 +117,37 @@ public class PoleGame extends BaseAdapter {
                 break;
             case CELL_CLOSE:
 
-                if (rubashka == 0) {
-                    view.setImageResource(R.drawable.close1);
-                }
-                if (rubashka == 1) {
-                    view.setImageResource(R.drawable.close2);
-                }
-                if (rubashka == 2) {
-                    view.setImageResource(R.drawable.close3);
-                }
-                if (rubashka == 3) {
-                    view.setImageResource(R.drawable.close4);
-                }
-                if (rubashka == 4) {
-                    view.setImageResource(R.drawable.close5);
-                }
-                if (rubashka == 5) {
-                    view.setImageResource(R.drawable.close6);
+                switch (rubashka) {
+                    case 0:
+                        view.setImageResource(R.drawable.close1);
+                        break;
+                    case 1:
+                        view.setImageResource(R.drawable.close2);
+                        break;
+                    case 2:
+                        view.setImageResource(R.drawable.close3);
+                        break;
+                    case 3:
+                        view.setImageResource(R.drawable.close4);
+                        break;
+                    case 4:
+                        view.setImageResource(R.drawable.close5);
+                        break;
+                    case 5:
+                        view.setImageResource(R.drawable.close6);
+                        break;
+                    case 6:
+                        view.setImageResource(R.drawable.close7);
+                        break;
+                    case 7:
+                        view.setImageResource(R.drawable.close8);
+                        break;
+                    case 8:
+                        view.setImageResource(R.drawable.close9);
+                        break;
+                    case 9:
+                        view.setImageResource(R.drawable.close10);
+                        break;
                 }
                 break;
             default:
