@@ -5,94 +5,169 @@
     style="@style/styleStart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/polemenu"
-    tools:context=".Menu1">
+    android:background="@drawable/poleslognost"
+    tools:context=".Menu">
 
     <TextView
         android:id="@+id/nadpSlognost_viev"
         style="@style/stylChronom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:gravity="center_horizontal|center_vertical"
         android:text="ВЫБИРИТЕ СЛОЖНОСТЬ ИГРЫ"
-        android:textColor="@color/CV1"
+        android:textColor="@color/CV2"
         android:textSize="35dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintLeft_toLeftOf="parent"
+
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.069" />
 
+    <ImageView
+        android:id="@+id/slogn1_viev"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="80dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/slogn1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nadpSlognost_viev" />
+
+    <ImageView
+        android:id="@+id/slogn2_viev"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/slogn2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slogn1_viev" />
+
+    <ImageView
+        android:id="@+id/slogn3_viev"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/slogn3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slogn2_viev" />
+
+    <ImageView
+        android:id="@+id/slogn4_viev"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
+        android:src="@drawable/slogn4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/slogn3_viev" />
+
     <Button
         android:id="@+id/buZabiv"
-        style="@style/styleStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="ЗАБЫВЧИВЫЙ"
-        app:layout_constraintBottom_toBottomOf="parent"
+        style="@style/styleButtonMenu"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="80dp"
+        android:scaleType="fitXY"
+               android:text="ЗАБЫВЧИВЫЙ"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.33" />
+        app:layout_constraintTop_toBottomOf="@id/nadpSlognost_viev" />
 
     <Button
         android:id="@+id/buNovishok"
-        style="@style/styleStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/styleButtonMenu"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
         android:text="НОВИЧОК"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.456" />
+        app:layout_constraintTop_toBottomOf="@id/buZabiv"  />
 
     <Button
         android:id="@+id/buOpitn"
-        style="@style/styleStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/styleButtonMenu"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
         android:text="ОПЫТНЫЙ"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.576" />
+        app:layout_constraintTop_toBottomOf="@id/buNovishok" />
 
     <Button
         android:id="@+id/buMaster"
-        style="@style/styleStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/styleButtonMenu"
+
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="50dp"
+        android:scaleType="fitXY"
         android:text="МАСТЕР"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.698" />
+        app:layout_constraintTop_toBottomOf="@id/buOpitn"  />
 
     <Button
         android:id="@+id/buExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="МЕНЮ"
+        android:textStyle="bold"
+        android:textColor="@color/CV1"
+        android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.916" />
+        app:layout_constraintVertical_bias="0.96" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

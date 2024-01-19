@@ -6,21 +6,22 @@ import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.view.Display;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Menu1 extends AppCompatActivity {
+public class Menu extends AppCompatActivity {
 
     public static final String APP_PREFERENCES = "PAPKA_MEMORI_GAME_MEMOR";  // константа для имени файла настроек
     public static SharedPreferences mSettings;  // Создаём переменную, представляющую экземпляр класса SharedPreferences, который отвечает за работу с настройками
@@ -52,7 +53,6 @@ public class Menu1 extends AppCompatActivity {
     public static int kolvoGameOverPodrad; // количество проигрышей подряд
 
 
-
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
 
     private ImageView iconSlogn;
@@ -68,7 +68,7 @@ public class Menu1 extends AppCompatActivity {
         setContentView(R.layout.menu);
 
         iconSlogn = findViewById(R.id.slogn_viev);
-        nadpUrovenGame= findViewById(R.id. nadpUrovenGame_view);
+        nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
         time = findViewById(R.id.time_viev);
         timeBonus = findViewById(R.id.timeBonus_view);
         score_viev = findViewById(R.id.score_viev);
@@ -85,6 +85,8 @@ public class Menu1 extends AppCompatActivity {
         nadpUrovenGame.setTypeface(type1);
         Typeface type2 = getResources().getFont(R.font.vanowitsch);    // шрифт
         namberUroven.setTypeface(type2);
+        Typeface type3 = getResources().getFont(R.font.pacifico_regular);    // шрифт
+        start.setTypeface(type3);
 
         onResume();
 
@@ -196,6 +198,9 @@ public class Menu1 extends AppCompatActivity {
 
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+    }
+    public void finish() {
+        this.finishAffinity();            // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
     }
 
     @Override

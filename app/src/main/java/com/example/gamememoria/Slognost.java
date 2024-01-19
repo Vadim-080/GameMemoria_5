@@ -1,14 +1,14 @@
 package com.example.gamememoria;
 
 
-import static com.example.gamememoria.Menu1.Key_Slognost_game;
-import static com.example.gamememoria.Menu1.Key_Slognost_step;
-import static com.example.gamememoria.Menu1.Key_Slognost_time;
-import static com.example.gamememoria.Menu1.koef_slogn_step;
-import static com.example.gamememoria.Menu1.koef_slogn_time;
-import static com.example.gamememoria.Menu1.mSettings;
+import static com.example.gamememoria.Menu.Key_Slognost_game;
+import static com.example.gamememoria.Menu.Key_Slognost_step;
+import static com.example.gamememoria.Menu.Key_Slognost_time;
+import static com.example.gamememoria.Menu.koef_slogn_step;
+import static com.example.gamememoria.Menu.koef_slogn_time;
+import static com.example.gamememoria.Menu.mSettings;
 
-import static com.example.gamememoria.Menu1.slognost_game;
+import static com.example.gamememoria.Menu.slognost_game;
 import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
 import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 
@@ -17,7 +17,6 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Chronometer;
 
 
 import androidx.appcompat.app.AppCompatActivity;

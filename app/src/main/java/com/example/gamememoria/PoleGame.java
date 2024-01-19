@@ -1,7 +1,8 @@
 package com.example.gamememoria;
 
-import static com.example.gamememoria.Menu1.Shirin_fishek;
-import static com.example.gamememoria.Menu1.Visot_fishek;
+import static com.example.gamememoria.Menu.Shirin_fishek;
+import static com.example.gamememoria.Menu.Visot_fishek;
+import static com.example.gamememoria.Menu.uroven;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -151,7 +152,39 @@ public class PoleGame extends BaseAdapter {
                 }
                 break;
             default:
-                view.setImageResource(R.drawable.none);
+                if (uroven > 7 | uroven < 14 ) {
+                    byte zastOtkrKart = (byte) (Math.random() * 2); // Случайное число от 0 до 2
+                    switch (zastOtkrKart) {
+                        case 0:
+                            view.setImageResource(R.drawable.none1);
+                            break;
+                        case 1:
+                            view.setImageResource(R.drawable.none);
+                            break;
+                    }
+                } else {
+                    view.setImageResource(R.drawable.none);
+                }
+
+                if (uroven > 13 ) {
+                    byte zastOtkrKart = (byte) (Math.random() * 4); // Случайное число от 0 до 2
+                    switch (zastOtkrKart) {
+                        case 0:
+                            view.setImageResource(R.drawable.none);
+                            break;
+                        case 1:
+                            view.setImageResource(R.drawable.none1);
+                            break;
+                        case 2:
+                            view.setImageResource(R.drawable.none1);
+                            break;
+                        case 3:
+                            view.setImageResource(R.drawable.none1);
+                            break;
+                    }
+                } else {
+                    view.setImageResource(R.drawable.none);
+                }
         }
         return view;
     }

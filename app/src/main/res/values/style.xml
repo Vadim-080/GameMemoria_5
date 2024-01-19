@@ -11,12 +11,21 @@
     </style>
 
     <style name="stylChronom">
-        <item name="android:textColor">#00FF00</item>
+        <item name="android:textColor">@color/CV7</item>
         <item name="android:textSize">39sp</item>
         <item name="android:shadowColor">#782144</item>
+        <item name="android:shadowDx">100</item>
+        <item name="android:shadowDy">100</item>
+        <item name="android:shadowRadius">100</item>
+    </style>
+
+    <style name="styleButtonMenu">
+        <item name="android:textColor">#00FF00</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:shadowColor">#0223E4</item>
         <item name="android:shadowDx">30</item>
-        <item name="android:shadowDy">10</item>
-        <item name="android:shadowRadius">10</item>
+        <item name="android:shadowDy">20</item>
+        <item name="android:shadowRadius">8</item>
     </style>
 
     <style name="textOstatok">

@@ -2,12 +2,8 @@ package com.example.gamememoria;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.os.Bundle;
-import android.view.View;
-import android.view.ViewGroup;
-import android.view.WindowMetrics;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -27,7 +23,7 @@ public class Zastavka extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.zastavkaa);
+        setContentView(R.layout.zastavka);
 
         nazvGame = findViewById(R.id.nazvGame_view);
         emblema = findViewById(R.id.emblem_view);
@@ -45,7 +41,7 @@ public class Zastavka extends AppCompatActivity {
         Animation m3 = AnimationUtils.loadAnimation(this, R.anim.zastav_anim3);
         nazvGame.startAnimation(m3);
 
-        final Intent i = new Intent(this, Menu1.class);
+        final Intent i = new Intent(this, Menu.class);
         Thread timer = new Thread() {
             public void run() {
                 try {

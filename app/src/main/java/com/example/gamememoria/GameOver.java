@@ -10,15 +10,13 @@ import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
-import android.widget.GridView;
 import android.widget.TextView;
 
-import static com.example.gamememoria.Menu1.Key_Uroven;
-import static com.example.gamememoria.Menu1.PrichinGameOver;
-import static com.example.gamememoria.Menu1.kolvoGameOverPodrad;
-import static com.example.gamememoria.Menu1.mSettings;
-import static com.example.gamememoria.Menu1.score;
-import static com.example.gamememoria.Menu1.uroven;
+import static com.example.gamememoria.Menu.Key_Uroven;
+import static com.example.gamememoria.Menu.PrichinGameOver;
+import static com.example.gamememoria.Menu.kolvoGameOverPodrad;
+import static com.example.gamememoria.Menu.mSettings;
+import static com.example.gamememoria.Menu.uroven;
 import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
 
@@ -118,7 +116,7 @@ public class GameOver extends AppCompatActivity {
     }
 
     public void clickMenu(View view) {
-        Intent intent = new Intent(this, Menu1.class);    // Переход на другой класс (сдесь класс Vvod)
+        Intent intent = new Intent(this, Menu.class);    // Переход на другой класс (сдесь класс Vvod)
         startActivity(intent);
     }
 
