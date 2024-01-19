@@ -14,15 +14,33 @@
         <item name="android:textColor">@color/CV7</item>
         <item name="android:textSize">39sp</item>
         <item name="android:shadowColor">#782144</item>
-        <item name="android:shadowDx">100</item>
-        <item name="android:shadowDy">100</item>
-        <item name="android:shadowRadius">100</item>
+        <item name="android:shadowDx">30</item>
+        <item name="android:shadowDy">10</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+
+    <style name="stylePobeda">
+        <item name="android:textColor">@color/CV7</item>
+        <item name="android:textSize">39sp</item>
+        <item name="android:shadowColor">@color/CV18</item>
+        <item name="android:shadowDx">30</item>
+        <item name="android:shadowDy">20</item>
+        <item name="android:shadowRadius">10</item>
     </style>
 
     <style name="styleButtonMenu">
         <item name="android:textColor">#00FF00</item>
         <item name="android:textSize">22sp</item>
         <item name="android:shadowColor">#0223E4</item>
+        <item name="android:shadowDx">30</item>
+        <item name="android:shadowDy">20</item>
+        <item name="android:shadowRadius">8</item>
+    </style>
+
+    <style name="styleNadpSlogn">
+        <item name="android:textColor">@color/CV2</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:shadowColor">@color/CV3</item>
         <item name="android:shadowDx">30</item>
         <item name="android:shadowDy">20</item>
         <item name="android:shadowRadius">8</item>
@@ -71,6 +89,19 @@
         <!-- <item name="android:background">@color/CV8</item>  // Цвет поля-->
         <!-- <item name="android:typeface">monospace</item>-->
         <!--<item name="android:headerBackground">@color/CV6</item>-->
+    </style>
+
+    <style name="StyleDialogOknaGameOver"
+        parent="Theme.AppCompat.Light.Dialog.Alert">  // Делает окно не во весь экран
+
+        <item name="android:textColor">@color/CV12</item>  // Цвет заголовка
+        <item name="android:textSize">40sp</item>  // Размер текста заголовка
+        <item name="android:gravity">center</item>   // Размещение по центру
+        <item name="android:textStyle">bold</item>  // Жирн шрифт кнопок
+        <item name="android:textColorPrimary">@color/CV9</item> // Цвет текста вопроса
+        <item name="android:windowBackground">@drawable/background_dialog_step</item>  // Стиль и форма диалогового окна
+
+
     </style>
 
 

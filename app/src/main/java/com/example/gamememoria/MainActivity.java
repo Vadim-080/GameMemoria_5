@@ -516,25 +516,19 @@ public class MainActivity extends AppCompatActivity {
     private void ParametrUrovneiGame() {
         if (uroven == 1) {
 
-           /* mGrid.setNumColumns(6);
-            mAdapter = new PoleGame(this, 6, 11);
-            koef_timeGame = 60 + koef_slogn_time;
-            StepCount = 138 + koef_slogn_step;  // Задаём максимальное количество ходов
-            Visot_fishek = 150;
-            Shirin_fishek = 160;*/
-
             mGrid.setNumColumns(3);
-            mAdapter = new PoleGame(this, 3, 4);
-            koef_timeGame = 5 + koef_slogn_time;
-            StepCount = (3*4)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
-            Visot_fishek = 300;
-            Shirin_fishek = 300;
+            int c=3, r=4;
+            mAdapter = new PoleGame(this, c, r);
+            koef_timeGame = (c*r)/2+uroven/2 + koef_slogn_time;
+            StepCount = (c*r)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 320;
+            Shirin_fishek = 320;
         }
 
         if (uroven == 2) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 4);
-            koef_timeGame = 8 + koef_slogn_time;
+            koef_timeGame = (4*4)/2+uroven/2 + koef_slogn_time;
             StepCount = (4*4)*2+uroven*2 + koef_slogn_step; // Задаём максимальное количество ходов
             Visot_fishek = 260;
             Shirin_fishek = 260;
@@ -543,7 +537,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 3) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 5);
-            koef_timeGame = 11 + koef_slogn_time;
+            koef_timeGame = (4*5)/2+uroven/2 + koef_slogn_time;
             StepCount = (4*5)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 260;
             Shirin_fishek = 260;
@@ -552,7 +546,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 4) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 6);
-            koef_timeGame = 13 + koef_slogn_time;
+            koef_timeGame =(4*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (4*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 250;
             Shirin_fishek = 260;
@@ -561,7 +555,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 5) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 7);
-            koef_timeGame = 15 + koef_slogn_time;
+            koef_timeGame = (4*7)/2+uroven/2 + koef_slogn_time;
             StepCount = (4*7)*2+uroven*2 + koef_slogn_step; // Задаём максимальное количество ходов
             Visot_fishek = 240;
             Shirin_fishek = 250;
@@ -570,7 +564,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 6) {
             mGrid.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 6);
-            koef_timeGame = 17 + koef_slogn_time;
+            koef_timeGame = (5*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (5*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 220;
             Shirin_fishek = 210;
@@ -579,7 +573,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 7) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 8);
-            koef_timeGame = 19 + koef_slogn_time;
+            koef_timeGame = (4*8)/2+uroven/2 + koef_slogn_time;
             StepCount = (4*8)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 210;
             Shirin_fishek = 220;
@@ -587,7 +581,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 8) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 6);
-            koef_timeGame = 23 + koef_slogn_time;
+            koef_timeGame = (6*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (6*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 180;
             Shirin_fishek = 170;
@@ -595,7 +589,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 9) {
             mGrid.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 8);
-            koef_timeGame = 75 + koef_slogn_time;
+            koef_timeGame = (5*8)/2+uroven/2 + koef_slogn_time;
             StepCount = (5*8)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 210;
             Shirin_fishek = 210;
@@ -603,7 +597,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 10) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 7);
-            koef_timeGame = 78 + koef_slogn_time;
+            koef_timeGame = (7*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (7*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 180;
             Shirin_fishek = 170;
@@ -611,7 +605,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 11) {
             mGrid.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 11);
-            koef_timeGame = 33 + koef_slogn_time;
+            koef_timeGame = (4*11)/2+uroven/2 + koef_slogn_time;
             StepCount = (4*11)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 150;
             Shirin_fishek = 160;
@@ -619,7 +613,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 12) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 8);
-            koef_timeGame = 38 + koef_slogn_time;
+            koef_timeGame = (8*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (8*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 180;
             Shirin_fishek = 170;
@@ -628,7 +622,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 13) {
             mGrid.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 10);
-            koef_timeGame = 42 + koef_slogn_time;
+            koef_timeGame = (5*10)/2+uroven/2 + koef_slogn_time;
             StepCount = (5*10)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 170;
             Shirin_fishek = 190;
@@ -637,7 +631,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 14) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 9);
-            koef_timeGame = 47 + koef_slogn_time;
+            koef_timeGame = (9*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (9*6)*2+uroven*2 + koef_slogn_step; // Задаём максимальное количество ходов
             Visot_fishek = 170;
             Shirin_fishek = 160;
@@ -646,7 +640,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 15) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 10);
-            koef_timeGame = 55 + koef_slogn_time;
+            koef_timeGame = (10*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (10*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 170;
             Shirin_fishek = 170;
@@ -655,7 +649,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 16) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 11);
-            koef_timeGame = 60 + koef_slogn_time;
+            koef_timeGame = (11*6)/2+uroven/2 + koef_slogn_time;
             StepCount = (11*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 150;
             Shirin_fishek = 160;
@@ -664,7 +658,7 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 17) {
             mGrid.setNumColumns(7);
             mAdapter = new PoleGame(this, 7, 10);
-            koef_timeGame = 65 + koef_slogn_time;
+            koef_timeGame = (7*10)/2+uroven/2 + koef_slogn_time;
             StepCount = (7*10)*2+uroven*2 + koef_slogn_step; // Задаём максимальное количество ходов
             Visot_fishek = 160;
             Shirin_fishek = 150;
@@ -673,8 +667,8 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 18) {
             mGrid.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 12);
-            koef_timeGame = 68 + koef_slogn_time;
-            StepCount = (12*6)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = (12*6)*2+uroven*2 + koef_slogn_time;
+            StepCount = (12*6)/2+uroven/2 + koef_slogn_step;  // Задаём максимальное количество ходов
             Visot_fishek = 140;
             Shirin_fishek = 150;
         }
@@ -682,8 +676,8 @@ public class MainActivity extends AppCompatActivity {
         if (uroven == 19) {
             mGrid.setNumColumns(7);
             mAdapter = new PoleGame(this, 7, 12);
-            koef_timeGame = 80 + koef_slogn_time;
-            StepCount = (7*12)*2+uroven*2 + koef_slogn_step;  // Задаём максимальное количество ходов
+            koef_timeGame = (7*12)*2+uroven*2 + koef_slogn_time;
+            StepCount = (7*12)/2+uroven/2 + koef_slogn_step;  // Задаём максимальное количество ходов
              Visot_fishek = 140;
             Shirin_fishek = 150;
         }

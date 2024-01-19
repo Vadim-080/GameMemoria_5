@@ -24,8 +24,8 @@ public class Pobeda extends AppCompatActivity {
 
         result = findViewById(R.id.Result_view);
 
-        result.setText("ВЫ ПОБЕДИЛИ" + "\n \n" + "Открыт уровень: " + uroven + " \n \n" + "Сделано ходов: " + StepCountIspolz + " \n\n " +
-                "Истрачено времени: " + timeIstr + " \n\n " + "Бонусные очки: " + bonusStep + " \n\n " + "Бонусное время: " + (bonusTimeViv / 1000) + " сек");
+        result.setText("НОВЫЙ УРОВЕНЬ - " + uroven + " \n" + " \n" +"СДЕЛАНО ХОДОВ - " + StepCountIspolz + " \n" +" \n" +
+                "ВРЕМЯ ИГРЫ - " + timeIstr + " \n" + " \n" +"ЗАРАБОТАНО МОНЕТ - " + bonusStep + " \n " +" \n" + "БОНУСНОЕ ВРЕМЯ - " + (bonusTimeViv / 1000) + " сек");
 
     }
 

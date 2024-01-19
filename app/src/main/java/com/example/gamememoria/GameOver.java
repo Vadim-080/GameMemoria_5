@@ -59,7 +59,7 @@ public class GameOver extends AppCompatActivity {
         String TextToast;
 
         // Диалоговое окно
-        AlertDialog.Builder alertbox = new AlertDialog.Builder(this, R.style.StyleDialogOknaTime);
+        AlertDialog.Builder alertbox = new AlertDialog.Builder(this, R.style.StyleDialogOknaGameOver);
 
         // Заголовок и текст
 
@@ -102,11 +102,11 @@ public class GameOver extends AppCompatActivity {
         alert.setCanceledOnTouchOutside(false);  // Не даёт закрывать диалоговое окно при нажатии на пустое место экрана
 
         Button nbutton = alert.getButton(DialogInterface.BUTTON_POSITIVE);
-        nbutton.setTextColor(Color.RED);
+        nbutton.setTextColor(Color.GREEN);
         nbutton.setTextSize(15);
 
         Button nbutton2 = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
-        nbutton2.setTextColor(Color.DKGRAY);
+        nbutton2.setTextColor(Color.BLUE);
         nbutton2.setTextSize(15);
     }
 
@@ -119,9 +119,6 @@ public class GameOver extends AppCompatActivity {
         Intent intent = new Intent(this, Menu.class);    // Переход на другой класс (сдесь класс Vvod)
         startActivity(intent);
     }
-
-
-
 
     public void onPause() {    // Запоминаем данные
         super.onPause();
