@@ -7,10 +7,10 @@
     <shape android:shape="rectangle">
         <corners android:radius="25dp" />
         <gradient
-            android:startColor="@color/CV10"
-            android:endColor="@color/CV11"
+            android:startColor="#F8E995"
+            android:endColor="#B39D2D"
             android:type="linear"
-            android:angle="1000000"/>
+            android:angle="135"/>
         <stroke android:width="10dp" android:color="@color/CV14" />
     </shape>
 </inset>

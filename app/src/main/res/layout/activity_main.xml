@@ -16,6 +16,7 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="УРОВЕНЬ"
         android:textColor="#AA00FF"
+        android:background="@android:color/transparent"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,6 +34,7 @@
         android:layout_marginTop="-15dp"
         android:gravity="center_vertical"
         android:text="0"
+        android:background="@android:color/transparent"
         android:textColor="@color/CV15"
         android:textSize="50dp"
         android:textStyle="bold"
@@ -47,6 +49,7 @@
         android:gravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/slogn1"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.99"
@@ -63,6 +66,7 @@
         android:layout_marginTop="5dp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
+        android:background="@android:color/transparent"
         android:text="ОСТАТОК ХОДОВ"
         android:textColor="#AA00FF"
         android:textSize="12dp"
@@ -78,6 +82,7 @@
         android:layout_marginLeft="30dp"
         android:layout_marginTop="1dp"
         android:gravity="center"
+        android:background="@android:color/transparent"
         android:scaleType="fitXY"
         android:textColor="#AA00FF"
         android:textSize="40dp"
@@ -93,6 +98,7 @@
         android:gravity="center"
         android:text="ВРЕМЯ"
         android:textColor="@color/CV7"
+        android:background="@android:color/transparent"
         android:textSize="12dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -110,6 +116,7 @@
         android:gravity="center"
         android:countDown="true"
         android:textSize="40dp"
+        android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nadpTime_view" />
 
@@ -118,6 +125,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:countDown="false"
+        android:background="@android:color/transparent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="parent" />
 
@@ -130,7 +138,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="50dp"
         android:gravity="center"
-
+        android:background="@android:color/transparent"
 
         android:numColumns="auto_fit"
         android:stretchMode="columnWidth"

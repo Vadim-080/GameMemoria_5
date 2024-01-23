@@ -117,7 +117,7 @@ public class GameOver extends AppCompatActivity {
 
         Button nbutton2 = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
         nbutton2.setTextColor(Color.BLUE);
-        nbutton2.setTextSize(15);
+        nbutton2.setTextSize(13);
     }
 
     public void PovtorGame(View view) {

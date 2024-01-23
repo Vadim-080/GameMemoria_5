@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-<!--
-    <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
-    </style>-->
+    <!--
+        <style name="Theme.AppCompat.Light.NoActionBar.FullScreen" parent="@style/Theme.AppCompat.Light.NoActionBar">
+            <item name="android:windowNoTitle">true</item>
+            <item name="android:windowActionBar">false</item>
+            <item name="android:windowFullscreen">true</item>
+            <item name="android:windowContentOverlay">@null</item>
+        </style>-->
 
-   <!-- <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <!-- <style name="AppFullScreenTheme" parent="Theme.AppCompat.Light.NoActionBar">
 
-        <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">fill_parent</item>
+         <item name="android:layout_width">fill_parent</item>
+         <item name="android:layout_height">fill_parent</item>
 
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowActionBar">false</item>
-        <item name="android:windowFullscreen">true</item>
-        <item name="android:windowContentOverlay">@null</item>
+         <item name="android:windowNoTitle">true</item>
+         <item name="android:windowActionBar">false</item>
+         <item name="android:windowFullscreen">true</item>
+         <item name="android:windowContentOverlay">@null</item>
 
-        <item name="android:windowIsFloating">false</item>
+         <item name="android:windowIsFloating">false</item>
 
-    </style>-->
+     </style>-->
 
-    <style name="styleStart" >
+    <style name="styleStart">
         <item name="android:textColor">@color/CV4</item>
         <item name="android:textSize">22sp</item>
         <item name="android:shadowColor">@color/CV17</item>
@@ -94,46 +94,65 @@
         <item name="android:shadowRadius">3</item>
     </style>
 
-    <style name="StyleDialogOknaTime"
-        parent="Theme.AppCompat.Light.Dialog.Alert">  // Делает окно не во весь экран
+    <style name="StyleDialogOknaTime" parent="Theme.AppCompat.Light.Dialog.Alert">// Делает окно не
+        во весь экран
 
-        <item name="android:textColor">@color/CV4</item>  // Цвет заголовка
-        <item name="android:textSize">60sp</item>  // Размер текста заголовка
-        <item name="android:gravity">center</item>   // Размещение по центру
-        <item name="android:textStyle">bold</item>  // Жирн шрифт кнопок
-        <item name="android:textColorPrimary">@color/CV2</item> // Цвет текста вопроса
-        <item name="android:windowBackground">@drawable/background_dialog_time</item>  // Стиль и форма диалогового окна
+        <item name="android:textColor">@color/CV4</item>
+        // Цвет заголовка
+        <item name="android:textSize">60sp</item>
+        // Размер текста заголовка
+        <item name="android:gravity">center</item>
+        // Размещение по центру
+        <item name="android:textStyle">bold</item>
+        // Жирн шрифт кнопок
+        <item name="android:textColorPrimary">@color/CV2</item>
+        // Цвет текста вопроса
+        <item name="android:windowBackground">@drawable/background_dialog_time</item>
+        // Стиль и форма диалогового окна
+
+
+        <!-- <item name="android:background">@color/CV8</item>  // Цвет поля-->
+        <!--    <item name="android:typeface">monospace</item>-->
+        <!--<item name="android:headerBackground">@color/CV6</item>-->
+        <!-- <item name="colorAccent">@color/CV1</item>-->
+    </style>
+
+    <style name="StyleDialogOknaStep" parent="Theme.AppCompat.Light.Dialog.Alert">// Делает окно не
+        во весь экран
+
+        <item name="android:textColor">@color/CV13</item>
+        // Цвет заголовка
+        <item name="android:textSize">40sp</item>
+        // Размер текста заголовка
+        <item name="android:gravity">center</item>
+        // Размещение по центру
+        <item name="android:textStyle">bold</item>
+        // Жирн шрифт кнопок
+        <item name="android:textColorPrimary">@color/CV12</item>
+        // Цвет текста вопроса
+        <item name="android:windowBackground">@drawable/background_dialog_step</item>
+        // Стиль и форма диалогового окна
 
         <!-- <item name="android:background">@color/CV8</item>  // Цвет поля-->
         <!-- <item name="android:typeface">monospace</item>-->
         <!--<item name="android:headerBackground">@color/CV6</item>-->
-        <!--<item name="colorAccent">@color/CV1</item>-->
     </style>
 
-    <style name="StyleDialogOknaStep"
-        parent="Theme.AppCompat.Light.Dialog.Alert">  // Делает окно не во весь экран
+    <style name="StyleDialogOknaGameOver" parent="Theme.AppCompat.Light.Dialog.Alert">// Делает окно
+        не во весь экран
 
-        <item name="android:textColor">@color/CV13</item>  // Цвет заголовка
-        <item name="android:textSize">40sp</item>  // Размер текста заголовка
-        <item name="android:gravity">center</item>   // Размещение по центру
-        <item name="android:textStyle">bold</item>  // Жирн шрифт кнопок
-        <item name="android:textColorPrimary">@color/CV12</item> // Цвет текста вопроса
-        <item name="android:windowBackground">@drawable/background_dialog_step</item>  // Стиль и форма диалогового окна
-
-        <!-- <item name="android:background">@color/CV8</item>  // Цвет поля-->
-        <!-- <item name="android:typeface">monospace</item>-->
-        <!--<item name="android:headerBackground">@color/CV6</item>-->
-    </style>
-
-    <style name="StyleDialogOknaGameOver"
-        parent="Theme.AppCompat.Light.Dialog.Alert">  // Делает окно не во весь экран
-
-        <item name="android:textColor">@color/CV12</item>  // Цвет заголовка
-        <item name="android:textSize">40sp</item>  // Размер текста заголовка
-        <item name="android:gravity">center</item>   // Размещение по центру
-        <item name="android:textStyle">bold</item>  // Жирн шрифт кнопок
-        <item name="android:textColorPrimary">@color/CV9</item> // Цвет текста вопроса
-        <item name="android:windowBackground">@drawable/background_dialog_step</item>  // Стиль и форма диалогового окна
+        <item name="android:textColor">@color/CV12</item>
+        // Цвет заголовка
+        <item name="android:textSize">40sp</item>
+        // Размер текста заголовка
+        <item name="android:gravity">center</item>
+        // Размещение по центру
+        <item name="android:textStyle">bold</item>
+        // Жирн шрифт кнопок
+        <item name="android:textColorPrimary">@color/CV9</item>
+        // Цвет текста вопроса
+        <item name="android:windowBackground">@drawable/background_dialog_step</item>
+        // Стиль и форма диалогового окна
 
 
     </style>

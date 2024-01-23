@@ -34,7 +34,7 @@ public class PoleGame extends BaseAdapter {
         mCols = cols;
         mRows = rows;
 
-        rubashka = (byte) (Math.random() * 11); // Случайное число от 0 до 10 -- Для выбора рубашки карт
+        rubashka = (byte) (Math.random() * 15); // Случайное число от 0 до 14 -- Для выбора рубашки карт
         naborKartinKart = (byte) (Math.random() * 3); // Случайное число от 0 до 2 -- Для выбора картинок карт
 
         arrPict = new ArrayList<String>();
@@ -152,11 +152,43 @@ public class PoleGame extends BaseAdapter {
                     case 10:
                         view.setImageResource(R.drawable.close11);
                         break;
+                    case 11:
+                        view.setImageResource(R.drawable.close12);
+                        break;
+                    case 12:
+                        view.setImageResource(R.drawable.close13);
+                        break;
+                    case 13:
+                        view.setImageResource(R.drawable.close14);
+                        break;
+                    case 14:
+                        view.setImageResource(R.drawable.close15);
+                        break;
                 }
                 break;
             default:
-                if (uroven > 7 | uroven < 14 ) {
-                    byte zastOtkrKart = (byte) (Math.random() * 2); // Случайное число от 0 до 2
+                if (uroven > 7 | uroven < 11 ) {
+                    byte zastOtkrKart = (byte) (Math.random() * 4); // Случайное число от 0 до 3
+                    switch (zastOtkrKart) {
+                        case 0:
+                            view.setImageResource(R.drawable.none1);
+                            break;
+                        case 1:
+                            view.setImageResource(R.drawable.none);
+                            break;
+                        case 2:
+                            view.setImageResource(R.drawable.none);
+                            break;
+                        case 3:
+                            view.setImageResource(R.drawable.none);
+                            break;
+                    }
+                } else {
+                    view.setImageResource(R.drawable.none);
+                }
+
+                if (uroven > 10 | uroven < 14 ) {
+                    byte zastOtkrKart = (byte) (Math.random() * 2); // Случайное число от 0 до 1
                     switch (zastOtkrKart) {
                         case 0:
                             view.setImageResource(R.drawable.none1);
@@ -170,7 +202,7 @@ public class PoleGame extends BaseAdapter {
                 }
 
                 if (uroven > 13 ) {
-                    byte zastOtkrKart = (byte) (Math.random() * 4); // Случайное число от 0 до 2
+                    byte zastOtkrKart = (byte) (Math.random() * 4); // Случайное число от 0 до 32
                     switch (zastOtkrKart) {
                         case 0:
                             view.setImageResource(R.drawable.none);

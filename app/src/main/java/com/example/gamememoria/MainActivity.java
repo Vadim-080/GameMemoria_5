@@ -150,7 +150,7 @@ public class MainActivity extends AppCompatActivity {
 
         stepScreen.setText(StepCount.toString());
 
-        timeGame = 1000 * 6 * koef_timeGame;  // Задаём время игры
+        timeGame = 100 * 6 * koef_timeGame;  // Задаём время игры
 
         timeScreen.setBase(SystemClock.elapsedRealtime() + timeGame);
         timeScreen.start();   // Запуск время игры
@@ -303,6 +303,8 @@ public class MainActivity extends AppCompatActivity {
         Button nbutton2 = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
         nbutton2.setTextColor(Color.DKGRAY);
         nbutton2.setTextSize(13);
+
+
     }
 
     // Диалоговое окно "Использовать бонусное время"
@@ -361,7 +363,7 @@ public class MainActivity extends AppCompatActivity {
         nbutton.setTextSize(15);
 
         Button nbutton2 = alert.getButton(DialogInterface.BUTTON_NEGATIVE);
-        nbutton2.setTextColor(Color.BLUE);
+        nbutton2.setTextColor(Color.rgb(1,90,38));
         nbutton2.setTextSize(13);
 
         //  УВЕДОМЛЕНИЯ
