@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/polegameover"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    tools:context=".GameOver">
+
+    <ImageView
+        android:id="@+id/smailProigr_view"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal|center_vertical"
+        android:src="@drawable/smail_proigr1"
+        app:layout_constraintBottom_toTopOf="@+id/nadpViProigrali_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/nadpViProigrali_view"
@@ -13,14 +27,14 @@
         android:gravity="center_horizontal|center_vertical"
         android:text="ВЫ  ПРОИГРАЛИ  !!!"
         android:textColor="@color/CV5"
-        android:textSize="27dp"
+        android:textSize="25dp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.357" />
+        app:layout_constraintVertical_bias="0.3" />
 
     <TextView
         android:id="@+id/PrichinGameOver_view"
@@ -28,18 +42,15 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
+        android:layout_marginTop="110dp"
         android:layout_marginRight="20dp"
-        android:layout_marginTop="5dp"
+        android:autoSizeTextType="uniform"
         android:gravity="center_horizontal|center_vertical"
         android:textColor="@color/CV3"
-        android:textSize="30dp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.54" />
+        app:layout_constraintTop_toBottomOf="@+id/nadpViProigrali_view" />
 
     <Button
         android:id="@+id/buMenu"
@@ -48,9 +59,9 @@
         android:layout_height="wrap_content"
         android:onClick="clickMenu"
         android:text="МЕНЮ"
+        android:textColor="@color/CV1"
         android:textSize="15dp"
         android:textStyle="bold"
-        android:textColor="@color/CV1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.95"

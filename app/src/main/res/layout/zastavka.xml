@@ -6,46 +6,50 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/polezastavka"
-    tools:context=".MainActivity">
+    tools:context=".Zastavka">
 
     <TextView
         android:id="@+id/nazvGame_view"
-        android:layout_width="290dp"
-        android:layout_height="70dp"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="50dp"
+        android:layout_marginRight="50dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:text="ТРЕНЕР ПАМЯТИ"
         android:textColor="@color/CV4"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.06" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <ImageView
         android:id="@+id/emblem_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="80dp"
-        android:layout_marginRight="80dp"
         android:layout_marginTop="60dp"
+        android:layout_marginRight="80dp"
         android:adjustViewBounds="true"
         android:background="@android:color/transparent"
         android:src="@drawable/icon_mem3"
+        app:layout_constraintBottom_toTopOf="@+id/stimulirNadp_view"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.431"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nazvGame_view" />
+        app:layout_constraintTop_toBottomOf="@+id/nazvGame_view"
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/stimulirNadp_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="30dp"
-        android:layout_marginTop="60dp"
         android:layout_marginRight="30dp"
+        android:layout_marginBottom="40dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
@@ -53,8 +57,9 @@
         android:textColor="@color/CV2"
         android:textSize="40dp"
         android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/emblem_view" />
+        app:layout_constraintHorizontal_bias="0.733"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

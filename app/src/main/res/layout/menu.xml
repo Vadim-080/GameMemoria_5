@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/styleStart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/polemenu"
@@ -61,29 +60,30 @@
         android:id="@+id/monet_viev"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="10dp"
         android:layout_marginTop="30dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/monet"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/score_viev"
         app:layout_constraintTop_toBottomOf="@id/nadpUrovenGame_view" />
 
     <TextView
         android:id="@+id/score_viev"
         android:layout_width="40dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:autoSizeTextType="uniform"
         android:gravity="center_vertical"
         android:text="0"
-        android:layout_marginStart="10dp"
         android:textColor="@color/CV4"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/monet_viev"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/nadpUrovenGame_view" />
 
     <ImageView
@@ -110,7 +110,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="30dp"
         android:autoSizeTextType="uniform"
         android:gravity="center_vertical"
         android:textColor="@color/CV4"
@@ -126,15 +126,17 @@
         android:layout_height="100dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
+        android:backgroundTint="@color/CV20"
+
         android:text="СТАРТ"
-        android:textColor="@color/CV5"
         android:textSize="25dp"
         android:textStyle="bold"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_viev"
-        app:layout_constraintVertical_bias="0.247" />
+        app:layout_constraintVertical_bias="0.247"
+        app:strokeColor="@color/CV17"
+        app:strokeWidth="5dp" />
 
     <Button
         android:id="@+id/buStart1"
@@ -143,108 +145,117 @@
         android:layout_marginStart="150dp"
         android:layout_marginTop="20dp"
         android:background="@android:color/transparent"
-        app:layout_constraintTop_toBottomOf="@+id/score_viev"/>
+        app:layout_constraintTop_toBottomOf="@+id/score_viev" />
 
     <Button
         android:id="@+id/buDostigen"
         style="@style/styleButtonMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="25dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/CV19"
+
         android:text="ДОСТИЖЕНИЯ"
-
-
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buStart" />
+        app:layout_constraintTop_toBottomOf="@+id/buStart"
+        app:strokeColor="@color/CV2"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/buNewGame"
         style="@style/styleButtonMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/CV19"
         android:text="НОВАЯ ИГРА"
-
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buDostigen" />
+        app:layout_constraintTop_toBottomOf="@+id/buDostigen"
+        app:strokeColor="@color/CV23"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/buVosstsnovlMaxGame"
         style="@style/styleButtonMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/CV19"
+
         android:text="ВОССТАНОВЛЕНИЕ ИГРЫ"
-
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buNewGame" />
+        app:layout_constraintTop_toBottomOf="@+id/buNewGame"
+        app:strokeColor="@color/CV24"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/buSetting"
         style="@style/styleButtonMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/CV19"
         android:text="НАСТРОЙКИ"
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buSlognost" />
+        app:layout_constraintTop_toBottomOf="@+id/buSlognost"
+        app:strokeColor="@color/CV26"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/buSlognost"
         style="@style/styleButtonMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/CV19"
         android:text="СЛОЖНОСТЬ"
 
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buVosstsnovlMaxGame" />
+        app:layout_constraintTop_toBottomOf="@+id/buVosstsnovlMaxGame"
+        app:strokeColor="@color/CV25"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/buPravila"
         style="@style/styleButtonMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="220dp"
+        android:layout_height="45dp"
         android:layout_marginTop="10dp"
+        android:autoSizeTextType="uniform"
+        android:backgroundTint="@color/CV19"
         android:text="ПРАВИЛА ИГРЫ"
         app:layout_constraintEnd_toEndOf="parent"
-
-
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buSetting" />
+        app:layout_constraintTop_toBottomOf="@+id/buSetting"
+        app:strokeColor="@color/CV27"
+        app:strokeWidth="3dp" />
 
     <Button
         android:id="@+id/buExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
         android:text="ВЫХОД"
-        android:textColor="@color/CV1"
-
+        android:textColor="@color/CV21"
         android:textSize="25dp"
         android:textStyle="bold"
-
         app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="@color/CV22"
+        app:strokeWidth="3dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

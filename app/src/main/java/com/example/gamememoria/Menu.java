@@ -8,11 +8,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
@@ -20,6 +24,10 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Menu extends AppCompatActivity {
 
@@ -31,12 +39,15 @@ public class Menu extends AppCompatActivity {
     public static int Key_Slognost_time = 4; //  ключ Сложность время
     public static int Key_Slognost_step = 5; //  ключ Сложность ходы
     public static int Key_Slognost_game = 6; //  ключ Сложность Игры
+    public static int Key_Koef_Pobed = 7; //  ключ Сложность Игры
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
     public static int Key_Slognost_Max = 14; //  ключ набранного на максимальн уровне времени
 
     public static int uroven;  // Задаём уровень в игре
+
+    public static int koefPobed=0;  // Сколько раз победил всю игру
 
     public static int slognost_game;  // Задаём сложность игры
 
@@ -62,10 +73,17 @@ public class Menu extends AppCompatActivity {
     Chronometer timeBonus;
     TextView namberUroven, score_viev, nadpUrovenGame;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+
+        // Задаем цвет верхей строки и строки навигации
+        if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
+        }
 
         iconSlogn = findViewById(R.id.slogn_viev);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
@@ -80,6 +98,106 @@ public class Menu extends AppCompatActivity {
         vosstsnovlMaxGame = findViewById(R.id.buVosstsnovlMaxGame);
         namberUroven = findViewById(R.id.NamberUroven_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
+
+// Мигание кнопки
+
+        final Animation animation1 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        animation1.setDuration(1000); // продолжительность
+        animation1.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation1.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation1.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        final Button btn1 = (Button) findViewById(R.id.buDostigen);
+        btn1.startAnimation(animation1);
+        btn1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.clearAnimation();
+            }
+        });
+
+        final Animation animation2 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        animation2.setDuration(1500); // продолжительность
+        animation2.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation2.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation2.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        final Button btn2 = (Button) findViewById(R.id.buNewGame);
+        btn2.startAnimation(animation2);
+
+        btn2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.clearAnimation();
+            }
+        });
+
+        final Animation animation3 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        animation3.setDuration(2000); // продолжительность
+        animation3.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation3.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation3.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        final Button btn3 = (Button) findViewById(R.id.buVosstsnovlMaxGame);
+        btn3.startAnimation(animation3);
+        btn3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.clearAnimation();
+            }
+        });
+
+        final Animation animation4 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        animation4.setDuration(2500); // продолжительность
+        animation4.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation4.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation4.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        final Button btn4 = (Button) findViewById(R.id.buSlognost);
+        btn4.startAnimation(animation4);
+        btn4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.clearAnimation();
+            }
+        });
+
+        final Animation animation5 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        animation5.setDuration(3000); // продолжительность
+        animation5.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation5.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation5.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        final Button btn5 = (Button) findViewById(R.id.buSetting);
+        btn5.startAnimation(animation5);
+        btn5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.clearAnimation();
+            }
+        });
+
+        final Animation animation6 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        animation6.setDuration(3500); // продолжительность
+        animation6.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation6.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation6.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        final Button btn6 = (Button) findViewById(R.id.buPravila);
+        btn6.startAnimation(animation6);
+        btn6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(final View view) {
+                view.clearAnimation();
+            }
+        });
+
+        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_time2);
+        time.startAnimation(a2);
+
+        View a3 = findViewById(R.id.monet_viev);                   // ПОВОРОТ КНОПКИ
+        a3.animate().rotationYBy(99720).setDuration(300000);
+
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start);
+        start.startAnimation(a4);
+
+        Animation a5 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
+        namberUroven.startAnimation(a5);
+
 
         Typeface type1 = getResources().getFont(R.font.komi);    // шрифт
         nadpUrovenGame.setTypeface(type1);
@@ -108,17 +226,6 @@ public class Menu extends AppCompatActivity {
         score_viev.setText("" + score);
         timeBonus.setBase(SystemClock.elapsedRealtime() - bonusTime * 1000);
 
-        Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_time2);
-        time.startAnimation(a2);
-
-        View a3 = findViewById(R.id.monet_viev);                   // ПОВОРОТ КНОПКИ
-        a3.animate().rotationYBy(99720).setDuration(300000);
-
-        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start);
-        start.startAnimation(a4);
-
-        Animation a5 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
-        namberUroven.startAnimation(a5);
 
         start.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -162,6 +269,7 @@ public class Menu extends AppCompatActivity {
             }
         });
     }
+
 
     private void startGame() {
 

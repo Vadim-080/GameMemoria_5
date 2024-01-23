@@ -34,7 +34,7 @@ public class PoleGame extends BaseAdapter {
         mCols = cols;
         mRows = rows;
 
-        rubashka = (byte) (Math.random() * 10); // Случайное число от 0 до 9 -- Для выбора рубашки карт
+        rubashka = (byte) (Math.random() * 11); // Случайное число от 0 до 10 -- Для выбора рубашки карт
         naborKartinKart = (byte) (Math.random() * 3); // Случайное число от 0 до 2 -- Для выбора картинок карт
 
         arrPict = new ArrayList<String>();
@@ -148,6 +148,9 @@ public class PoleGame extends BaseAdapter {
                         break;
                     case 9:
                         view.setImageResource(R.drawable.close10);
+                        break;
+                    case 10:
+                        view.setImageResource(R.drawable.close11);
                         break;
                 }
                 break;

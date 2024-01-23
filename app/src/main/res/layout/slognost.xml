@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/poleslognost"
-    tools:context=".Menu">
+    tools:context=".Slognost">
 
     <TextView
         android:id="@+id/nadpSlognost_viev"
@@ -120,6 +120,8 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/buZabiv"  />
+
+
 
     <Button
         android:id="@+id/buOpitn"
