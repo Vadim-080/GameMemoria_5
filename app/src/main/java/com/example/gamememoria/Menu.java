@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -40,17 +41,28 @@ public class Menu extends AppCompatActivity {
     public static int Key_Slognost_step = 5; //  ключ Сложность ходы
     public static int Key_Slognost_game = 6; //  ключ Сложность Игры
     public static int Key_Koef_Pobed = 7; //  ключ Сложность Игры
+    public static int Key_Kolvo_Igr = 8; //  ключ количества сыгранных игр всего Игры
+    public static int Key_Kolvo_Pobed = 9; //  ключ количества побед всего
+    public static int Key_Kolvo_Proigr = 10; //  ключ количества поражений всего
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
     public static int Key_Slognost_Max = 14; //  ключ набранного на максимальн уровне времени
+    public static int Key_Koef_Dostign_Slogn = 15; //  ключ коэфиц достигнутой сложности = уровень*сложность
 
     public static int uroven;  // Задаём уровень в игре
 
-    public static int koefPobed=0;  // Сколько раз победил всю игру
+    public static int koefPobed = 0;  // Сколько раз победил всю игру
+
+    public static int kolvoIgr;  // Сколько сыграно всего игр
+
+    public static int kolvoPobed ;  // Сколько всего побед
+
+    public static int kolvoProigr ;  // Сколько всего поражений
 
     public static int slognost_game;  // Задаём сложность игры
 
+    public static int koefDostignSlogn; // коэфиц достигнутой сложности = уровень*сложность
     public static int score;  // Задаём количество очков в игре
     public static int bonusTime;  // Задаём количество бонусного времени
     public static int urovenMax;  // Для хранения максимального достигнутого в игре уровня
@@ -60,19 +72,15 @@ public class Menu extends AppCompatActivity {
     public static String PrichinGameOver;
     public static int Visot_fishek; // высота фишек
     public static int Shirin_fishek; // высота фишек
-
     public static int kolvoGameOverPodrad; // количество проигрышей подряд
-
-
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
-
     private ImageView iconSlogn;
     private ImageView time;
 
-    Button start, start1, exit, newGame, slogn, vosstsnovlMaxGame;
+    Button start, start1, exit, newGame, slogn, vosstsnovlMaxGame, dostigen;
     Chronometer timeBonus;
     TextView namberUroven, score_viev, nadpUrovenGame;
-
+    MediaPlayer mediaPlayer1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -85,6 +93,9 @@ public class Menu extends AppCompatActivity {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
         }
 
+// Задаём звуковые сигналы
+        mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
+
         iconSlogn = findViewById(R.id.slogn_viev);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
         time = findViewById(R.id.time_viev);
@@ -93,6 +104,7 @@ public class Menu extends AppCompatActivity {
         start = findViewById(R.id.buStart);
         start1 = findViewById(R.id.buStart1);
         slogn = findViewById(R.id.buSlognost);
+        dostigen = findViewById(R.id.buDostigen);
         exit = findViewById(R.id.buExit);
         newGame = findViewById(R.id.buNewGame);
         vosstsnovlMaxGame = findViewById(R.id.buVosstsnovlMaxGame);
@@ -262,6 +274,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        dostigen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dostigen();
+            }
+        });
+
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -272,13 +291,18 @@ public class Menu extends AppCompatActivity {
 
 
     private void startGame() {
+        mediaPlayer1.start();
 
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
-    private void slognost() {
+    private void Dostigen() {
+        Intent i = new Intent(this, Dostigenia.class);
+        startActivity(i);
+    }
 
+    private void slognost() {
         Intent i = new Intent(this, Slognost.class);
         startActivity(i);
     }
@@ -307,6 +331,7 @@ public class Menu extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
     public void finish() {
         this.finishAffinity();            // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
     }

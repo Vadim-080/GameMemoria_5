@@ -28,12 +28,32 @@
     <color name="CV26">#B078FF</color>
     <color name="CV27">#C59CFF</color>
     <color name="CV28">#8F0242</color>
-
     <color name="CV29">#015A26</color>
+    <color name="CV30">#DF0165</color>
+    <color name="CV31">#FD338E</color>
+    <color name="CV32">#FA57A0</color>
+    <color name="CV33">#FD71B1</color>
 
 
 
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="red">#FF0073</color>
+
+
+
+    <color name="colorPrimary">#024265</color>
+    <color name="colorPrimaryDark">#024265</color>
+    <color name="colorAccent">#05af9b</color>
+
+    <color name="color_one">#fb7268</color>
+    <color name="color_white">#ededf2</color>
+    <color name="color_two">#E3E0E0</color>
+
+    <color name="R">#FFA726</color>
+    <color name="Python">#66BB6A</color>
+    <color name="CPP">#EF5350</color>
+    <color name="Java">#29B6F6</color>
+
+
 </resources>

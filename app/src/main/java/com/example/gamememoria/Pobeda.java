@@ -25,6 +25,7 @@ import static com.example.gamememoria.Menu.urovenMax;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -40,6 +41,7 @@ public class Pobeda extends AppCompatActivity {
 
     TextView result;
     ImageView smailPobeda;
+    MediaPlayer mediaPlayer1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class Pobeda extends AppCompatActivity {
 
         result = findViewById(R.id.Result_view);
         smailPobeda = findViewById(R.id.smailPobeda_view);
+        mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
 

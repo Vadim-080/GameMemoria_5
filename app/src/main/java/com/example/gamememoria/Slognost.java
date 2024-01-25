@@ -1,6 +1,5 @@
 package com.example.gamememoria;
 
-
 import static com.example.gamememoria.Menu.Key_Koef_Pobed;
 import static com.example.gamememoria.Menu.Key_Slognost_game;
 import static com.example.gamememoria.Menu.Key_Slognost_step;
@@ -16,6 +15,7 @@ import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
@@ -28,7 +28,8 @@ import androidx.core.content.ContextCompat;
 
 public class Slognost extends AppCompatActivity {
 
-    Button zabiv, novi, opit, mast, exit;
+    Button zabiv, novi, opit, mast, buMenu;
+    MediaPlayer mediaPlayer1;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -45,7 +46,8 @@ public class Slognost extends AppCompatActivity {
         novi = findViewById(R.id.buNovishok);
         opit = findViewById(R.id.buOpitn);
         mast = findViewById(R.id.buMaster);
-        exit = findViewById(R.id.buExit);
+        buMenu = findViewById(R.id.buMenu);
+        mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
         onResume();
         povtorTriGameOverPodrad = false;
@@ -93,7 +95,7 @@ public class Slognost extends AppCompatActivity {
             }
         });
 
-        exit.setOnClickListener(new View.OnClickListener() {
+        buMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();

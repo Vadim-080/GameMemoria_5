@@ -104,7 +104,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nadpSlognost_viev" />
+        app:layout_constraintTop_toBottomOf="@id/nadpSlognost_viev"
+        app:strokeColor="@color/CV33"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/buNovishok"
@@ -120,7 +122,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buZabiv"  />
+        app:layout_constraintTop_toBottomOf="@id/buZabiv"
+        app:strokeColor="@color/CV32"
+        app:strokeWidth="3dp"/>
 
 
 
@@ -138,7 +142,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buNovishok" />
+        app:layout_constraintTop_toBottomOf="@id/buNovishok"
+        app:strokeColor="@color/CV31"
+        app:strokeWidth="3dp"/>
 
     <Button
         android:id="@+id/buMaster"
@@ -155,10 +161,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buOpitn"  />
+        app:layout_constraintTop_toBottomOf="@id/buOpitn"
+        app:strokeColor="@color/CV30"
+        app:strokeWidth="3dp"/>
 
     <Button
-        android:id="@+id/buExit"
+        android:id="@+id/buMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="МЕНЮ"
@@ -167,10 +175,11 @@
         android:textSize="25dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.96" />
+        app:layout_constraintVertical_bias="0.96"
+        app:strokeColor="@color/CV3"
+        app:strokeWidth="2dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -67,14 +67,21 @@
         <item name="android:shadowDx">30</item>
         <item name="android:shadowDy">20</item>
         <item name="android:shadowRadius">8</item>
-
-
     </style>
 
     <style name="styleNadpSlogn">
         <item name="android:textColor">@color/CV2</item>
         <item name="android:textSize">22sp</item>
         <item name="android:shadowColor">@color/CV3</item>
+        <item name="android:shadowDx">30</item>
+        <item name="android:shadowDy">20</item>
+        <item name="android:shadowRadius">8</item>
+    </style>
+
+    <style name="styleNadpDostigen">
+        <item name="android:textColor">@color/CV2</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:shadowColor">@color/CV19</item>
         <item name="android:shadowDx">30</item>
         <item name="android:shadowDy">20</item>
         <item name="android:shadowRadius">8</item>
