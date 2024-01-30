@@ -3,16 +3,21 @@ package com.example.gamememoria;
 import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
 import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.IBinder;
 import android.os.SystemClock;
+import android.provider.Settings;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -23,7 +28,9 @@ import android.widget.Chronometer;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 
@@ -43,25 +50,20 @@ public class Menu extends AppCompatActivity {
     public static int Key_Koef_Pobed = 7; //  ключ Сложность Игры
     public static int Key_Kolvo_Igr = 8; //  ключ количества сыгранных игр всего Игры
     public static int Key_Kolvo_Pobed = 9; //  ключ количества побед всего
-    public static int Key_Kolvo_Proigr = 10; //  ключ количества поражений всего
+    public static int Key_Kolvo_Proigr_Step = 10; //  ключ количества поражений всего из за ходов
     public static int Key_Uroven_Max = 11; //  ключ максимального уровня
     public static int Key_Score_Max = 12; //  ключ набранных на максимальн уровне очков
     public static int Key_Time_Max = 13; //  ключ набранного на максимальн уровне времени
     public static int Key_Slognost_Max = 14; //  ключ набранного на максимальн уровне времени
     public static int Key_Koef_Dostign_Slogn = 15; //  ключ коэфиц достигнутой сложности = уровень*сложность
-
+    public static int Key_Kolvo_Proigr_Time = 16; //  ключ количества поражений всего из за времени
     public static int uroven;  // Задаём уровень в игре
-
     public static int koefPobed = 0;  // Сколько раз победил всю игру
-
     public static int kolvoIgr;  // Сколько сыграно всего игр
-
-    public static int kolvoPobed ;  // Сколько всего побед
-
-    public static int kolvoProigr ;  // Сколько всего поражений
-
+    public static int kolvoPobed;  // Сколько всего побед
+    public static int kolvoProigrStep;  // Сколько всего поражений из за ходов
+    public static int kolvoProigrTime;  // Сколько всего поражений из за времени
     public static int slognost_game;  // Задаём сложность игры
-
     public static int koefDostignSlogn; // коэфиц достигнутой сложности = уровень*сложность
     public static int score;  // Задаём количество очков в игре
     public static int bonusTime;  // Задаём количество бонусного времени
@@ -77,24 +79,28 @@ public class Menu extends AppCompatActivity {
     private ImageView iconSlogn;
     private ImageView time;
 
+
+    String PLAY_ACTION = "com.app.action.play";
+    String STOP_ACTION = "com.app.action.stop";
+
+
     Button start, start1, exit, newGame, slogn, vosstsnovlMaxGame, dostigen;
     Chronometer timeBonus;
     TextView namberUroven, score_viev, nadpUrovenGame;
-    MediaPlayer mediaPlayer1;
+    MediaPlayer mediaPlayer1,
+            fonMusicMenu; // Фоновая музыка
+    MediaPlayer mediaMenu1, mediaMenu2, mediaMenu3, mediaMenu4, mediaMenu5, mediaMenu6; // Звук кнопок меню
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
-        // Задаем цвет верхей строки и строки навигации
+// Задаем цвет верхей строки и строки навигации
         if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
-            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); // строка состояния или временная шкала вверху
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Панель навигации - нижняя часть
         }
-
-// Задаём звуковые сигналы
-        mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
         iconSlogn = findViewById(R.id.slogn_viev);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
@@ -111,9 +117,242 @@ public class Menu extends AppCompatActivity {
         namberUroven = findViewById(R.id.NamberUroven_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
-// Мигание кнопки
+// Задаём звуковые сигналы
+        mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
+        fonMusicMenu = MediaPlayer.create(this, R.raw.legki_jazz);
+        mediaMenu1 = MediaPlayer.create(this, R.raw.zv_menu_1);
+        mediaMenu2 = MediaPlayer.create(this, R.raw.zv_menu_2);
+        mediaMenu3 = MediaPlayer.create(this, R.raw.zv_menu_3);
+        mediaMenu4 = MediaPlayer.create(this, R.raw.zv_menu_4);
+        mediaMenu5 = MediaPlayer.create(this, R.raw.zv_menu_5);
+        mediaMenu6 = MediaPlayer.create(this, R.raw.zv_menu_6);
 
-        final Animation animation1 = new AlphaAnimation(1, 0.3f); // Изменение с полностью видимого на невидимый
+        /*  mediaPlayer2.setVolume(0.5f, 0.5f); // Задаём уровень громкости*/
+        fonMusicMenu.start();
+        fonMusicMenu.setLooping(true);  // повтор проигрывания плеера
+
+
+//Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
+
+        fonMusicMenu.setVolume(0.5f, 0.5f); // Задаём уровень громкости
+
+        animButtonMenu();  // Мигание кнопок Меню
+        animZnakov();  // Анимация знаков (монет, часы...)
+        shrift();  // Шрифты
+
+        onResume(); // Вывод данных из памяти
+
+        switch (slognost_game) {
+            case 1:
+                iconSlogn.setImageResource(R.drawable.slogn1);
+                break;
+            case 2:
+                iconSlogn.setImageResource(R.drawable.slogn2);
+                break;
+            case 3:
+                iconSlogn.setImageResource(R.drawable.slogn3);
+                break;
+            case 4:
+                iconSlogn.setImageResource(R.drawable.slogn4);
+                break;
+        }
+
+        namberUroven.setText("" + uroven);
+        score_viev.setText("" + score);
+        timeBonus.setBase(SystemClock.elapsedRealtime() - bonusTime * 1000);
+
+        start.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
+
+        start1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startGame();
+            }
+        });
+
+        newGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                newGame();
+            }
+        });
+
+        vosstsnovlMaxGame.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vosstsnovlMaxGame();
+            }
+        });
+
+        slogn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                slognost();
+            }
+        });
+
+        dostigen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dostigen();
+            }
+        });
+
+        exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+    }
+
+    // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        fonMusicMenu.pause();
+    }
+
+    // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
+    public void onStart() {
+        super.onStart();
+        fonMusicMenu.start();
+    }
+
+    private void startGame() {
+
+        mediaPlayer1.start();
+
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    private void Dostigen() {
+        fonMusicMenu.stop();
+        mediaMenu1.start();
+        Intent i = new Intent(this, Dostigenia.class);
+        startActivity(i);
+    }
+
+    private void newGame() {
+        fonMusicMenu.stop();
+        mediaMenu2.start();
+        promegutGameOverPodrad = 0;
+        povtorTriGameOverPodrad = false;
+        uroven = 1;
+        score = 0;
+        bonusTime = 0;
+        onPause();
+        Intent i = new Intent(this, Slognost.class);
+        startActivity(i);
+    }
+
+    private void vosstsnovlMaxGame() {
+        fonMusicMenu.stop();
+        mediaMenu3.start();
+        promegutGameOverPodrad = 0;
+        povtorTriGameOverPodrad = false;
+        onResume();
+
+        uroven = urovenMax;
+        score = scoreMax;
+        bonusTime = bonusTimeMax;
+        slognost_game = slognostMax;
+
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    private void slognost() {
+        fonMusicMenu.stop();
+        mediaMenu4.start();
+        Intent i = new Intent(this, Slognost.class);
+        startActivity(i);
+    }
+
+    // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
+    public void finish() {
+        fonMusicMenu.stop();
+        this.finishAffinity();
+    }
+
+    @Override
+    public void onResume() {    // Получаем число из настроек
+        super.onResume();
+
+        if (mSettings.contains(String.valueOf(Key_Uroven))) {
+            uroven = mSettings.getInt(String.valueOf(Key_Uroven), 0);
+        } else uroven = 1;
+
+        if (mSettings.contains(String.valueOf(Key_Uroven_Max))) {
+            urovenMax = mSettings.getInt(String.valueOf(Key_Uroven_Max), 0);
+        } else urovenMax = 1;
+
+        if (mSettings.contains(String.valueOf(Key_Score))) {
+            score = mSettings.getInt(String.valueOf(Key_Score), 0);
+        } else score = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Time))) {
+            bonusTime = mSettings.getInt(String.valueOf(Key_Time), 0);
+        } else bonusTime = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Score_Max))) {
+            scoreMax = mSettings.getInt(String.valueOf(Key_Score_Max), 0);
+        } else scoreMax = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Time_Max))) {
+            bonusTimeMax = mSettings.getInt(String.valueOf(Key_Time_Max), 0);
+        } else bonusTimeMax = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
+            slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
+        } else slognost_game = 1;
+
+        if (mSettings.contains(String.valueOf(Key_Slognost_Max))) {
+            slognostMax = mSettings.getInt(String.valueOf(Key_Slognost_Max), 0);
+        } else slognostMax = 1;
+
+       /* Intent serviceIntent = new Intent(this, PlayService.class);
+        serviceIntent.setAction(PLAY_ACTION);
+        startService(serviceIntent);*/
+
+
+    }
+
+    @Override
+    public void onPause() {    // Запоминаем данные
+        super.onPause();
+
+        SharedPreferences.Editor a1 = mSettings.edit();
+        a1.putInt(String.valueOf(Key_Uroven), uroven);
+        a1.apply();
+
+        SharedPreferences.Editor a2 = mSettings.edit();
+        a2.putInt(String.valueOf(Key_Score), score);
+        a2.apply();
+
+        SharedPreferences.Editor a3 = mSettings.edit();
+        a3.putInt(String.valueOf(Key_Time), bonusTime);
+        a3.apply();
+
+
+       /* Intent serviceIntent = new Intent(this, PlayService.class);
+        serviceIntent.setAction(STOP_ACTION);
+        startService(serviceIntent);*/
+
+
+    }
+
+    private void animButtonMenu() {// Мигание кнопок Меню
+
+        final Animation animation1 = new AlphaAnimation(1, 0.2f); // Изменение с полностью видимого на невидимый
         animation1.setDuration(1000); // продолжительность
         animation1.setInterpolator(new LinearInterpolator()); // do not alter animation rate
         animation1.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
@@ -197,7 +436,10 @@ public class Menu extends AppCompatActivity {
                 view.clearAnimation();
             }
         });
+    }
 
+    // Анимация знаков (монет, часы...)
+    private void animZnakov() {
         Animation a2 = AnimationUtils.loadAnimation(this, R.anim.anim_time2);
         time.startAnimation(a2);
 
@@ -209,184 +451,18 @@ public class Menu extends AppCompatActivity {
 
         Animation a5 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
         namberUroven.startAnimation(a5);
+    }
 
-
+    // Шрифты
+    private void shrift() {
         Typeface type1 = getResources().getFont(R.font.komi);    // шрифт
         nadpUrovenGame.setTypeface(type1);
         Typeface type2 = getResources().getFont(R.font.vanowitsch);    // шрифт
         namberUroven.setTypeface(type2);
         Typeface type3 = getResources().getFont(R.font.pacifico_regular);    // шрифт
         start.setTypeface(type3);
-
-        onResume();
-
-        if (slognost_game == 1) {
-            iconSlogn.setImageResource(R.drawable.slogn1);
-        }
-        if (slognost_game == 2) {
-            iconSlogn.setImageResource(R.drawable.slogn2);
-        }
-        if (slognost_game == 3) {
-            iconSlogn.setImageResource(R.drawable.slogn3);
-        }
-        if (slognost_game == 4) {
-            iconSlogn.setImageResource(R.drawable.slogn4);
-        }
-
-        namberUroven.setText("" + uroven);
-
-        score_viev.setText("" + score);
-        timeBonus.setBase(SystemClock.elapsedRealtime() - bonusTime * 1000);
-
-
-        start.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startGame();
-            }
-        });
-
-        start1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startGame();
-            }
-        });
-
-        newGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                newGame();
-            }
-        });
-
-        vosstsnovlMaxGame.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                vosstsnovlMaxGame();
-            }
-        });
-
-        slogn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                slognost();
-            }
-        });
-
-        dostigen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Dostigen();
-            }
-        });
-
-        exit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
     }
 
-
-    private void startGame() {
-        mediaPlayer1.start();
-
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-
-    private void Dostigen() {
-        Intent i = new Intent(this, Dostigenia.class);
-        startActivity(i);
-    }
-
-    private void slognost() {
-        Intent i = new Intent(this, Slognost.class);
-        startActivity(i);
-    }
-
-    private void newGame() {
-        promegutGameOverPodrad = 0;
-        povtorTriGameOverPodrad = false;
-        uroven = 1;
-        score = 0;
-        bonusTime = 0;
-        onPause();
-        Intent i = new Intent(this, Slognost.class);
-        startActivity(i);
-    }
-
-    private void vosstsnovlMaxGame() {
-        promegutGameOverPodrad = 0;
-        povtorTriGameOverPodrad = false;
-        onResume();
-
-        uroven = urovenMax;
-        score = scoreMax;
-        bonusTime = bonusTimeMax;
-        slognost_game = slognostMax;
-
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
-
-    public void finish() {
-        this.finishAffinity();            // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
-    }
-
-    @Override
-    public void onResume() {    // Получаем число из настроек
-        super.onResume();
-
-        if (mSettings.contains(String.valueOf(Key_Uroven))) {
-            uroven = mSettings.getInt(String.valueOf(Key_Uroven), 0);
-        } else uroven = 1;
-
-        if (mSettings.contains(String.valueOf(Key_Uroven_Max))) {
-            urovenMax = mSettings.getInt(String.valueOf(Key_Uroven_Max), 0);
-        } else urovenMax = 1;
-
-        if (mSettings.contains(String.valueOf(Key_Score))) {
-            score = mSettings.getInt(String.valueOf(Key_Score), 0);
-        } else score = 0;
-
-        if (mSettings.contains(String.valueOf(Key_Time))) {
-            bonusTime = mSettings.getInt(String.valueOf(Key_Time), 0);
-        } else bonusTime = 0;
-
-        if (mSettings.contains(String.valueOf(Key_Score_Max))) {
-            scoreMax = mSettings.getInt(String.valueOf(Key_Score_Max), 0);
-        } else scoreMax = 0;
-
-        if (mSettings.contains(String.valueOf(Key_Time_Max))) {
-            bonusTimeMax = mSettings.getInt(String.valueOf(Key_Time_Max), 0);
-        } else bonusTimeMax = 0;
-
-        if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
-            slognost_game = mSettings.getInt(String.valueOf(Key_Slognost_game), 0);
-        } else slognost_game = 1;
-
-        if (mSettings.contains(String.valueOf(Key_Slognost_Max))) {
-            slognostMax = mSettings.getInt(String.valueOf(Key_Slognost_Max), 0);
-        } else slognostMax = 1;
-    }
-
-    @Override
-    public void onPause() {    // Запоминаем данные
-        super.onPause();
-
-        SharedPreferences.Editor a1 = mSettings.edit();
-        a1.putInt(String.valueOf(Key_Uroven), uroven);
-        a1.apply();
-
-        SharedPreferences.Editor a2 = mSettings.edit();
-        a2.putInt(String.valueOf(Key_Score), score);
-        a2.apply();
-
-        SharedPreferences.Editor a3 = mSettings.edit();
-        a3.putInt(String.valueOf(Key_Time), bonusTime);
-        a3.apply();
-    }
 }
+
+// ЗВУКИ из - https://developer.alexanderklimov.ru/android/theory/soundpool.php

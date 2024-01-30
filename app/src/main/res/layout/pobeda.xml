@@ -49,7 +49,7 @@
         android:autoSizeTextType="uniform"
         android:textStyle="bold"
         android:background="@android:color/transparent"
-        android:textSize="16dp"
+        android:textSize="13dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintBottom_toTopOf="@+id/nadpPobed_view"
         app:layout_constraintEnd_toEndOf="parent"

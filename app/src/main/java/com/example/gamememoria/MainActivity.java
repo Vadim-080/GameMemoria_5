@@ -6,7 +6,8 @@ import static com.example.gamememoria.Menu.Key_Koef_Dostign_Slogn;
 import static com.example.gamememoria.Menu.Key_Koef_Pobed;
 import static com.example.gamememoria.Menu.Key_Kolvo_Igr;
 import static com.example.gamememoria.Menu.Key_Kolvo_Pobed;
-import static com.example.gamememoria.Menu.Key_Kolvo_Proigr;
+import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Step;
+import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Time;
 import static com.example.gamememoria.Menu.Key_Score;
 import static com.example.gamememoria.Menu.Key_Score_Max;
 import static com.example.gamememoria.Menu.Key_Slognost_Max;
@@ -26,6 +27,7 @@ import static com.example.gamememoria.Menu.koefDostignSlogn;
 import static com.example.gamememoria.Menu.koefPobed;
 import static com.example.gamememoria.Menu.koef_slogn_step;
 import static com.example.gamememoria.Menu.koef_slogn_time;
+import static com.example.gamememoria.Menu.kolvoProigrTime;
 import static com.example.gamememoria.Menu.mSettings;
 import static com.example.gamememoria.Menu.score;
 import static com.example.gamememoria.Menu.scoreMax;
@@ -34,7 +36,7 @@ import static com.example.gamememoria.Menu.slognost_game;
 import static com.example.gamememoria.Menu.uroven;
 import static com.example.gamememoria.Menu.urovenMax;
 import static com.example.gamememoria.Menu.kolvoPobed;
-import static com.example.gamememoria.Menu.kolvoProigr;
+import static com.example.gamememoria.Menu.kolvoProigrStep;
 import static com.example.gamememoria.Menu.kolvoIgr;
 import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 import static java.util.Calendar.getInstance;
@@ -94,8 +96,9 @@ public class MainActivity extends AppCompatActivity {
     boolean zapuskBonusTime = false;
     boolean zapuskBonusScore = false;
 
-// звуковые переменные
-   MediaPlayer mediaPlayer1, mediaPlayer2;
+    // звуковые переменные
+    MediaPlayer mediaPlayer1,
+            mediaPlayer2; // Фоновая музыка
 
 
     @SuppressLint("InvalidWakeLockTag")
@@ -110,9 +113,8 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
         }
 
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Запрет тускнениия экрана телефона и его выключения во время игры
-
-        ProzrachButton();
+// Запрет тускнениия экрана телефона и его выключения во время игры
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         iconSlogn = findViewById(R.id.slogn_viev);
         mGrid = findViewById(R.id.igrovoePole);
@@ -126,7 +128,11 @@ public class MainActivity extends AppCompatActivity {
 
 // Задаём звуковые сигналы
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
-        mediaPlayer2 = MediaPlayer.create(this, R.raw.ac);
+        mediaPlayer2 = MediaPlayer.create(this, R.raw.music_game);
+
+        mediaPlayer2.setVolume(0.5f, 0.5f); // Задаём уровень громкости
+        mediaPlayer2.start();
+        mediaPlayer2.setLooping(true);  // повтор проигрывания плеера
 
 // Шрифт
         Typeface type1 = getResources().getFont(R.font.qwe);    // шрифт
@@ -243,6 +249,7 @@ public class MainActivity extends AppCompatActivity {
                             b1.setEnabled(false);
                             PrichinGameOver = "ИЗРАСХОДОВАНО  ЗАДАННОЕ  ЧИСЛО  ХОДОВ";
                             timeScreen.stop();
+                            kolvoProigrStep = kolvoProigrStep + 1;
                             gameOver();
                         }
                         if ((chronometer.getText().toString().equalsIgnoreCase("00:00")
@@ -250,6 +257,7 @@ public class MainActivity extends AppCompatActivity {
 
                             PrichinGameOver = "ВРЕМЯ  ИГРЫ  ИСТЕКЛО";
                             timeScreen.stop();
+                            kolvoProigrTime = kolvoProigrTime + 1;
                             gameOver();
                         }
                     }
@@ -259,8 +267,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                mediaPlayer2.start();
-
+                mediaPlayer1.start();
                 mAdapter.checkOpenCells();
                 if (mAdapter.openCell(position)) {
                     StepCount--;
@@ -273,9 +280,25 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        clickPause(null);  // Пуск игры, связано с приостановкой во время свертывания (Иначе изначально ставится на Паузу)
+        ProzrachButton();
     }
 
-// Диалоговое окно "Использовать бонусные ходы"
+// ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        mediaPlayer2.pause();
+        clickPause(null);  // Приостанав игры при свертывании приложения
+    }
+// ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
+    public void onStart() {
+        super.onStart();
+        mediaPlayer2.start();
+        clickPause(null); // Пуск игры после свертывании приложения
+    }
+
+    // Диалоговое окно "Использовать бонусные ходы"
     private void ProdolGameStep() {
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
@@ -335,7 +358,7 @@ public class MainActivity extends AppCompatActivity {
         nbutton2.setTextSize(13);
     }
 
-// Диалоговое окно "Использовать бонусное время"
+    // Диалоговое окно "Использовать бонусное время"
     private void ProdolGameTime() {
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
@@ -393,7 +416,7 @@ public class MainActivity extends AppCompatActivity {
         nbutton2.setTextColor(Color.rgb(1, 90, 38));
         nbutton2.setTextSize(13);
 
- //  УВЕДОМЛЕНИЯ
+        //  УВЕДОМЛЕНИЯ
         // https://stackru.com/questions/54083216/sozdanie-uvedomleniya-android-kotoroe-povtoryaetsya-kazhdyij-den-v-opredelennoe?ysclid=lplngnkswq786714462
 
         Intent notifyIntent = new Intent(this, ReceiverNapomin.class);
@@ -411,8 +434,8 @@ public class MainActivity extends AppCompatActivity {
 
     private void GamePobeda() {
 
-        kolvoPobed = kolvoPobed+1;
-        kolvoIgr = kolvoIgr+1;
+        kolvoPobed = kolvoPobed + 1;
+        kolvoIgr = kolvoIgr + 1;
 
         promegutGameOverPodrad = 0;
         StepCountIspolz = StepCountStart - StepCount; // Подсчет количества использованных ходов
@@ -439,7 +462,7 @@ public class MainActivity extends AppCompatActivity {
                 scoreMax = score;
                 bonusTimeMax = bonusTime;
                 slognostMax = slognost_game;
-                koefDostignSlogn = urovenMax*slognost_game;
+                koefDostignSlogn = urovenMax * slognost_game;
             }
         }
 
@@ -451,8 +474,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void gameOver() {      // Переход на другой класс
 
-        kolvoProigr = kolvoProigr+1;
-        kolvoIgr = kolvoIgr+1;
+        mediaPlayer2.stop();
+        kolvoIgr = kolvoIgr + 1;
 
         onPause();
 
@@ -517,12 +540,16 @@ public class MainActivity extends AppCompatActivity {
         a10.apply();
 
         SharedPreferences.Editor a11 = mSettings.edit();
-        a11.putInt(String.valueOf(Key_Kolvo_Proigr), kolvoProigr);
+        a11.putInt(String.valueOf(Key_Kolvo_Proigr_Step), kolvoProigrStep);
         a11.apply();
 
         SharedPreferences.Editor a12 = mSettings.edit();
-        a12.putInt(String.valueOf(Key_Koef_Dostign_Slogn), koefDostignSlogn);
+        a12.putInt(String.valueOf(Key_Kolvo_Proigr_Time), kolvoProigrTime);
         a12.apply();
+
+        SharedPreferences.Editor a13 = mSettings.edit();
+        a13.putInt(String.valueOf(Key_Koef_Dostign_Slogn), koefDostignSlogn);
+        a13.apply();
     }
 
     @Override
@@ -562,14 +589,20 @@ public class MainActivity extends AppCompatActivity {
             kolvoPobed = mSettings.getInt(String.valueOf(Key_Kolvo_Pobed), 0);
         } else kolvoPobed = 0;
 
-        if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr))) {
-            kolvoProigr = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr), 0);
-        } else kolvoProigr = 0;
+        if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr_Step))) {
+            kolvoProigrStep = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr_Step), 0);
+        } else kolvoProigrStep = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr_Time))) {
+            kolvoProigrTime = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr_Time), 0);
+        } else kolvoProigrTime = 0;
     }
 
 // ПАУЗА - ПРОДОЛЖИТЬ
 
     public void clickPause(View view) {
+
+        mediaPlayer2.pause();
 
         if (sostoyniePause == false) {
             timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
@@ -584,6 +617,9 @@ public class MainActivity extends AppCompatActivity {
             a1.animate().alpha(0.1f).setDuration(1500);
 
         } else {
+
+            mediaPlayer2.start();
+
             timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
             timeScreen.start();
             sostoyniePause = false;
@@ -599,7 +635,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickMenu(View view) {
 
+        mediaPlayer2.stop();
+
         mediaPlayer1.start();
+        /* mediaPlayer1.release();*/
 
         Intent intent = new Intent(this, Menu.class);    // Переход на другой класс
         startActivity(intent);

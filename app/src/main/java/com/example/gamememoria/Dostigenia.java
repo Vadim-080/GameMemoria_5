@@ -4,7 +4,8 @@ import static com.example.gamememoria.Menu.Key_Koef_Dostign_Slogn;
 import static com.example.gamememoria.Menu.Key_Koef_Pobed;
 import static com.example.gamememoria.Menu.Key_Kolvo_Igr;
 import static com.example.gamememoria.Menu.Key_Kolvo_Pobed;
-import static com.example.gamememoria.Menu.Key_Kolvo_Proigr;
+import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Step;
+import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Time;
 import static com.example.gamememoria.Menu.Key_Slognost_game;
 import static com.example.gamememoria.Menu.Key_Slognost_step;
 import static com.example.gamememoria.Menu.Key_Slognost_time;
@@ -15,7 +16,8 @@ import static com.example.gamememoria.Menu.koef_slogn_step;
 import static com.example.gamememoria.Menu.koef_slogn_time;
 import static com.example.gamememoria.Menu.kolvoIgr;
 import static com.example.gamememoria.Menu.kolvoPobed;
-import static com.example.gamememoria.Menu.kolvoProigr;
+import static com.example.gamememoria.Menu.kolvoProigrStep;
+import static com.example.gamememoria.Menu.kolvoProigrTime;
 import static com.example.gamememoria.Menu.mSettings;
 import static com.example.gamememoria.Menu.slognost_game;
 import static com.example.gamememoria.Menu.urovenMax;
@@ -39,7 +41,7 @@ import org.eazegraph.lib.models.PieModel;
 public class Dostigenia extends AppCompatActivity {
 
     // Create the object of TextView and PieChart class
-    TextView vsegoGame, pobed, proigr,  maxUroven;
+    TextView vsegoGame, pobed1, proigrTime, proigrStep,  koefSlognost;
     PieChart pieChart;
     MediaPlayer mediaPlayer1;
 
@@ -62,9 +64,10 @@ public class Dostigenia extends AppCompatActivity {
 // Link those objects with their respective
 // id's that we have given in .XML file
         vsegoGame = findViewById(R.id.tvVsegoGame);
-        pobed = findViewById(R.id.tvPobed);
-        proigr = findViewById(R.id.tvProigr);
-        maxUroven = findViewById(R.id.tvMaxUroven);
+        pobed1 = findViewById(R.id.tvPobed1);
+        proigrStep = findViewById(R.id.tvProigrStep);
+        proigrTime = findViewById(R.id.tvProigrTime);
+        koefSlognost = findViewById(R.id.tvKoefSlognost);
         pieChart = findViewById(R.id.piechart);
 
         onResume();
@@ -72,31 +75,31 @@ public class Dostigenia extends AppCompatActivity {
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
         vsegoGame.setText(Integer.toString(kolvoIgr));
-        pobed.setText(Integer.toString(kolvoPobed));
-        proigr.setText(Integer.toString(kolvoProigr));
-        maxUroven.setText(Integer.toString(koefDostignSlogn));
+        pobed1.setText(Integer.toString(kolvoPobed));
+        proigrStep.setText(Integer.toString(kolvoProigrStep));
+        proigrTime.setText(Integer.toString(kolvoProigrTime));
+        koefSlognost.setText(Integer.toString(koefDostignSlogn));
 
 
-// Set the data and color to the pie chart
+// Цвет диаграммы
         pieChart.addPieSlice(
                 new PieModel(
-                        "СЫГРАНО ИГР",
-                        Integer.parseInt(vsegoGame.getText().toString()),
-                        Color.parseColor("#12A5FF")));
+                        "ПОБ",
+                        Integer.parseInt(pobed1.getText().toString()),
+                        Color.parseColor("#008839")));
         pieChart.addPieSlice(
                 new PieModel(
-                        "ПОБЕД",
-                        Integer.parseInt(pobed.getText().toString()),
-                        Color.parseColor("#66BB6A")));
+                        "ПРОИГ ХОД",
+                        Integer.parseInt(proigrStep.getText().toString()),
+                        Color.parseColor("#FF8225")));
         pieChart.addPieSlice(
                 new PieModel(
-                        "ПРОИГРЫШЕЙ",
-                        Integer.parseInt(proigr.getText().toString()),
+                        "ПРОИГ ВРЕМ",
+                        Integer.parseInt(proigrTime.getText().toString()),
                         Color.parseColor("#DF0165")));
 
 // To animate the pie chart
         pieChart.startAnimation();
-
 
     }
 
@@ -109,8 +112,6 @@ public class Dostigenia extends AppCompatActivity {
         pieChart.startAnimation();
     }
 
-
-
     public void onResume() {    // Получаем число из настроек
         super.onResume();
 
@@ -122,9 +123,9 @@ public class Dostigenia extends AppCompatActivity {
             kolvoPobed = mSettings.getInt(String.valueOf(Key_Kolvo_Pobed), 0);
         } else kolvoPobed = 0;
 
-        if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr))) {
-            kolvoProigr = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr), 0);
-        } else kolvoProigr = 0;
+        if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr_Step))) {
+            kolvoProigrStep = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr_Step), 0);
+        } else kolvoProigrStep = 0;
 
         if (mSettings.contains(String.valueOf(Key_Uroven_Max))) {
             urovenMax = mSettings.getInt(String.valueOf(Key_Uroven_Max), 0);
@@ -133,6 +134,10 @@ public class Dostigenia extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Koef_Dostign_Slogn))) {
             koefDostignSlogn = mSettings.getInt(String.valueOf(Key_Koef_Dostign_Slogn), 0);
         } else koefDostignSlogn = 0;
+
+        if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr_Time))) {
+            kolvoProigrTime = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr_Time), 0);
+        } else kolvoProigrTime = 0;
     }
 
 
