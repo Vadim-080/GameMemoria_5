@@ -5,6 +5,7 @@ import static com.example.gamememoria.MainActivity.bonusStep;
 import static com.example.gamememoria.MainActivity.bonusTimeViv;
 import static com.example.gamememoria.MainActivity.timeIstr;
 import static com.example.gamememoria.Menu.Key_Koef_Pobed;
+import static com.example.gamememoria.Menu.Key_Koef_Pobed_Max;
 import static com.example.gamememoria.Menu.Key_Score;
 import static com.example.gamememoria.Menu.Key_Score_Max;
 import static com.example.gamememoria.Menu.Key_Slognost_Max;
@@ -15,6 +16,7 @@ import static com.example.gamememoria.Menu.Key_Uroven_Max;
 import static com.example.gamememoria.Menu.bonusTime;
 import static com.example.gamememoria.Menu.bonusTimeMax;
 import static com.example.gamememoria.Menu.koefPobed;
+import static com.example.gamememoria.Menu.koefPobedMax;
 import static com.example.gamememoria.Menu.mSettings;
 import static com.example.gamememoria.Menu.score;
 import static com.example.gamememoria.Menu.scoreMax;
@@ -74,10 +76,11 @@ public class Pobeda extends AppCompatActivity {
             score=0;
             urovenMax = 1;
             koefPobed = 0;
+            koefPobedMax = 0;
             uroven = 1;
             onPause();
         } else {
-            if (uroven == 20) {
+            if (uroven == 23) {
                 result.setText("ПОЗДРАВЛЯЕМ" + " \n" + "ВЫ ПРОШЛИ ИГРУ" + " \n" + "ПРЕДЛАГАЕМ УВЕЛИЧИТЬ СЛОЖНОСТЬ" + " \n" +
                         "И ТРЕНЕРОВАТЬСЯ ДАЛЬШЕ" + " \n" + "ЗАРАБОТАНО МОНЕТ - " + bonusStep + " \n " + " \n" +
                         "БОНУСНОЕ ВРЕМЯ - " + (bonusTimeViv / 1000) + " сек");
@@ -136,6 +139,10 @@ public class Pobeda extends AppCompatActivity {
         SharedPreferences.Editor a8 = mSettings.edit();
         a8.putInt(String.valueOf(Key_Koef_Pobed), koefPobed);
         a8.apply();
+
+        SharedPreferences.Editor a9 = mSettings.edit();
+        a9.putInt(String.valueOf(Key_Koef_Pobed_Max), koefPobedMax);
+        a9.apply();
     }
 }
 

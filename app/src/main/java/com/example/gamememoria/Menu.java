@@ -3,21 +3,16 @@ package com.example.gamememoria;
 import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
 import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 
-import android.app.Service;
+import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.IBinder;
 import android.os.SystemClock;
-import android.provider.Settings;
 import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
@@ -26,16 +21,12 @@ import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
-
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class Menu extends AppCompatActivity {
 
@@ -57,8 +48,10 @@ public class Menu extends AppCompatActivity {
     public static int Key_Slognost_Max = 14; //  ключ набранного на максимальн уровне времени
     public static int Key_Koef_Dostign_Slogn = 15; //  ключ коэфиц достигнутой сложности = уровень*сложность
     public static int Key_Kolvo_Proigr_Time = 16; //  ключ количества поражений всего из за времени
+    public static int Key_Koef_Pobed_Max = 17; //  ключ Сложность Игры Максимальн
     public static int uroven;  // Задаём уровень в игре
     public static int koefPobed = 0;  // Сколько раз победил всю игру
+    public static int koefPobedMax = 0;  // Сколько раз победил всю игру Максимальн
     public static int kolvoIgr;  // Сколько сыграно всего игр
     public static int kolvoPobed;  // Сколько всего побед
     public static int kolvoProigrStep;  // Сколько всего поражений из за ходов
@@ -78,11 +71,7 @@ public class Menu extends AppCompatActivity {
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
     private ImageView iconSlogn;
     private ImageView time;
-
-
-    String PLAY_ACTION = "com.app.action.play";
-    String STOP_ACTION = "com.app.action.stop";
-
+    int urovenVolume;
 
     Button start, start1, exit, newGame, slogn, vosstsnovlMaxGame, dostigen;
     Chronometer timeBonus;
@@ -102,6 +91,9 @@ public class Menu extends AppCompatActivity {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Панель навигации - нижняя часть
         }
 
+
+
+
         iconSlogn = findViewById(R.id.slogn_viev);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
         time = findViewById(R.id.time_viev);
@@ -117,6 +109,13 @@ public class Menu extends AppCompatActivity {
         namberUroven = findViewById(R.id.NamberUroven_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
+
+
+
+       /* qwe = findViewById(R.id.qqq);
+        RelativeLayout layout = (RelativeLayout) findViewById(R.id.qqq);
+        layout.setBackgroundResource(R.drawable.fon_3);*/
+
 // Задаём звуковые сигналы
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
         fonMusicMenu = MediaPlayer.create(this, R.raw.legki_jazz);
@@ -127,16 +126,26 @@ public class Menu extends AppCompatActivity {
         mediaMenu5 = MediaPlayer.create(this, R.raw.zv_menu_5);
         mediaMenu6 = MediaPlayer.create(this, R.raw.zv_menu_6);
 
-        /*  mediaPlayer2.setVolume(0.5f, 0.5f); // Задаём уровень громкости*/
+        urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
+        /*regulirovUrovenVolume();*/
+
+        ValueAnimator volumeAnimator = ValueAnimator.ofFloat(0f, 1f);
+        volumeAnimator.setDuration(100000); // Длительность анимации в миллисекундах
+        volumeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float volume = (float) animation.getAnimatedValue();
+                fonMusicMenu.setVolume(volume, volume); }
+        });
+        volumeAnimator.start();
+
         fonMusicMenu.start();
         fonMusicMenu.setLooping(true);  // повтор проигрывания плеера
 
+      /*  ConstraintLayout rl = (ConstraintLayout)findViewById(R.id.qqq);
+        rl.setBackground(getResources().getDrawable(R.drawable.polegame));*/
 
-//Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
-        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, 20, 0);
 
-        fonMusicMenu.setVolume(0.5f, 0.5f); // Задаём уровень громкости
 
         animButtonMenu();  // Мигание кнопок Меню
         animZnakov();  // Анимация знаков (монет, часы...)
@@ -223,11 +232,16 @@ public class Menu extends AppCompatActivity {
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
     public void onStart() {
         super.onStart();
+        urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
+        regulirovUrovenVolume();
         fonMusicMenu.start();
+        fonMusicMenu.setLooping(true);  // повтор проигрывания плеера
     }
 
     private void startGame() {
-
+        fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
         mediaPlayer1.start();
 
         Intent i = new Intent(this, MainActivity.class);
@@ -236,27 +250,38 @@ public class Menu extends AppCompatActivity {
 
     private void Dostigen() {
         fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
         mediaMenu1.start();
+
         Intent i = new Intent(this, Dostigenia.class);
         startActivity(i);
     }
 
     private void newGame() {
         fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
         mediaMenu2.start();
+
         promegutGameOverPodrad = 0;
         povtorTriGameOverPodrad = false;
         uroven = 1;
         score = 0;
         bonusTime = 0;
+        koefPobed = 0;
         onPause();
+
         Intent i = new Intent(this, Slognost.class);
         startActivity(i);
     }
 
     private void vosstsnovlMaxGame() {
         fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
         mediaMenu3.start();
+
         promegutGameOverPodrad = 0;
         povtorTriGameOverPodrad = false;
         onResume();
@@ -265,6 +290,7 @@ public class Menu extends AppCompatActivity {
         score = scoreMax;
         bonusTime = bonusTimeMax;
         slognost_game = slognostMax;
+        koefPobed = koefPobedMax;
 
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
@@ -272,7 +298,10 @@ public class Menu extends AppCompatActivity {
 
     private void slognost() {
         fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
         mediaMenu4.start();
+
         Intent i = new Intent(this, Slognost.class);
         startActivity(i);
     }
@@ -280,6 +309,10 @@ public class Menu extends AppCompatActivity {
     // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
     public void finish() {
         fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
+       /* mediaMenu4.start();*/
+
         this.finishAffinity();
     }
 
@@ -319,6 +352,10 @@ public class Menu extends AppCompatActivity {
             slognostMax = mSettings.getInt(String.valueOf(Key_Slognost_Max), 0);
         } else slognostMax = 1;
 
+        if (mSettings.contains(String.valueOf(Key_Koef_Pobed))) {
+            koefPobed = mSettings.getInt(String.valueOf(Key_Koef_Pobed), 0);
+        } else koefPobed = 0;
+
        /* Intent serviceIntent = new Intent(this, PlayService.class);
         serviceIntent.setAction(PLAY_ACTION);
         startService(serviceIntent);*/
@@ -341,6 +378,10 @@ public class Menu extends AppCompatActivity {
         SharedPreferences.Editor a3 = mSettings.edit();
         a3.putInt(String.valueOf(Key_Time), bonusTime);
         a3.apply();
+
+        SharedPreferences.Editor a4 = mSettings.edit();
+        a4.putInt(String.valueOf(Key_Koef_Pobed), koefPobed);
+        a4.apply();
 
 
        /* Intent serviceIntent = new Intent(this, PlayService.class);
@@ -463,6 +504,20 @@ public class Menu extends AppCompatActivity {
         start.setTypeface(type3);
     }
 
+    private void regulirovUrovenVolume() {
+        //Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
+
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+
+
+
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
+        int a = maxVolume * urovenVolume / 100;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
+
+        /*  nadpUrovenGame.setText("" + a);*/
+    }
 }
 
 // ЗВУКИ из - https://developer.alexanderklimov.ru/android/theory/soundpool.php

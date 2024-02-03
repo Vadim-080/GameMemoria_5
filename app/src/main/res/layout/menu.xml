@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/polemenu"
-    tools:context=".Menu">
+    tools:context=".Menu"
+    android:id="@+id/qqq"
+    >
 
     <TextView
         android:id="@+id/nadpUrovenGame_view"
@@ -13,11 +15,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
         android:layout_marginTop="20dp"
+        android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="УРОВЕНЬ"
         android:textColor="@color/CV2"
         android:textSize="30dp"
-        android:background="@android:color/transparent"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -33,9 +35,9 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
         android:layout_marginTop="5dp"
+        android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="0"
-        android:background="@android:color/transparent"
         android:textColor="@color/CV15"
         android:textSize="50dp"
         android:textStyle="bold"
@@ -47,9 +49,9 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
         android:gravity="center"
         android:scaleType="fitXY"
-        android:background="@android:color/transparent"
         android:src="@drawable/slogn1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -80,8 +82,8 @@
         android:layout_marginStart="30dp"
         android:layout_marginTop="30dp"
         android:autoSizeTextType="uniform"
-        android:gravity="center_vertical"
         android:background="@android:color/transparent"
+        android:gravity="center_vertical"
         android:text="0"
         android:textColor="@color/CV4"
         android:textSize="30dp"
@@ -110,12 +112,12 @@
 
     <Chronometer
         android:id="@+id/timeBonus_view"
-        android:background="@android:color/transparent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30dp"
         android:layout_marginRight="30dp"
         android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
         android:gravity="center_vertical"
         android:textColor="@color/CV4"
         android:textSize="30dp"
@@ -251,15 +253,23 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
         android:text="ВЫХОД"
-        android:textColor="@color/CV21"
+
+        android:textAppearance="@color/CV20"
+        android:textColorHighlight="@color/CV12"
+
+
         android:textSize="25dp"
         android:textStyle="bold"
+        app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
         app:layout_constraintVertical_bias="1.0"
+        app:rippleColor="@color/CV20"
         app:strokeColor="@color/CV22"
-        app:strokeWidth="3dp" />
+        app:strokeWidth="3dp"
+
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

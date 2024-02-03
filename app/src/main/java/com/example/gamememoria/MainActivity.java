@@ -4,6 +4,7 @@ package com.example.gamememoria;
 
 import static com.example.gamememoria.Menu.Key_Koef_Dostign_Slogn;
 import static com.example.gamememoria.Menu.Key_Koef_Pobed;
+import static com.example.gamememoria.Menu.Key_Koef_Pobed_Max;
 import static com.example.gamememoria.Menu.Key_Kolvo_Igr;
 import static com.example.gamememoria.Menu.Key_Kolvo_Pobed;
 import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Step;
@@ -25,6 +26,7 @@ import static com.example.gamememoria.Menu.bonusTime;
 import static com.example.gamememoria.Menu.bonusTimeMax;
 import static com.example.gamememoria.Menu.koefDostignSlogn;
 import static com.example.gamememoria.Menu.koefPobed;
+import static com.example.gamememoria.Menu.koefPobedMax;
 import static com.example.gamememoria.Menu.koef_slogn_step;
 import static com.example.gamememoria.Menu.koef_slogn_time;
 import static com.example.gamememoria.Menu.kolvoProigrTime;
@@ -48,6 +50,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -69,6 +72,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
@@ -93,12 +97,15 @@ public class MainActivity extends AppCompatActivity {
     private static final int NOTIFICATION_REMINDER = 3;
     int koef_timeGame; // Коэфициент для задания времени игры
     TextView namberUroven, nadpUrovenGame, time;
+    ConstraintLayout fon;
     boolean zapuskBonusTime = false;
     boolean zapuskBonusScore = false;
+    int urovenVolume;
+
 
     // звуковые переменные
     MediaPlayer mediaPlayer1,
-            mediaPlayer2; // Фоновая музыка
+            fonMusicMenu; // Фоновая музыка
 
 
     @SuppressLint("InvalidWakeLockTag")
@@ -125,14 +132,21 @@ public class MainActivity extends AppCompatActivity {
         timeItog = findViewById(R.id.timeItog);
         buPause = findViewById(R.id.buPause);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
+        fon = (ConstraintLayout) findViewById(R.id.fon_game_view);
 
 // Задаём звуковые сигналы
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
-        mediaPlayer2 = MediaPlayer.create(this, R.raw.music_game);
+        fonMusicMenu = MediaPlayer.create(this, R.raw.music_game);
 
-        mediaPlayer2.setVolume(0.5f, 0.5f); // Задаём уровень громкости
-        mediaPlayer2.start();
-        mediaPlayer2.setLooping(true);  // повтор проигрывания плеера
+        urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
+        regulirovUrovenVolume();
+        fonMusicMenu.start();
+        fonMusicMenu.setLooping(true);  // повтор проигрывания плеера
+
+
+        fon.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_1));  // Фоновая картинка
+
+
 
 // Шрифт
         Typeface type1 = getResources().getFont(R.font.qwe);    // шрифт
@@ -280,22 +294,52 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+
+
         clickPause(null);  // Пуск игры, связано с приостановкой во время свертывания (Иначе изначально ставится на Паузу)
+
+        buPause.setText("" + "СТАРТ");
+        buPause.setTextColor(Color.rgb(198, 20, 24)); // Цвет текста кнопки
+        buPause.setBackgroundColor(Color.rgb(123, 110, 33));   // Цвет поля кнопки
+
         ProzrachButton();
     }
 
-// ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
+    // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
-        mediaPlayer2.pause();
-        clickPause(null);  // Приостанав игры при свертывании приложения
+        fonMusicMenu.pause();
+        // Приостанав игры при свертывании приложения*/
+
+        if (sostoyniePause == false) {
+            clickPause(null); // Пуск игры после свертывании приложения
+        }
     }
-// ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
+
+    // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
     public void onStart() {
         super.onStart();
-        mediaPlayer2.start();
-        clickPause(null); // Пуск игры после свертывании приложения
+        fonMusicMenu.start();
+
+        // Пуск игры после свертывании приложения*/
+
+    /*    if (sostoyniePause == false) {
+            timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
+            timeScreen.stop();
+           *//* sostoyniePause = true;*//*
+        } else {
+            timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
+            timeScreen.start();
+           *//* sostoyniePause = false;*//*
+
+        }*/
+        /*sostoyniePause = false;
+          clickPause(null); // Пуск игры после свертывании приложения*/
+
+
+      /*  timeScreen.setBase(SystemClock.elapsedRealtime() + timeGame);
+        timeScreen.start();   // Запуск время игры*/
     }
 
     // Диалоговое окно "Использовать бонусные ходы"
@@ -442,13 +486,16 @@ public class MainActivity extends AppCompatActivity {
 
         timeIstr = timeItog.getText().toString();
 
-        uroven = uroven + 1;
-        bonusStep = StepCount;
-        bonusTimeViv = (SystemClock.elapsedRealtime() - timeScreen.getBase()) * (-1);
-        score = score + StepCount;
-        bonusTime = bonusTime + (int) (bonusTimeViv / 1000);
 
-        if (uroven == 20) {
+        bonusStep = StepCount + uroven / slognost_game;
+        bonusTimeViv = (SystemClock.elapsedRealtime() - timeScreen.getBase()) * (-1) + (2000 * uroven / slognost_game);
+        score = score + bonusStep;
+        bonusTime = (bonusTime + (int) (bonusTimeViv / 1000));
+
+        uroven = uroven + 1;
+        /*   uroven = 22 + 1;*/
+
+        if (uroven == 23) {
             slognostMax = slognostMax + 1;
             slognost_game = slognost_game + 1;
             bonusTimeMax = bonusTime;
@@ -463,6 +510,7 @@ public class MainActivity extends AppCompatActivity {
                 bonusTimeMax = bonusTime;
                 slognostMax = slognost_game;
                 koefDostignSlogn = urovenMax * slognost_game;
+                koefPobedMax = koefPobed;
             }
         }
 
@@ -474,7 +522,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void gameOver() {      // Переход на другой класс
 
-        mediaPlayer2.stop();
+        fonMusicMenu.stop();
         kolvoIgr = kolvoIgr + 1;
 
         onPause();
@@ -550,6 +598,14 @@ public class MainActivity extends AppCompatActivity {
         SharedPreferences.Editor a13 = mSettings.edit();
         a13.putInt(String.valueOf(Key_Koef_Dostign_Slogn), koefDostignSlogn);
         a13.apply();
+
+        SharedPreferences.Editor a14 = mSettings.edit();
+        a14.putInt(String.valueOf(Key_Slognost_game), slognost_game);
+        a14.apply();
+
+        SharedPreferences.Editor a15 = mSettings.edit();
+        a15.putInt(String.valueOf(Key_Koef_Pobed_Max), koefPobedMax);
+        a15.apply();
     }
 
     @Override
@@ -602,13 +658,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void clickPause(View view) {
 
-        mediaPlayer2.pause();
-
         if (sostoyniePause == false) {
             timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
             timeScreen.stop();
             sostoyniePause = true;
             buPause.setText("" + "ПРОДОЛЖИТЬ");
+
+            buPause.setTextColor(Color.parseColor("#63FF00")); // Цвет текста кнопки
+            buPause.setBackgroundColor(Color.parseColor("#FF00B7"));   // Цвет поля кнопки
+
+            /*  *//* Button myButton = findViewById(R.id.buPause);*//*
+            ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.CV5));
+            buPause.setBackgroundTintList(colorStateList);*/
 
             GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
             b1.setEnabled(false);
@@ -616,29 +677,44 @@ public class MainActivity extends AppCompatActivity {
             a1.setAlpha(1f);
             a1.animate().alpha(0.1f).setDuration(1500);
 
+            fonMusicMenu.pause();
+            urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            mediaPlayer1.start();
+
+            /*ИЗМЕН ЦВЕТА КНОПКИ
+            Button myButton = findViewById(R.id.buPause);
+            ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.CV5));
+            myButton.setBackgroundTintList(colorStateList);*/
+
         } else {
-
-            mediaPlayer2.start();
-
             timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
             timeScreen.start();
             sostoyniePause = false;
             buPause.setText("" + "ПАУЗА");
+
+            buPause.setTextColor(Color.rgb(98, 0, 234)); // Цвет текста кнопки
+            buPause.setBackgroundColor(Color.rgb(1, 90, 38));   // Цвет поля кнопки
 
             GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
             b1.setEnabled(true);
             GridView b2 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
             b2.setAlpha(0.1f);
             b2.animate().alpha(1f).setDuration(1500);
+
+            mediaPlayer1.start();
+            urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            fonMusicMenu.start();
         }
     }
 
     public void clickMenu(View view) {
 
-        mediaPlayer2.stop();
-
+        fonMusicMenu.stop();
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
         mediaPlayer1.start();
-        /* mediaPlayer1.release();*/
 
         Intent intent = new Intent(this, Menu.class);    // Переход на другой класс
         startActivity(intent);
@@ -821,12 +897,48 @@ public class MainActivity extends AppCompatActivity {
             Visot_fishek = 139;
             Shirin_fishek = 150;
         }
+        if (uroven == 20) {
+            mGrid.setNumColumns(8);
+            mAdapter = new PoleGame(this, 8, 11);
+            koef_timeGame = (8 * 11) / 2 + uroven / 2 + koef_slogn_time;
+            StepCount = (8 * 11) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 145;
+            Shirin_fishek = 130;
+        }
+
+        if (uroven == 21) {
+            mGrid.setNumColumns(8);
+            mAdapter = new PoleGame(this, 8, 12);
+            koef_timeGame = (8 * 12) / 2 + uroven / 2 + koef_slogn_time;
+            StepCount = (8 * 12) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 139;
+            Shirin_fishek = 130;
+        }
+
+        if (uroven == 22) {
+            mGrid.setNumColumns(8);
+            mAdapter = new PoleGame(this, 8, 13);
+            koef_timeGame = (8 * 13) / 2 + uroven / 2 + koef_slogn_time;
+            StepCount = (8 * 13) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
+            Visot_fishek = 130;
+            Shirin_fishek = 130;
+        }
     }
 
     private void ProzrachButton() {
         GridView b1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
         b1.setAlpha(0.3f);
         b1.animate().alpha(1f).setDuration(2000);
+    }
+
+    private void regulirovUrovenVolume() {
+        //Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
+
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
+        int a = maxVolume * urovenVolume / 100;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
     }
 }
 
