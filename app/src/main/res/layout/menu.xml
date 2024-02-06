@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/polemenu"
+
     tools:context=".Menu"
-    android:id="@+id/qqq"
+    android:id="@+id/fon_menu_view"
     >
 
     <TextView
@@ -134,8 +134,8 @@
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/CV20"
 
-        android:text="СТАРТ"
-        android:textSize="25dp"
+        android:text="ИГРА"
+        android:textSize="31dp"
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -253,11 +253,8 @@
         android:layout_marginTop="5dp"
         android:layout_marginBottom="20dp"
         android:text="ВЫХОД"
-
         android:textAppearance="@color/CV20"
         android:textColorHighlight="@color/CV12"
-
-
         android:textSize="25dp"
         android:textStyle="bold"
         app:cornerRadius="20dp"
@@ -269,7 +266,26 @@
         app:rippleColor="@color/CV20"
         app:strokeColor="@color/CV22"
         app:strokeWidth="3dp"
+        />
 
+    <ImageButton
+        android:id="@+id/buMute"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="25dp"
+        android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:onClick="clickMute"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/buPravila"
+        app:layout_constraintVertical_bias="1"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

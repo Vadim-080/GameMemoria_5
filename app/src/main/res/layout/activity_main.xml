@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".MainActivity"
     android:id="@+id/fon_game_view">
 
@@ -187,5 +186,25 @@
         app:layout_constraintVertical_bias="0.996"
         app:strokeColor="@color/CV3"
         app:strokeWidth="2dp"/>
+
+    <ImageButton
+        android:id="@+id/buMute"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginBottom="25dp"
+        android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:scaleType="fitXY"
+        android:src="@drawable/mute"
+        android:onClick="clickMute"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

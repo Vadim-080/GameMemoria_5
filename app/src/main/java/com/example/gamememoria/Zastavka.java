@@ -19,6 +19,8 @@ public class Zastavka extends AppCompatActivity {
     private ImageView emblema;
     public static int promegutGameOverPodrad=0; // промежут перемен для расчета количества проигрышей подряд
 
+    public static boolean pologenieKnopkiMute = false;
+
     public static boolean povtorTriGameOverPodrad=false; // промежут перемен для расчета количества проигрышей подряд
 
     @SuppressLint("MissingInflatedId")

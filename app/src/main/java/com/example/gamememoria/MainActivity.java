@@ -40,9 +40,11 @@ import static com.example.gamememoria.Menu.urovenMax;
 import static com.example.gamememoria.Menu.kolvoPobed;
 import static com.example.gamememoria.Menu.kolvoProigrStep;
 import static com.example.gamememoria.Menu.kolvoIgr;
+import static com.example.gamememoria.Zastavka.pologenieKnopkiMute;
 import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
 import static java.util.Calendar.getInstance;
 
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -51,6 +53,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -58,6 +61,8 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
+import android.renderscript.RenderScript;
+import android.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -66,6 +71,7 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -97,15 +103,16 @@ public class MainActivity extends AppCompatActivity {
     private static final int NOTIFICATION_REMINDER = 3;
     int koef_timeGame; // Коэфициент для задания времени игры
     TextView namberUroven, nadpUrovenGame, time;
-    ConstraintLayout fon;
+    ConstraintLayout fonKartink;
+    ImageButton mute;
     boolean zapuskBonusTime = false;
     boolean zapuskBonusScore = false;
     int urovenVolume;
 
 
     // звуковые переменные
-    MediaPlayer mediaPlayer1,
-            fonMusicMenu; // Фоновая музыка
+    MediaPlayer mediaPlayer1, timeOver,
+            fonMusicGame; // Фоновая музыка
 
 
     @SuppressLint("InvalidWakeLockTag")
@@ -120,6 +127,8 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
         }
 
+
+
 // Запрет тускнениия экрана телефона и его выключения во время игры
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
@@ -131,22 +140,26 @@ public class MainActivity extends AppCompatActivity {
         timeScreen = findViewById(R.id.time_view);
         timeItog = findViewById(R.id.timeItog);
         buPause = findViewById(R.id.buPause);
+        mute = findViewById(R.id.buMute);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
-        fon = (ConstraintLayout) findViewById(R.id.fon_game_view);
+        fonKartink = findViewById(R.id.fon_game_view);
 
 // Задаём звуковые сигналы
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
-        fonMusicMenu = MediaPlayer.create(this, R.raw.music_game);
+        fonMusicGame = MediaPlayer.create(this, R.raw.music_game);
+        timeOver = MediaPlayer.create(this, R.raw.time_over);
 
-        urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
-        regulirovUrovenVolume();
-        fonMusicMenu.start();
-        fonMusicMenu.setLooping(true);  // повтор проигрывания плеера
-
-
-        fon.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_1));  // Фоновая картинка
-
-
+        if (pologenieKnopkiMute == true) {
+            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            mute.setImageResource(R.drawable.mute);
+        } else {
+            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+           vklFonMusic();
+            mute.setImageResource(R.drawable.zvuk);
+        }
+        viborFonKartinki(); // Выбор фоновой картинки
 
 // Шрифт
         Typeface type1 = getResources().getFont(R.font.qwe);    // шрифт
@@ -221,22 +234,23 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (chronometer.getText().toString().equalsIgnoreCase("00:10")) {
-                            mediaPlayer1.start();
+                            timeOver.start();
+
                             time.setTextColor(Color.DKGRAY);
                             miganTime1(null);
                         }
                         if (chronometer.getText().toString().equalsIgnoreCase("00:08")) {
-                            mediaPlayer1.start();
+
                             time.setTextColor(Color.BLUE);
                             miganTime1(null);
                         }
                         if (chronometer.getText().toString().equalsIgnoreCase("00:06")) {
-                            mediaPlayer1.start();
+
                             time.setTextColor(Color.MAGENTA);
                             miganTime1(null);
                         }
                         if (chronometer.getText().toString().equalsIgnoreCase("00:04")) {
-                            mediaPlayer1.start();
+
                             time.setTextColor(Color.RED);
                             miganTime1(null);
                         }
@@ -303,13 +317,14 @@ public class MainActivity extends AppCompatActivity {
         buPause.setBackgroundColor(Color.rgb(123, 110, 33));   // Цвет поля кнопки
 
         ProzrachButton();
+
     }
 
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
-        fonMusicMenu.pause();
+        fonMusicGame.pause();
         // Приостанав игры при свертывании приложения*/
 
         if (sostoyniePause == false) {
@@ -320,7 +335,9 @@ public class MainActivity extends AppCompatActivity {
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
     public void onStart() {
         super.onStart();
-        fonMusicMenu.start();
+        vklFonMusic();
+
+       /* fonMusicGame.start();*/
 
         // Пуск игры после свертывании приложения*/
 
@@ -522,7 +539,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void gameOver() {      // Переход на другой класс
 
-        fonMusicMenu.stop();
+        fonMusicGame.stop();
         kolvoIgr = kolvoIgr + 1;
 
         onPause();
@@ -677,10 +694,9 @@ public class MainActivity extends AppCompatActivity {
             a1.setAlpha(1f);
             a1.animate().alpha(0.1f).setDuration(1500);
 
-            fonMusicMenu.pause();
-            urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            mediaPlayer1.start();
+            fonMusicGame.pause();
+
+
 
             /*ИЗМЕН ЦВЕТА КНОПКИ
             Button myButton = findViewById(R.id.buPause);
@@ -702,19 +718,13 @@ public class MainActivity extends AppCompatActivity {
             b2.setAlpha(0.1f);
             b2.animate().alpha(1f).setDuration(1500);
 
-            mediaPlayer1.start();
-            urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            fonMusicMenu.start();
+            fonMusicGame.start();
         }
     }
 
     public void clickMenu(View view) {
 
-        fonMusicMenu.stop();
-        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-        regulirovUrovenVolume();
-        mediaPlayer1.start();
+        fonMusicGame.stop();
 
         Intent intent = new Intent(this, Menu.class);    // Переход на другой класс
         startActivity(intent);
@@ -931,6 +941,22 @@ public class MainActivity extends AppCompatActivity {
         b1.animate().alpha(1f).setDuration(2000);
     }
 
+    public void clickMute(View view) {
+
+        if (pologenieKnopkiMute == false) {
+            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            mute.setImageResource(R.drawable.mute);
+            pologenieKnopkiMute = true;
+        } else {
+            mute.setImageResource(R.drawable.zvuk);
+            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+           /* vklFonMusic();*/
+            pologenieKnopkiMute = false;
+        }
+    }
+
     private void regulirovUrovenVolume() {
         //Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
 
@@ -939,6 +965,61 @@ public class MainActivity extends AppCompatActivity {
         int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
         int a = maxVolume * urovenVolume / 100;
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
+    }
+
+    private void viborFonKartinki() {
+
+        byte kartinka = (byte) (Math.random() * 6); // Случайное число от 0 до 5 -- Для выбора фона
+
+        switch (kartinka) {
+            case 0:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_1));  // Фоновая картинка
+                break;
+            case 1:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_2));  // Фоновая картинка
+                break;
+            case 2:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_3));  // Фоновая картинка
+                break;
+            case 3:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_4));  // Фоновая картинка
+                break;
+            case 4:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_5));  // Фоновая картинка
+                break;
+            case 5:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_6));  // Фоновая картинка
+                break;
+        }
+
+
+        fonKartink.getBackground().setAlpha(130);  //  Затемнение только фоновой картинки (от 0 до 255)
+
+
+
+
+
+
+      /*  fonKartink.setAlpha(0.2f);*/
+       /* nadpUrovenGame.setAlpha(1f);*/
+
+    }
+
+    private void vklFonMusic() {  //Этот код делает анимацию плавного включения фоновой музыки
+
+        ValueAnimator volumeAnimator = ValueAnimator.ofFloat(0f, 0.5f);
+        volumeAnimator.setDuration(8000); // Длительность анимации в миллисекундах
+        volumeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator animation) {
+                float volume = (float) animation.getAnimatedValue();
+                fonMusicGame.setVolume(volume, volume);
+            }
+        });
+        volumeAnimator.start();
+
+        fonMusicGame.start();
+        fonMusicGame.setLooping(true);  // повтор проигрывания плеера
     }
 }
 
@@ -950,3 +1031,5 @@ public class MainActivity extends AppCompatActivity {
 // https://ru-code-android.livejournal.com/2665.html
 
 /* Typeface type = Typeface.createFromAsset(getAssets(),"komi.ttf");*/  // Шрифт
+
+// fonKartink.setAlpha(0.1f);  -  Затемнение всего экрана

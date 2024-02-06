@@ -98,7 +98,7 @@ public class Slognost extends AppCompatActivity {
         buMenu.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Menu();
             }
         });
 
@@ -156,6 +156,11 @@ public class Slognost extends AppCompatActivity {
         onPause();
 
         Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
+    private void Menu() {
+        Intent i = new Intent(this, Menu.class);
         startActivity(i);
     }
 

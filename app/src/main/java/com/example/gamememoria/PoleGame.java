@@ -34,7 +34,7 @@ public class PoleGame extends BaseAdapter {
         mCols = cols;
         mRows = rows;
 
-        rubashka = (byte) (Math.random() * 15); // Случайное число от 0 до 14 -- Для выбора рубашки карт
+        rubashka = (byte) (Math.random() * 28); // Случайное число от 0 до 27 -- Для выбора рубашки карт
         naborKartinKart = (byte) (Math.random() * 3); // Случайное число от 0 до 2 -- Для выбора картинок карт
 
         arrPict = new ArrayList<String>();
@@ -164,6 +164,46 @@ public class PoleGame extends BaseAdapter {
                     case 14:
                         view.setImageResource(R.drawable.close15);
                         break;
+                    case 15:
+                        view.setImageResource(R.drawable.close16);
+                        break;
+                    case 16:
+                        view.setImageResource(R.drawable.close17);
+                        break;
+                    case 17:
+                        view.setImageResource(R.drawable.close18);
+                        break;
+                    case 18:
+                        view.setImageResource(R.drawable.close19);
+                        break;
+                    case 19:
+                        view.setImageResource(R.drawable.close20);
+                        break;
+                    case 20:
+                        view.setImageResource(R.drawable.close21);
+                        break;
+                    case 21:
+                        view.setImageResource(R.drawable.close22);
+                        break;
+                    case 22:
+                        view.setImageResource(R.drawable.close23);
+                        break;
+                    case 23:
+                        view.setImageResource(R.drawable.close24);
+                        break;
+                    case 24:
+                        view.setImageResource(R.drawable.close25);
+                        break;
+                    case 25:
+                        view.setImageResource(R.drawable.close26);
+                        break;
+                    case 26:
+                        view.setImageResource(R.drawable.close27);
+                        break;
+                    case 27:
+                        view.setImageResource(R.drawable.close28);
+                        break;
+
                 }
                 break;
             default:
