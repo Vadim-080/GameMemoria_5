@@ -24,11 +24,13 @@ import android.widget.GridView;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 public class Slognost extends AppCompatActivity {
 
     Button zabiv, novi, opit, mast, buMenu;
+    ConstraintLayout KartinraZadnegoPlana;
     MediaPlayer mediaPlayer1;
 
     @Override
@@ -47,7 +49,10 @@ public class Slognost extends AppCompatActivity {
         opit = findViewById(R.id.buOpitn);
         mast = findViewById(R.id.buMaster);
         buMenu = findViewById(R.id.buMenu);
+        KartinraZadnegoPlana = findViewById(R.id.fon_slognost_view);
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
+
+        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_slognost));  // задаем фоновое поле
 
         onResume();
         povtorTriGameOverPodrad = false;

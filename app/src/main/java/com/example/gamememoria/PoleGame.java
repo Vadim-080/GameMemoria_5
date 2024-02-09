@@ -35,7 +35,7 @@ public class PoleGame extends BaseAdapter {
         mRows = rows;
 
         rubashka = (byte) (Math.random() * 28); // Случайное число от 0 до 27 -- Для выбора рубашки карт
-        naborKartinKart = (byte) (Math.random() * 3); // Случайное число от 0 до 2 -- Для выбора картинок карт
+        naborKartinKart = (byte) (Math.random() * 4); // Случайное число от 0 до 3 -- Для выбора картинок карт
 
         arrPict = new ArrayList<String>();
         arrStatus = new ArrayList<Status>();
@@ -50,6 +50,9 @@ public class PoleGame extends BaseAdapter {
                 break;
             case 2:
                 PictureCollection = "animal_b";
+                break;
+            case 3:
+                PictureCollection = "animal_c";
                 break;
         }
 

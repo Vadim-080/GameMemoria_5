@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".Menu"
     android:id="@+id/fon_menu_view"
     >
@@ -18,7 +17,7 @@
         android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="УРОВЕНЬ"
-        android:textColor="@color/CV2"
+        android:textColor="@color/CV3"
         android:textSize="30dp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +37,7 @@
         android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="0"
-        android:textColor="@color/CV15"
+        android:textColor="@color/CV4"
         android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/nadpUrovenGame_view"
@@ -132,7 +131,7 @@
         android:layout_height="100dp"
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
-        android:backgroundTint="@color/CV20"
+        android:backgroundTint="@color/CV31"
 
         android:text="ИГРА"
         android:textSize="31dp"
@@ -141,8 +140,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/score_viev"
         app:layout_constraintVertical_bias="0.247"
-        app:strokeColor="@color/CV17"
-        app:strokeWidth="5dp" />
+        app:strokeColor="@color/CV3"
+        app:strokeWidth="7dp" />
 
     <Button
         android:id="@+id/buStart1"
@@ -166,7 +165,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buStart"
-        app:strokeColor="@color/CV2"
+        app:strokeColor="@color/CV38"
         app:strokeWidth="3dp" />
 
     <Button
@@ -260,21 +259,21 @@
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
         app:layout_constraintVertical_bias="1.0"
         app:rippleColor="@color/CV20"
-        app:strokeColor="@color/CV22"
-        app:strokeWidth="3dp"
-        />
+        app:strokeColor="@color/CV18"
+        app:strokeWidth="5dp" />
 
     <ImageButton
         android:id="@+id/buMute"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginTop="5dp"
-        android:layout_marginLeft="25dp"
-        android:layout_marginBottom="25dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"

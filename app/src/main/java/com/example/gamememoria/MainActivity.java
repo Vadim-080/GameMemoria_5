@@ -52,8 +52,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
@@ -61,19 +59,18 @@ import android.media.MediaPlayer;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
-import android.renderscript.RenderScript;
-import android.renderscript.ScriptIntrinsicBlur;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.SeekBar;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -109,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
     boolean zapuskBonusScore = false;
     int urovenVolume;
 
+    Button btn1;
+    Animation animation1;
 
     // звуковые переменные
     MediaPlayer mediaPlayer1, timeOver,
@@ -126,7 +125,6 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
         }
-
 
 
 // Запрет тускнениия экрана телефона и его выключения во время игры
@@ -156,7 +154,7 @@ public class MainActivity extends AppCompatActivity {
         } else {
             urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
-           vklFonMusic();
+            vklFonMusic();
             mute.setImageResource(R.drawable.zvuk);
         }
         viborFonKartinki(); // Выбор фоновой картинки
@@ -309,15 +307,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        animation1 = new AlphaAnimation(1, 0.1f); // Изменение с полностью видимого на невидимый
+        animation1.setDuration(500); // продолжительность
+        animation1.setInterpolator(new LinearInterpolator()); // do not alter animation rate
+        animation1.setRepeatCount(Animation.INFINITE); // Повторяйте анимацию бесконечно
+        animation1.setRepeatMode(Animation.REVERSE); // Обратная анимация в конце, чтобы кнопка снова исчезла в
+        btn1 = (Button) findViewById(R.id.buPause);
+        btn1.startAnimation(animation1);
 
         clickPause(null);  // Пуск игры, связано с приостановкой во время свертывания (Иначе изначально ставится на Паузу)
 
+        GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
+        b1.setEnabled(false);
+        GridView a2 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
+        a2.setAlpha(1f);
+        a2.animate().alpha(0.5f).setDuration(1000);
+
         buPause.setText("" + "СТАРТ");
+        buPause.setTextSize(22);
         buPause.setTextColor(Color.rgb(198, 20, 24)); // Цвет текста кнопки
-        buPause.setBackgroundColor(Color.rgb(123, 110, 33));   // Цвет поля кнопки
-
-        ProzrachButton();
-
+        buPause.setBackgroundColor(Color.rgb(253, 214, 0));   // Цвет поля кнопки
     }
 
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
@@ -337,26 +346,6 @@ public class MainActivity extends AppCompatActivity {
         super.onStart();
         vklFonMusic();
 
-       /* fonMusicGame.start();*/
-
-        // Пуск игры после свертывании приложения*/
-
-    /*    if (sostoyniePause == false) {
-            timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
-            timeScreen.stop();
-           *//* sostoyniePause = true;*//*
-        } else {
-            timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
-            timeScreen.start();
-           *//* sostoyniePause = false;*//*
-
-        }*/
-        /*sostoyniePause = false;
-          clickPause(null); // Пуск игры после свертывании приложения*/
-
-
-      /*  timeScreen.setBase(SystemClock.elapsedRealtime() + timeGame);
-        timeScreen.start();   // Запуск время игры*/
     }
 
     // Диалоговое окно "Использовать бонусные ходы"
@@ -679,44 +668,44 @@ public class MainActivity extends AppCompatActivity {
             timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
             timeScreen.stop();
             sostoyniePause = true;
+            buPause.setTextSize(16);
             buPause.setText("" + "ПРОДОЛЖИТЬ");
-
+            btn1.startAnimation(animation1);
             buPause.setTextColor(Color.parseColor("#63FF00")); // Цвет текста кнопки
             buPause.setBackgroundColor(Color.parseColor("#FF00B7"));   // Цвет поля кнопки
-
-            /*  *//* Button myButton = findViewById(R.id.buPause);*//*
-            ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.CV5));
-            buPause.setBackgroundTintList(colorStateList);*/
 
             GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
             b1.setEnabled(false);
             GridView a1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
             a1.setAlpha(1f);
-            a1.animate().alpha(0.1f).setDuration(1500);
+            a1.animate().alpha(0.2f).setDuration(1500);
 
             fonMusicGame.pause();
-
-
-
-            /*ИЗМЕН ЦВЕТА КНОПКИ
-            Button myButton = findViewById(R.id.buPause);
-            ColorStateList colorStateList = ColorStateList.valueOf(getResources().getColor(R.color.CV5));
-            myButton.setBackgroundTintList(colorStateList);*/
 
         } else {
             timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
             timeScreen.start();
             sostoyniePause = false;
+
+            String s1 = buPause.getText().toString();
+            if (s1.contains("ТАР")) {
+                GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
+                b1.setEnabled(true);
+                GridView a1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
+                a1.setAlpha(0.5f);
+                a1.animate().alpha(1f).setDuration(1000);
+            } else {
+                GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
+                b1.setEnabled(true);
+                GridView b2 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
+                b2.setAlpha(0.2f);
+                b2.animate().alpha(1f).setDuration(1500);
+            }
+            btn1.clearAnimation();
+            buPause.setTextSize(22);
             buPause.setText("" + "ПАУЗА");
-
             buPause.setTextColor(Color.rgb(98, 0, 234)); // Цвет текста кнопки
-            buPause.setBackgroundColor(Color.rgb(1, 90, 38));   // Цвет поля кнопки
-
-            GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
-            b1.setEnabled(true);
-            GridView b2 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-            b2.setAlpha(0.1f);
-            b2.animate().alpha(1f).setDuration(1500);
+            buPause.setBackgroundColor(Color.parseColor("#00DC00"));   // Цвет поля кнопки
 
             fonMusicGame.start();
         }
@@ -952,7 +941,7 @@ public class MainActivity extends AppCompatActivity {
             mute.setImageResource(R.drawable.zvuk);
             urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
-           /* vklFonMusic();*/
+            /* vklFonMusic();*/
             pologenieKnopkiMute = false;
         }
     }
@@ -969,39 +958,66 @@ public class MainActivity extends AppCompatActivity {
 
     private void viborFonKartinki() {
 
-        byte kartinka = (byte) (Math.random() * 6); // Случайное число от 0 до 5 -- Для выбора фона
+        byte kartinka = (byte) (Math.random() * 18); // Случайное число от 0 до 17 -- Для выбора фона
 
         switch (kartinka) {
             case 0:
-                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_1));  // Фоновая картинка
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_1));  // Фоновая картинка
                 break;
             case 1:
-                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_2));  // Фоновая картинка
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_2));  // Фоновая картинка
                 break;
             case 2:
-                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_3));  // Фоновая картинка
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_3));  // Фоновая картинка
                 break;
             case 3:
-                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_4));  // Фоновая картинка
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_4));  // Фоновая картинка
                 break;
             case 4:
-                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_5));  // Фоновая картинка
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_5));  // Фоновая картинка
                 break;
             case 5:
-                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_foto_game_6));  // Фоновая картинка
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_6));  // Фоновая картинка
+                break;
+            case 6:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_7));  // Фоновая картинка
+                break;
+            case 7:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_8));  // Фоновая картинка
+                break;
+            case 8:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_9));  // Фоновая картинка
+                break;
+            case 9:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_10));  // Фоновая картинка
+                break;
+            case 10:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_11));  // Фоновая картинка
+                break;
+            case 11:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_12));  // Фоновая картинка
+                break;
+            case 12:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_13));  // Фоновая картинка
+                break;
+            case 13:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_14));  // Фоновая картинка
+                break;
+            case 14:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_15));  // Фоновая картинка
+                break;
+            case 15:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_16));  // Фоновая картинка
+                break;
+            case 16:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_17));  // Фоновая картинка
+                break;
+            case 17:
+                fonKartink.setBackground(getResources().getDrawable(R.drawable.pole_game_18));  // Фоновая картинка
                 break;
         }
 
-
-        fonKartink.getBackground().setAlpha(130);  //  Затемнение только фоновой картинки (от 0 до 255)
-
-
-
-
-
-
-      /*  fonKartink.setAlpha(0.2f);*/
-       /* nadpUrovenGame.setAlpha(1f);*/
+        fonKartink.getBackground().setAlpha(170);  //  Затемнение только фоновой картинки (от 0 до 255)
 
     }
 

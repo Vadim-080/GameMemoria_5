@@ -37,6 +37,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 public class Pobeda extends AppCompatActivity {
@@ -44,6 +45,7 @@ public class Pobeda extends AppCompatActivity {
     TextView result;
     ImageView smailPobeda;
     MediaPlayer mediaPlayer1;
+    ConstraintLayout KartinraZadnegoPlana;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,12 +60,16 @@ public class Pobeda extends AppCompatActivity {
 
         result = findViewById(R.id.Result_view);
         smailPobeda = findViewById(R.id.smailPobeda_view);
+        KartinraZadnegoPlana = findViewById(R.id.fon_pobeda_view);
+
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
 
         Animation a1 = AnimationUtils.loadAnimation(this, R.anim.anim_smail_pobeda);
         smailPobeda.startAnimation(a1);
+
+        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_pobeda));  // задаем фоновое поле
 
         if (slognost_game == 5) {
             result.setText("ПОЗДРАВЛЯЕМ" + " \n" + "ВЫ ПРОШЛИ ИГРУ" + " \n" + "НА МАКСИМАЛЬНОМ" + " \n" + "УРОВНЕ СЛОЖНОСТИ" + " \n" +

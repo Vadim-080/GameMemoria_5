@@ -26,12 +26,14 @@ import static java.lang.Thread.sleep;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 public class GameOver extends AppCompatActivity {
 
     private TextView PrichinGameOver_view, ViProigrali;
     MediaPlayer mediaPlayer1;
+    ConstraintLayout KartinraZadnegoPlana;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,6 +43,8 @@ public class GameOver extends AppCompatActivity {
 
         PrichinGameOver_view = findViewById(R.id.PrichinGameOver_view);
         ViProigrali = findViewById(R.id.nadpViProigrali_view);
+        KartinraZadnegoPlana = findViewById(R.id.fon_game_over_view);
+
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
         // Задаем цвет верхей строки и строки навигации
@@ -48,6 +52,8 @@ public class GameOver extends AppCompatActivity {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
         }
+
+        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_game_over));  // задаем фоновое поле
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
 

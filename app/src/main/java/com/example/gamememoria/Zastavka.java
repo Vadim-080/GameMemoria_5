@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 public class Zastavka extends AppCompatActivity {
@@ -22,6 +23,8 @@ public class Zastavka extends AppCompatActivity {
     public static boolean pologenieKnopkiMute = false;
 
     public static boolean povtorTriGameOverPodrad=false; // промежут перемен для расчета количества проигрышей подряд
+
+    ConstraintLayout KartinraZadnegoPlana;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -37,7 +40,10 @@ public class Zastavka extends AppCompatActivity {
 
         nazvGame = findViewById(R.id.nazvGame_view);
         emblema = findViewById(R.id.emblem_view);
-        stimulirNadp = (TextView) findViewById(R.id.stimulirNadp_view);
+        stimulirNadp = findViewById(R.id.stimulirNadp_view);
+        KartinraZadnegoPlana = findViewById(R.id.fon_zastavka_view);
+
+        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka1));  // задаем фоновое поле
 
         Typeface type1 = getResources().getFont(R.font.vanowitsch);    // шрифт
         nazvGame.setTypeface(type1);

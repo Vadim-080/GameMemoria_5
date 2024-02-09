@@ -22,11 +22,11 @@
     <color name="CV20">#8F0242</color>
     <color name="CV21">#EDCAFF</color>
     <color name="CV22">#3E025C</color>
-    <color name="CV23">#7A1BFD</color>
-    <color name="CV24">#8E3CFF</color>
-    <color name="CV25">#9E58FF</color>
-    <color name="CV26">#B078FF</color>
-    <color name="CV27">#C59CFF</color>
+    <color name="CV23">#FFD700</color>
+    <color name="CV24">#FFD732</color>
+    <color name="CV25">#FFD769</color>
+    <color name="CV26">#FFD78C</color>
+    <color name="CV27">#FFD7AF</color>
     <color name="CV28">#8F0242</color>
     <color name="CV29">#015A26</color>
     <color name="CV30">#DF0165</color>
@@ -37,6 +37,8 @@
     <color name="CV35">#DA0264</color>
     <color name="CV36">#008839</color>
     <color name="CV37">#0026FF</color>
+    <color name="CV38">#FDD600</color>
+    <color name="CV39">#FF318E</color>
 
 
 

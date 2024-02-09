@@ -31,9 +31,9 @@
     </style>
 
     <style name="stylePobeda">
-        <item name="android:textColor">@color/CV7</item>
+        <item name="android:textColor">@color/CV18</item>
         <item name="android:textSize">39sp</item>
-        <item name="android:shadowColor">@color/CV18</item>
+        <item name="android:shadowColor">@color/CV7</item>
         <item name="android:shadowDx">30</item>
         <item name="android:shadowDy">20</item>
         <item name="android:shadowRadius">10</item>

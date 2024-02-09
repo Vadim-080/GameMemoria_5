@@ -122,7 +122,6 @@ public class Menu extends AppCompatActivity {
         mediaMenu5 = MediaPlayer.create(this, R.raw.zv_menu_5);
         mediaMenu6 = MediaPlayer.create(this, R.raw.zv_menu_6);
 
-
         if (pologenieKnopkiMute == true) {
             urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
@@ -134,12 +133,7 @@ public class Menu extends AppCompatActivity {
             mute.setImageResource(R.drawable.zvuk);
         }
 
-        urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
-        regulirovUrovenVolume();
-
-        vklFonMusic();
-
-        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.polemenu));  // задаем фоновое поле
+        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu2));  // задаем фоновое поле
 
         animButtonMenu();  // Мигание кнопок Меню
         animZnakov();  // Анимация знаков (монет, часы...)
@@ -219,6 +213,7 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
+
         fonMusicMenu.pause();
     }
 
@@ -233,7 +228,7 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusicMenu.stop();
-            urovenVolume = 10; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
             StartZvuk.start();
         }
@@ -246,7 +241,7 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusicMenu.pause();
-            urovenVolume = 50; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
             mediaMenu1.start();
         }
@@ -259,7 +254,7 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusicMenu.pause();
-            urovenVolume = 50; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
             mediaMenu2.start();
         }
@@ -280,7 +275,7 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusicMenu.stop();
-            urovenVolume = 50; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
             mediaMenu3.start();
         }
@@ -303,7 +298,7 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusicMenu.pause();
-            urovenVolume = 50; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
             mediaMenu4.start();
         }
@@ -317,7 +312,7 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusicMenu.stop();
-            urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 40; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
             /* mediaMenu4.start();*/
         }
@@ -524,12 +519,11 @@ public class Menu extends AppCompatActivity {
         int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
         int a = maxVolume * urovenVolume / 100;
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
-
     }
 
     private void vklFonMusic() {  //Этот код делает анимацию плавного включения фоновой музыки
 
-        ValueAnimator volumeAnimator = ValueAnimator.ofFloat(0f, 0.5f);
+        ValueAnimator volumeAnimator = ValueAnimator.ofFloat(0f, 0.6f);
         volumeAnimator.setDuration(8000); // Длительность анимации в миллисекундах
         volumeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
