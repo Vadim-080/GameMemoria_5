@@ -5,8 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Menu"
-    android:id="@+id/fon_menu_view"
-    >
+    android:id="@+id/fon_menu_view"    >
 
     <TextView
         android:id="@+id/nadpUrovenGame_view"

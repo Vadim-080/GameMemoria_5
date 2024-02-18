@@ -1,12 +1,22 @@
 package com.example.gamememoria;
 
 import android.annotation.SuppressLint;
+import android.app.Dialog;
+import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +35,7 @@ public class Zastavka extends AppCompatActivity {
     public static boolean povtorTriGameOverPodrad=false; // промежут перемен для расчета количества проигрышей подряд
 
     ConstraintLayout KartinraZadnegoPlana;
+    MediaPlayer zvZastavka;
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -33,15 +44,42 @@ public class Zastavka extends AppCompatActivity {
         setContentView(R.layout.zastavka);
 
         // Задаем цвет верхей строки и строки навигации
-        if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
-            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
-        }
+       /* if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.red)); //status bar or the time bar at the top (see example image1)
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.red)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
+        }*/
+
+
+// Задаем MAX яркость экрана
+
+       /* final Dialog dialog = new Dialog(this) {
+            @Override
+            public void onAttachedToWindow() {
+                super.onAttachedToWindow();
+                WindowManager.LayoutParams layout = getWindow()
+                        .getAttributes();
+                layout.screenBrightness = 0.0f;
+                getWindow().setAttributes(layout);
+            }
+        };
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.show();*/
+
+
+       /* WindowManager.LayoutParams lp = getWindow().getAttributes();
+        float brightness=0.1f;
+        lp.screenBrightness = brightness;
+        getWindow().setAttributes(lp);*/
+
 
         nazvGame = findViewById(R.id.nazvGame_view);
         emblema = findViewById(R.id.emblem_view);
         stimulirNadp = findViewById(R.id.stimulirNadp_view);
         KartinraZadnegoPlana = findViewById(R.id.fon_zastavka_view);
+
+// Задаём звуковые сигналы
+        zvZastavka = MediaPlayer.create(this, R.raw.zastavka_1);
+        zvZastavka.start();
 
         KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka1));  // задаем фоновое поле
 

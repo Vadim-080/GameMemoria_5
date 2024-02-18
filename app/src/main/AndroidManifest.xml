@@ -6,6 +6,25 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+
+
+
+
+
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+
+
+
+
+
+
+
+
+
+
     <supports-screens
 
         android:anyDensity="true"
@@ -45,6 +64,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+
+
+
+
+
+
+
 
 
         <activity
