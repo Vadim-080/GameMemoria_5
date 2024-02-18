@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/fon_zastavka_view"
-    tools:context=".Zastavka">
+    tools:context=".A_Zastavka">
 
     <TextView
         android:id="@+id/nazvGame_view"

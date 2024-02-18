@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/polezastavka"
 
-    tools:context=".Dostigenia">
+    tools:context=".D_Dostigenia">
 
     <!-- Card view for displaying the -->
     <!-- Pie chart and details of pie chart -->
@@ -100,10 +100,10 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_vertical"
                         android:paddingLeft="15dp"
-                        android:textSize="11dp"
+                        android:text="ПОБЕД"
                         android:textColor="@color/CV12"
-                        android:textStyle="bold"
-                        android:text="ПОБЕД" />
+                        android:textSize="11dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -127,14 +127,14 @@
 
                         android:gravity="center_vertical"
 
-                        android:text="ПРОИГРЫШ ХОДЫ"
-
-
                         android:paddingLeft="15dp"
-                        android:textSize="10dp"
 
+
+                        android:text="ПРОИГРЫШ ХОДЫ"
                         android:textColor="@color/CV35"
-                        android:textStyle="bold"/>
+
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -158,11 +158,10 @@
 
                         android:gravity="center_horizontal|center_vertical"
                         android:paddingLeft="15dp"
-                        android:textSize="10dp"
                         android:text="ПРОИГРЫШ ВРЕМЯ"
                         android:textColor="@color/CV13"
-                        android:textStyle="bold"
-                        />
+                        android:textSize="10dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
 
@@ -203,8 +202,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:layout_marginRight="25dp"
                 android:layout_marginTop="10dp"
+                android:layout_marginRight="25dp"
                 android:gravity="center_horizontal|center_vertical"
                 android:text="СТАТИСТИКА"
                 android:textColor="@color/CV4"
@@ -318,8 +317,8 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="sans-serif-light"
                     android:text="ПРОИГРЫШ ХОДЫ"
-                    android:textSize="18sp"
                     android:textColor="@color/CV30"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
 
                 <!--Text view to display the percentage -->
@@ -337,7 +336,6 @@
                     android:textColor="@color/CV30"
                     android:textSize="20sp"
                     android:textStyle="bold" />
-
             </RelativeLayout>
 
             <View
@@ -396,7 +394,6 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="0dp">
 
-
             </RelativeLayout>
 
             <RelativeLayout
@@ -448,7 +445,6 @@
                 android:layout_marginRight="25dp"
                 android:layout_marginBottom="0dp">
 
-
             </RelativeLayout>
 
         </LinearLayout>
@@ -470,5 +466,18 @@
         android:textStyle="bold"
         app:strokeColor="@color/CV3"
         app:strokeWidth="2dp" />
+
+    <ImageButton
+        android:id="@+id/buMute"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
+        android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:onClick="clickMute"
+        android:scaleType="fitXY" />
 
 </RelativeLayout>

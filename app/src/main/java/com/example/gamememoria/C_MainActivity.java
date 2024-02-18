@@ -2,49 +2,53 @@
 //
 package com.example.gamememoria;
 
-import static com.example.gamememoria.Menu.Key_Koef_Dostign_Slogn;
-import static com.example.gamememoria.Menu.Key_Koef_Pobed;
-import static com.example.gamememoria.Menu.Key_Koef_Pobed_Max;
-import static com.example.gamememoria.Menu.Key_Kolvo_Igr;
-import static com.example.gamememoria.Menu.Key_Kolvo_Pobed;
-import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Step;
-import static com.example.gamememoria.Menu.Key_Kolvo_Proigr_Time;
-import static com.example.gamememoria.Menu.Key_Score;
-import static com.example.gamememoria.Menu.Key_Score_Max;
-import static com.example.gamememoria.Menu.Key_Slognost_Max;
-import static com.example.gamememoria.Menu.Key_Slognost_game;
-import static com.example.gamememoria.Menu.Key_Slognost_step;
-import static com.example.gamememoria.Menu.Key_Slognost_time;
-import static com.example.gamememoria.Menu.Key_Time;
-import static com.example.gamememoria.Menu.Key_Time_Max;
-import static com.example.gamememoria.Menu.Key_Uroven;
-import static com.example.gamememoria.Menu.Key_Uroven_Max;
-import static com.example.gamememoria.Menu.PrichinGameOver;
-import static com.example.gamememoria.Menu.Shirin_fishek;
-import static com.example.gamememoria.Menu.Visot_fishek;
-import static com.example.gamememoria.Menu.bonusTime;
-import static com.example.gamememoria.Menu.bonusTimeMax;
-import static com.example.gamememoria.Menu.koefDostignSlogn;
-import static com.example.gamememoria.Menu.koefPobed;
-import static com.example.gamememoria.Menu.koefPobedMax;
-import static com.example.gamememoria.Menu.koef_slogn_step;
-import static com.example.gamememoria.Menu.koef_slogn_time;
-import static com.example.gamememoria.Menu.kolvoProigrTime;
-import static com.example.gamememoria.Menu.mSettings;
-import static com.example.gamememoria.Menu.score;
-import static com.example.gamememoria.Menu.scoreMax;
-import static com.example.gamememoria.Menu.slognostMax;
-import static com.example.gamememoria.Menu.slognost_game;
-import static com.example.gamememoria.Menu.uroven;
-import static com.example.gamememoria.Menu.urovenMax;
-import static com.example.gamememoria.Menu.kolvoPobed;
-import static com.example.gamememoria.Menu.kolvoProigrStep;
-import static com.example.gamememoria.Menu.kolvoIgr;
-import static com.example.gamememoria.Zastavka.pologenieKnopkiMute;
-import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
+import static com.example.gamememoria.B_Menu.Key_Koef_Dostign_Slogn;
+import static com.example.gamememoria.B_Menu.Key_Koef_Pobed;
+import static com.example.gamememoria.B_Menu.Key_Koef_Pobed_Max;
+import static com.example.gamememoria.B_Menu.Key_Kolvo_Igr;
+import static com.example.gamememoria.B_Menu.Key_Kolvo_Pobed;
+import static com.example.gamememoria.B_Menu.Key_Kolvo_Proigr_Step;
+import static com.example.gamememoria.B_Menu.Key_Kolvo_Proigr_Time;
+import static com.example.gamememoria.B_Menu.Key_Score;
+import static com.example.gamememoria.B_Menu.Key_Score_Max;
+import static com.example.gamememoria.B_Menu.Key_Slognost_Max;
+import static com.example.gamememoria.B_Menu.Key_Slognost_game;
+import static com.example.gamememoria.B_Menu.Key_Slognost_step;
+import static com.example.gamememoria.B_Menu.Key_Slognost_time;
+import static com.example.gamememoria.B_Menu.Key_Time;
+import static com.example.gamememoria.B_Menu.Key_Time_Max;
+import static com.example.gamememoria.B_Menu.Key_Uroven;
+import static com.example.gamememoria.B_Menu.Key_Uroven_Max;
+import static com.example.gamememoria.B_Menu.PrichinGameOver;
+import static com.example.gamememoria.B_Menu.Shirin_fishek;
+import static com.example.gamememoria.B_Menu.Visot_fishek;
+import static com.example.gamememoria.B_Menu.bonusTime;
+import static com.example.gamememoria.B_Menu.bonusTimeMax;
+import static com.example.gamememoria.B_Menu.koefDostignSlogn;
+import static com.example.gamememoria.B_Menu.koefPobed;
+import static com.example.gamememoria.B_Menu.koefPobedMax;
+import static com.example.gamememoria.B_Menu.koef_slogn_step;
+import static com.example.gamememoria.B_Menu.koef_slogn_time;
+import static com.example.gamememoria.B_Menu.kolvoProigrTime;
+import static com.example.gamememoria.B_Menu.mSettings;
+import static com.example.gamememoria.B_Menu.score;
+import static com.example.gamememoria.B_Menu.scoreMax;
+import static com.example.gamememoria.B_Menu.slognostMax;
+import static com.example.gamememoria.B_Menu.slognost_game;
+import static com.example.gamememoria.B_Menu.uroven;
+import static com.example.gamememoria.B_Menu.urovenMax;
+import static com.example.gamememoria.B_Menu.kolvoPobed;
+import static com.example.gamememoria.B_Menu.kolvoProigrStep;
+import static com.example.gamememoria.B_Menu.kolvoIgr;
+import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
+import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
+import static com.example.gamememoria.A_Zastavka.promegutGameOverPodrad;
 import static java.util.Calendar.getInstance;
+import static com.example.gamememoria.B_Menu.fonMusic;
+import static com.example.gamememoria.B_Menu.timeOnFonMusik;
+import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+import static com.example.gamememoria.RegulirovkiPRG.vklFonMusicProdolgenGame;
 
-import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
 import android.app.PendingIntent;
@@ -56,7 +60,6 @@ import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -71,48 +74,47 @@ import android.widget.Chronometer;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity {
+public class C_MainActivity extends AppCompatActivity {
 
-    int timeGame;  // Задаём время игры на разных уровнях
-    long timeStopped = 0; // для остановки времени во время паузы
-    boolean sostoyniePause = false; // для переключения надписи кнопки пвуза-продолжить
-    private TextView stepScreen;
-    private ImageView iconSlogn;
     public static long bonusTimeViv;
     public static int bonusStep;
     public static String timeIstr;
-    private Button buPause;
     private Chronometer timeScreen, timeItog;
     private Integer StepCount; // кол-во ходов
     private Integer StepCountStart; // начальное число ходов, для вычислений
     public static Integer StepCountIspolz; // Использованное за игру число ходов, для вычислений
-    private GridView mGrid;
+    private GridView igrovoePole;
     private PoleGame mAdapter;
     private static final int NOTIFICATION_REMINDER = 3;
-    int koef_timeGame; // Коэфициент для задания времени игры
-    TextView namberUroven, nadpUrovenGame, time;
-    ConstraintLayout fonKartink;
-    ImageButton mute;
+    long timeStopped = 0; // для остановки времени во время паузы
+    boolean sostoyniePause = false; // для переключения надписи кнопки пвуза-продолжить
     boolean zapuskBonusTime = false;
     boolean zapuskBonusScore = false;
     int urovenVolume;
+    int timeGame;  // Задаём время игры на разных уровнях
+    int koef_timeGame; // Коэфициент для задания времени игры
+    boolean sostTimeOver = false;
 
+    Button buPause, buStart;
+    ImageView iconSlogn;
+    TextView stepScreen, namberUroven, nadpUrovenGame, time;
+    ConstraintLayout fonKartink;
+    ImageButton mute;
     Button btn1;
     Animation animation1;
 
     // звуковые переменные
-    MediaPlayer mediaPlayer1, timeOver,
-            fonMusicGame; // Фоновая музыка
-
+    MediaPlayer zvPerevorashKart, zvTimeOver, zvMute, zvPause, zvProdolgitGame, zvStartGame, zvPerexV_Menu;
+    public static MediaPlayer musicProdolGame;
 
     @SuppressLint("InvalidWakeLockTag")
     @Override
@@ -121,40 +123,78 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 // Задаем цвет верхей строки и строки навигации
-        if (Build.VERSION.SDK_INT >= 21) {
+      /*  if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
-        }
-
+        }*/
 
 // Запрет тускнениия экрана телефона и его выключения во время игры
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         iconSlogn = findViewById(R.id.slogn_viev);
-        mGrid = findViewById(R.id.igrovoePole);
+        igrovoePole = findViewById(R.id.igrovoePole);
         namberUroven = findViewById(R.id.NamberUroven_view);
         stepScreen = findViewById(R.id.step_view);
         time = findViewById(R.id.time_view);
         timeScreen = findViewById(R.id.time_view);
         timeItog = findViewById(R.id.timeItog);
         buPause = findViewById(R.id.buPause);
+        buStart = findViewById(R.id.buStart);
         mute = findViewById(R.id.buMute);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
         fonKartink = findViewById(R.id.fon_game_view);
 
 // Задаём звуковые сигналы
-        mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
-        fonMusicGame = MediaPlayer.create(this, R.raw.music_game);
-        timeOver = MediaPlayer.create(this, R.raw.time_over);
+        zvPerevorashKart = MediaPlayer.create(this, R.raw.zv_perevorash_kart_1);
+        zvMute = MediaPlayer.create(this, R.raw.mute_1);
+        zvPause = MediaPlayer.create(this, R.raw.pause);
+        zvProdolgitGame = MediaPlayer.create(this, R.raw.prodolgit_game);
+        zvTimeOver = MediaPlayer.create(this, R.raw.time_over);
+        zvStartGame = MediaPlayer.create(this, R.raw.start_game_1);
+        zvPerexV_Menu = MediaPlayer.create(this, R.raw.zv_perxoda_v_menu_1);
+
+        mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
+
+        byte melodiyaGame = (byte) (Math.random() * 9); // Случайное число от 0 до 8 -- Для выбора мелодии фоновой музыки
+        switch (melodiyaGame) {
+            case 0:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_0);
+                break;
+            case 1:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_1);
+                break;
+            case 2:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_2);
+                break;
+            case 3:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_3);
+                break;
+            case 4:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_4);
+                break;
+            case 5:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_5);
+                break;
+            case 6:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_6);
+                break;
+            case 7:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_7);
+                break;
+            case 8:
+                fonMusic = MediaPlayer.create(this, R.raw.music_game_8);
+                break;
+        }
+
+        mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
 
         if (pologenieKnopkiMute == true) {
             urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
             mute.setImageResource(R.drawable.mute);
         } else {
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            vklFonMusic();
+          /*  urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();*/
             mute.setImageResource(R.drawable.zvuk);
         }
         viborFonKartinki(); // Выбор фоновой картинки
@@ -189,8 +229,8 @@ public class MainActivity extends AppCompatActivity {
 
         ParametrUrovneiGame();
 
-        mGrid.setEnabled(true);
-        mGrid.setAdapter(mAdapter);
+        igrovoePole.setEnabled(true);
+        igrovoePole.setAdapter(mAdapter);
 
         Typeface type = getResources().getFont(R.font.ocker);    // шрифт
 
@@ -221,18 +261,20 @@ public class MainActivity extends AppCompatActivity {
                             miganStep1(null);
                         }
                         if (StepCount <= 4) {
-                            mediaPlayer1.start();
+                            /*  mediaPlayer1.start();*/
                             stepScreen.setTextColor(Color.MAGENTA);
                             miganStep1(null);
                         }
                         if (StepCount <= 2) {
-                            mediaPlayer1.start();
+                            /*  mediaPlayer1.start();*/
                             stepScreen.setTextColor(Color.RED);
                             miganStep1(null);
                         }
 
                         if (chronometer.getText().toString().equalsIgnoreCase("00:10")) {
-                            timeOver.start();
+                            fonMusic.stop();
+                            zvTimeOver.start();
+                            sostTimeOver = true;
 
                             time.setTextColor(Color.DKGRAY);
                             miganTime1(null);
@@ -254,7 +296,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         if (StepCount <= 0 & score != 0 & zapuskBonusScore == false) {    // Предлаг использ бонус очки
-                            mediaPlayer1.start();
+
                             timeScreen.stop();
                             ProdolGameStep();
                         }
@@ -262,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
 
                         if ((chronometer.getText().toString().equalsIgnoreCase("00:00")
                                 | (provOkonshTimeVZdushemRezime >= 0)) & bonusTime != 0 & zapuskBonusTime == false) {  // Предлаг использ бонус время
-                            mediaPlayer1.start();
+
                             timeScreen.stop();
                             ProdolGameTime();
 
@@ -271,8 +313,8 @@ public class MainActivity extends AppCompatActivity {
 
 
                         if (StepCount <= 0 & score == 0) {
-                            GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
-                            b1.setEnabled(false);
+                            // Блокировка КНОПКИ
+                            igrovoePole.setEnabled(false);
                             PrichinGameOver = "ИЗРАСХОДОВАНО  ЗАДАННОЕ  ЧИСЛО  ХОДОВ";
                             timeScreen.stop();
                             kolvoProigrStep = kolvoProigrStep + 1;
@@ -289,11 +331,11 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
 
-        mGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        igrovoePole.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
 
-                mediaPlayer1.start();
+                zvPerevorashKart.start();
                 mAdapter.checkOpenCells();
                 if (mAdapter.openCell(position)) {
                     StepCount--;
@@ -315,47 +357,79 @@ public class MainActivity extends AppCompatActivity {
         btn1 = (Button) findViewById(R.id.buPause);
         btn1.startAnimation(animation1);
 
-        clickPause(null);  // Пуск игры, связано с приостановкой во время свертывания (Иначе изначально ставится на Паузу)
+        timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
 
-        GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
-        b1.setEnabled(false);
-        GridView a2 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-        a2.setAlpha(1f);
-        a2.animate().alpha(0.5f).setDuration(1000);
+        igrovoePole.setEnabled(false);   // Блокировка КНОПКИ
+        igrovoePole.setAlpha(1f);    // ПРОЗРАЧНОСТЬ КНОПКИ
+        igrovoePole.animate().alpha(0.5f).setDuration(1000);
 
-        buPause.setText("" + "СТАРТ");
-        buPause.setTextSize(22);
-        buPause.setTextColor(Color.rgb(198, 20, 24)); // Цвет текста кнопки
-        buPause.setBackgroundColor(Color.rgb(253, 214, 0));   // Цвет поля кнопки
+        // Блокировка КНОПКИ
+        buPause.setEnabled(false);
+        // ПРОЗРАЧНОСТЬ КНОПКИ
+        buPause.setAlpha(0f);
+        buPause.animate().alpha(0f).setDuration(1);
+
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start_2);
+        buStart.startAnimation(a4);
     }
 
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
-        fonMusicGame.pause();
-        // Приостанав игры при свертывании приложения*/
+        pologSostoyanSvernutogoPrilogen = true;
 
+        if (pologenieKnopkiMute == false) {
+            fonMusic.pause();
+        }
+
+        if (sostTimeOver == true) {
+            zvTimeOver.pause();
+        }
+
+        // Приостанав игры при свертывании приложения*/
         if (sostoyniePause == false) {
-            clickPause(null); // Пуск игры после свертывании приложения
+            /*   clickPause(null); // Пуск игры после свертывании приложения*/
+
+            timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
+            timeScreen.stop();
+            sostoyniePause = true;
+            buPause.setTextSize(16);
+            buPause.setText("" + "ПРОДОЛЖИТЬ");
+            btn1.startAnimation(animation1);
+            buPause.setTextColor(Color.parseColor("#63FF00")); // Цвет текста кнопки
+            buPause.setBackgroundColor(Color.parseColor("#FF00B7"));   // Цвет поля кнопки
         }
     }
 
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
-    public void onStart() {
+  /*  public void onStart() {
         super.onStart();
-        vklFonMusic();
-
-    }
+        if (pologenieKnopkiMute == false) {
+            timeOnFonMusik = 3000;
+            vklFonMusic();
+        }
+    }*/
 
     // Диалоговое окно "Использовать бонусные ходы"
     private void ProdolGameStep() {
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
 
-        GridView a1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-        a1.setAlpha(1f);
-        a1.animate().alpha(0.3f).setDuration(1000);
+        // ПРОЗРАЧНОСТЬ КНОПКИ
+        igrovoePole.setAlpha(1f);
+        igrovoePole.animate().alpha(0.3f).setDuration(1000);
+
+
+        if (pologenieKnopkiMute == false) {
+            fonMusic.stop();
+            timeOnFonMusik = 3000;
+            vklFonMusicProdolgenGame();
+
+            musicProdolGame = MediaPlayer.create(this, R.raw.zv_perxoda_v_menu_1); // ЗАДАТЬ МУЗЫКУ
+
+        }
+
 
         // Диалоговое окно
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this, R.style.StyleDialogOknaStep);
@@ -374,8 +448,8 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface arg0, int arg1) {
 
-                GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
-                b1.setEnabled(true);
+                // Разблокировка КНОПКИ
+                igrovoePole.setEnabled(true);
 
                 zapuskBonusScore = true;
                 timeScreen.start();
@@ -413,9 +487,18 @@ public class MainActivity extends AppCompatActivity {
 
         getWindow().clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);  // Разрешает тускнениия экрана телефона и его выключения во время игры
 
-        GridView a1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-        a1.setAlpha(1f);
-        a1.animate().alpha(0.3f).setDuration(1500);
+        // ПРОЗРАЧНОСТЬ КНОПКИ
+        igrovoePole.setAlpha(1f);
+        igrovoePole.animate().alpha(0.3f).setDuration(1500);
+
+        if (pologenieKnopkiMute == false) {
+            fonMusic.stop();
+            timeOnFonMusik = 3000;
+            vklFonMusicProdolgenGame();
+
+            musicProdolGame = MediaPlayer.create(this, R.raw.zv_perxoda_v_menu_1); // ЗАДАТЬ МУЗЫКУ
+
+        }
 
         AlertDialog.Builder alertbox = new AlertDialog.Builder(this, R.style.StyleDialogOknaTime);
 
@@ -432,8 +515,8 @@ public class MainActivity extends AppCompatActivity {
 
             public void onClick(DialogInterface dialog, int which) {
 
-                GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
-                b1.setEnabled(true);
+                // Разблокировка КНОПКИ
+                igrovoePole.setEnabled(true);
 
                 zapuskBonusTime = true;
                 timeGame = 1000 * bonusTime;
@@ -499,7 +582,6 @@ public class MainActivity extends AppCompatActivity {
         bonusTime = (bonusTime + (int) (bonusTimeViv / 1000));
 
         uroven = uroven + 1;
-        /*   uroven = 22 + 1;*/
 
         if (uroven == 23) {
             slognostMax = slognostMax + 1;
@@ -522,18 +604,18 @@ public class MainActivity extends AppCompatActivity {
 
         onPause();
 
-        Intent intent = new Intent(this, Pobeda.class);    // Переход на другой класс
+        Intent intent = new Intent(this, H_Pobeda.class);    // Переход на другой класс
         startActivity(intent);
     }
 
     public void gameOver() {      // Переход на другой класс
 
-        fonMusicGame.stop();
+        fonMusic.stop();
         kolvoIgr = kolvoIgr + 1;
 
         onPause();
 
-        Intent intent = new Intent(this, GameOver.class);
+        Intent intent = new Intent(this, G_GameOver.class);
         startActivity(intent);
     }
 
@@ -629,14 +711,14 @@ public class MainActivity extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Slognost_time))) {
             koef_slogn_time = mSettings.getInt(String.valueOf(Key_Slognost_time), 0);
         } else {
-            Intent i = new Intent(this, Slognost.class);
+            Intent i = new Intent(this, E_Slognost.class);
             startActivity(i);
         }
 
         if (mSettings.contains(String.valueOf(Key_Slognost_step))) {
             koef_slogn_step = mSettings.getInt(String.valueOf(Key_Slognost_step), 0);
         } else {
-            Intent i = new Intent(this, Slognost.class);
+            Intent i = new Intent(this, E_Slognost.class);
             startActivity(i);
         }
         if (mSettings.contains(String.valueOf(Key_Slognost_game))) {
@@ -660,11 +742,54 @@ public class MainActivity extends AppCompatActivity {
         } else kolvoProigrTime = 0;
     }
 
+    // ЗАПУСК ИГРЫ
+    public void clickStart(View view) {
+
+        if (pologenieKnopkiMute == false) {
+            zvStartGame.start();
+            timeOnFonMusik = 6000;
+            vklFonMusic();
+        }
+
+        timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
+        timeScreen.start();
+
+        igrovoePole.setEnabled(true);  // Блокировка КНОПКИ
+        igrovoePole.setAlpha(0.5f);    // ПРОЗРАЧНОСТЬ КНОПКИ
+        igrovoePole.animate().alpha(1f).setDuration(1000);
+
+        // Блокировка КНОПКИ
+        buStart.setEnabled(false);
+        // ПРОЗРАЧНОСТЬ КНОПКИ
+        buStart.setAlpha(1f);
+        buStart.animate().alpha(0f).setDuration(1500);
+
+        // Блокировка КНОПКИ
+        buPause.setEnabled(true);
+        // ПРОЗРАЧНОСТЬ КНОПКИ
+        buPause.setAlpha(0f);
+        buPause.animate().alpha(1f).setDuration(2000);
+
+        sostoyniePause = false;
+
+        btn1.clearAnimation();
+        buPause.setTextSize(20);
+        buPause.setText("" + "ПАУЗА");
+        buPause.setTextColor(Color.rgb(98, 0, 234)); // Цвет текста кнопки
+        buPause.setBackgroundColor(Color.parseColor("#00DC00"));   // Цвет поля кнопки
+
+        buStart.setLayoutParams(new LinearLayout.LayoutParams(0, 0));   // Уменьшает размер кнопки СТАРТ
+
+    }
+
 // ПАУЗА - ПРОДОЛЖИТЬ
 
     public void clickPause(View view) {
 
         if (sostoyniePause == false) {
+
+            fonMusic.pause();
+
             timeStopped = timeScreen.getBase() - SystemClock.elapsedRealtime();
             timeScreen.stop();
             sostoyniePause = true;
@@ -674,64 +799,63 @@ public class MainActivity extends AppCompatActivity {
             buPause.setTextColor(Color.parseColor("#63FF00")); // Цвет текста кнопки
             buPause.setBackgroundColor(Color.parseColor("#FF00B7"));   // Цвет поля кнопки
 
-            GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
-            b1.setEnabled(false);
-            GridView a1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-            a1.setAlpha(1f);
-            a1.animate().alpha(0.2f).setDuration(1500);
+            igrovoePole.setEnabled(false); // Блокировка КНОПКИ
+            igrovoePole.setAlpha(1f);// ПРОЗРАЧНОСТЬ КНОПКИ
+            igrovoePole.animate().alpha(0.2f).setDuration(1500);
 
-            fonMusicGame.pause();
+            if (sostTimeOver == false) {
+                zvPause.start();
+            } else {
+                zvTimeOver.pause();
+            }
 
         } else {
+            sostoyniePause = false;
             timeScreen.setBase(SystemClock.elapsedRealtime() + timeStopped);
             timeScreen.start();
-            sostoyniePause = false;
 
-            String s1 = buPause.getText().toString();
-            if (s1.contains("ТАР")) {
-                GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Блокировка КНОПКИ
-                b1.setEnabled(true);
-                GridView a1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-                a1.setAlpha(0.5f);
-                a1.animate().alpha(1f).setDuration(1000);
-            } else {
-                GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
-                b1.setEnabled(true);
-                GridView b2 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-                b2.setAlpha(0.2f);
-                b2.animate().alpha(1f).setDuration(1500);
-            }
+            igrovoePole.setEnabled(true);    // Разблокировка КНОПКИ
+            igrovoePole.setAlpha(0.2f);      // ПРОЗРАЧНОСТЬ КНОПКИ
+            igrovoePole.animate().alpha(1f).setDuration(1500);
+
             btn1.clearAnimation();
-            buPause.setTextSize(22);
+            buPause.setTextSize(20);
             buPause.setText("" + "ПАУЗА");
             buPause.setTextColor(Color.rgb(98, 0, 234)); // Цвет текста кнопки
             buPause.setBackgroundColor(Color.parseColor("#00DC00"));   // Цвет поля кнопки
 
-            fonMusicGame.start();
+            if (sostTimeOver == true) {
+                zvTimeOver.start();
+            } else {
+                zvProdolgitGame.start();
+                timeOnFonMusik = 2500;
+                vklFonMusic();
+            }
         }
     }
 
     public void clickMenu(View view) {
 
-        fonMusicGame.stop();
+        fonMusic.stop();
+        zvTimeOver.stop();
+        zvPerexV_Menu.start();
 
-        Intent intent = new Intent(this, Menu.class);    // Переход на другой класс
+        Intent intent = new Intent(this, B_Menu.class);    // Переход на другой класс
         startActivity(intent);
     }
 
     public void PovtorGame(View view) {
 
-        GridView b1 = (GridView) findViewById(R.id.igrovoePole);  // Разблокировка КНОПКИ
-        b1.setEnabled(true);
+        igrovoePole.setEnabled(true);     // Разблокировка КНОПКИ
 
-        Intent intent = new Intent(this, MainActivity.class);    // Переход на другой класс
+        Intent intent = new Intent(this, C_MainActivity.class);    // Переход на другой класс
         startActivity(intent);
     }
 
     private void ParametrUrovneiGame() {
         if (uroven == 1) {
 
-            mGrid.setNumColumns(3);
+            igrovoePole.setNumColumns(3);
             int c = 3, r = 4;
             mAdapter = new PoleGame(this, c, r);
             koef_timeGame = (c * r) / 2 + uroven / 2 + koef_slogn_time;
@@ -741,7 +865,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 2) {
-            mGrid.setNumColumns(4);
+            igrovoePole.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 4);
             koef_timeGame = (4 * 4) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (4 * 4) * 2 + uroven * 2 + koef_slogn_step; // Задаём максимальное количество ходов
@@ -750,7 +874,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 3) {
-            mGrid.setNumColumns(4);
+            igrovoePole.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 5);
             koef_timeGame = (4 * 5) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (4 * 5) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -759,7 +883,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 4) {
-            mGrid.setNumColumns(4);
+            igrovoePole.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 6);
             koef_timeGame = (4 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (4 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -768,7 +892,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 5) {
-            mGrid.setNumColumns(4);
+            igrovoePole.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 7);
             koef_timeGame = (4 * 7) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (4 * 7) * 2 + uroven * 2 + koef_slogn_step; // Задаём максимальное количество ходов
@@ -777,7 +901,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 6) {
-            mGrid.setNumColumns(5);
+            igrovoePole.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 6);
             koef_timeGame = (5 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (5 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -786,7 +910,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 7) {
-            mGrid.setNumColumns(4);
+            igrovoePole.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 8);
             koef_timeGame = (4 * 8) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (4 * 8) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -794,7 +918,7 @@ public class MainActivity extends AppCompatActivity {
             Shirin_fishek = 220;
         }
         if (uroven == 8) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 6);
             koef_timeGame = (6 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (6 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -802,7 +926,7 @@ public class MainActivity extends AppCompatActivity {
             Shirin_fishek = 170;
         }
         if (uroven == 9) {
-            mGrid.setNumColumns(5);
+            igrovoePole.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 8);
             koef_timeGame = (5 * 8) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (5 * 8) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -810,7 +934,7 @@ public class MainActivity extends AppCompatActivity {
             Shirin_fishek = 210;
         }
         if (uroven == 10) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 7);
             koef_timeGame = (7 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (7 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -818,7 +942,7 @@ public class MainActivity extends AppCompatActivity {
             Shirin_fishek = 170;
         }
         if (uroven == 11) {
-            mGrid.setNumColumns(4);
+            igrovoePole.setNumColumns(4);
             mAdapter = new PoleGame(this, 4, 11);
             koef_timeGame = (4 * 11) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (4 * 11) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -826,7 +950,7 @@ public class MainActivity extends AppCompatActivity {
             Shirin_fishek = 160;
         }
         if (uroven == 12) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 8);
             koef_timeGame = (8 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (8 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -835,7 +959,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 13) {
-            mGrid.setNumColumns(5);
+            igrovoePole.setNumColumns(5);
             mAdapter = new PoleGame(this, 5, 10);
             koef_timeGame = (5 * 10) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (5 * 10) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -844,7 +968,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 14) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 9);
             koef_timeGame = (9 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (9 * 6) * 2 + uroven * 2 + koef_slogn_step; // Задаём максимальное количество ходов
@@ -853,7 +977,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 15) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 10);
             koef_timeGame = (10 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (10 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -862,7 +986,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 16) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 11);
             koef_timeGame = (11 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (11 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -871,7 +995,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 17) {
-            mGrid.setNumColumns(7);
+            igrovoePole.setNumColumns(7);
             mAdapter = new PoleGame(this, 7, 10);
             koef_timeGame = (7 * 10) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (7 * 10) * 2 + uroven * 2 + koef_slogn_step; // Задаём максимальное количество ходов
@@ -880,7 +1004,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 18) {
-            mGrid.setNumColumns(6);
+            igrovoePole.setNumColumns(6);
             mAdapter = new PoleGame(this, 6, 12);
             koef_timeGame = (12 * 6) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (12 * 6) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -889,7 +1013,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 19) {
-            mGrid.setNumColumns(7);
+            igrovoePole.setNumColumns(7);
             mAdapter = new PoleGame(this, 7, 12);
             koef_timeGame = (7 * 12) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (7 * 12) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -897,7 +1021,7 @@ public class MainActivity extends AppCompatActivity {
             Shirin_fishek = 150;
         }
         if (uroven == 20) {
-            mGrid.setNumColumns(8);
+            igrovoePole.setNumColumns(8);
             mAdapter = new PoleGame(this, 8, 11);
             koef_timeGame = (8 * 11) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (8 * 11) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -906,7 +1030,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 21) {
-            mGrid.setNumColumns(8);
+            igrovoePole.setNumColumns(8);
             mAdapter = new PoleGame(this, 8, 12);
             koef_timeGame = (8 * 12) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (8 * 12) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -915,7 +1039,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (uroven == 22) {
-            mGrid.setNumColumns(8);
+            igrovoePole.setNumColumns(8);
             mAdapter = new PoleGame(this, 8, 13);
             koef_timeGame = (8 * 13) / 2 + uroven / 2 + koef_slogn_time;
             StepCount = (8 * 13) * 2 + uroven * 2 + koef_slogn_step;  // Задаём максимальное количество ходов
@@ -925,9 +1049,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void ProzrachButton() {
-        GridView b1 = findViewById(R.id.igrovoePole);   // ПРОЗРАЧНОСТЬ КНОПКИ
-        b1.setAlpha(0.3f);
-        b1.animate().alpha(1f).setDuration(2000);
+        // ПРОЗРАЧНОСТЬ КНОПКИ
+        igrovoePole.setAlpha(0.3f);
+        igrovoePole.animate().alpha(1f).setDuration(2000);
     }
 
     public void clickMute(View view) {
@@ -935,25 +1059,23 @@ public class MainActivity extends AppCompatActivity {
         if (pologenieKnopkiMute == false) {
             urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
+            fonMusic.pause();
             mute.setImageResource(R.drawable.mute);
             pologenieKnopkiMute = true;
+            mute.animate().rotationXBy(180).setDuration(500);
         } else {
             mute.setImageResource(R.drawable.zvuk);
             urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
-            /* vklFonMusic();*/
+            zvMute.start();
+
+            if (sostoyniePause == false) {
+                timeOnFonMusik = 1500;
+                vklFonMusic();
+            }
             pologenieKnopkiMute = false;
+            mute.animate().rotationYBy(180).setDuration(500);
         }
-    }
-
-    private void regulirovUrovenVolume() {
-        //Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
-
-        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
-
-        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
-        int a = maxVolume * urovenVolume / 100;
-        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
     }
 
     private void viborFonKartinki() {
@@ -1018,25 +1140,18 @@ public class MainActivity extends AppCompatActivity {
         }
 
         fonKartink.getBackground().setAlpha(170);  //  Затемнение только фоновой картинки (от 0 до 255)
-
     }
 
-    private void vklFonMusic() {  //Этот код делает анимацию плавного включения фоновой музыки
+    private void regulirovUrovenVolume() {
+        //Этот код мгновенно установит громкость 100 без обратной связи с пользователем при нажатии кнопок.
 
-        ValueAnimator volumeAnimator = ValueAnimator.ofFloat(0f, 0.5f);
-        volumeAnimator.setDuration(8000); // Длительность анимации в миллисекундах
-        volumeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float volume = (float) animation.getAnimatedValue();
-                fonMusicGame.setVolume(volume, volume);
-            }
-        });
-        volumeAnimator.start();
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
 
-        fonMusicGame.start();
-        fonMusicGame.setLooping(true);  // повтор проигрывания плеера
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
+        int a = maxVolume * urovenVolume / 100;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
     }
+
 }
 
  /*     mGrid.setHorizontalSpacing(10); // расстояние между иконками

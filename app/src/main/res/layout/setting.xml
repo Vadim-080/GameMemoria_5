@@ -6,19 +6,19 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/poleslognost"
-    tools:context=".Setting">
+    tools:context=".F_Setting">
 
     <TextView
         android:id="@+id/nadpSlognost_viev"
         style="@style/styleNadpSlogn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
         android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="ВЫБИРИТЕ СЛОЖНОСТЬ ИГРЫ"
-        android:background="@android:color/transparent"
         android:textSize="35dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -26,153 +26,52 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.069" />
 
-    <ImageView
-        android:id="@+id/slogn1_viev"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="80dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/slogn1"
-        android:background="@android:color/transparent"
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="240dp"
+        android:text="      Установить яркость экрана"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nadpSlognost_viev" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/slogn2_viev"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/slogn2"
-        android:background="@android:color/transparent"
+    <SeekBar
+        android:id="@+id/seekBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginEnd="8dp"
+        android:max="100"
+        android:progress="50"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slogn1_viev" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.431" />
 
-    <ImageView
-        android:id="@+id/slogn3_viev"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/slogn3"
-        android:background="@android:color/transparent"
+    <TextView
+        android:id="@+id/textViewSetting"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="468dp"
+        android:text="    0.50"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slogn2_viev" />
-
-    <ImageView
-        android:id="@+id/slogn4_viev"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:autoSizeTextType="uniform"
-        android:gravity="center"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="fitXY"
-        android:src="@drawable/slogn4"
-        android:background="@android:color/transparent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slogn3_viev" />
-
-    <Button
-        android:id="@+id/buZabiv"
-        style="@style/styleButtonMenu"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="80dp"
-        android:scaleType="fitXY"
-               android:text="ЗАБЫВЧИВЫЙ"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nadpSlognost_viev"
-        app:strokeColor="@color/CV33"
-        app:strokeWidth="3dp"/>
-
-    <Button
-        android:id="@+id/buNovishok"
-        style="@style/styleButtonMenu"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="fitXY"
-        android:text="НОВИЧОК"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buZabiv"
-        app:strokeColor="@color/CV32"
-        app:strokeWidth="3dp"/>
-
-
-
-    <Button
-        android:id="@+id/buOpitn"
-        style="@style/styleButtonMenu"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="fitXY"
-        android:text="ОПЫТНЫЙ"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buNovishok"
-        app:strokeColor="@color/CV31"
-        app:strokeWidth="3dp"/>
-
-    <Button
-        android:id="@+id/buMaster"
-        style="@style/styleButtonMenu"
-
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:textSize="20dp"
-        android:textStyle="bold"
-        android:layout_marginLeft="130dp"
-        android:layout_marginTop="50dp"
-        android:scaleType="fitXY"
-        android:text="МАСТЕР"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/buOpitn"
-        app:strokeColor="@color/CV30"
-        app:strokeWidth="3dp"/>
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/buMenu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:onClick="clickMenu"
         android:text="МЕНЮ"
-        android:textStyle="bold"
         android:textColor="@color/CV1"
         android:textSize="25dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -180,6 +79,6 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.96"
         app:strokeColor="@color/CV3"
-        app:strokeWidth="2dp"/>
+        app:strokeWidth="2dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

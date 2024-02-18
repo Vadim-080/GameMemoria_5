@@ -1,17 +1,16 @@
 package com.example.gamememoria;
 
-import static com.example.gamememoria.Zastavka.pologenieKnopkiMute;
-import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
-import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
+import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
+import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
+import static com.example.gamememoria.A_Zastavka.povtorTriGameOverPodrad;
+import static com.example.gamememoria.A_Zastavka.promegutGameOverPodrad;
 
-import android.animation.ValueAnimator;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
@@ -23,14 +22,12 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
-public class Menu extends AppCompatActivity {
+public class B_Menu extends AppCompatActivity {
 
     public static final String APP_PREFERENCES = "PAPKA_MEMORI_GAME_MEMOR";  // константа для имени файла настроек
     public static SharedPreferences mSettings;  // Создаём переменную, представляющую экземпляр класса SharedPreferences, который отвечает за работу с настройками
@@ -73,16 +70,19 @@ public class Menu extends AppCompatActivity {
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
     private ImageView iconSlogn, timeZnashok;
     int urovenVolume;
+    public static int timeOnFonMusik;
+    public static boolean pologSostoyanSvernutogoPrilogen = false;
 
-    Button start, start1, exit, newGame, slogn, vosstsnovlMaxGame, dostigen;
+    Button start, start1, exit, newGame, slogn, setting, vosstsnovlMaxGame, dostigen;
 
     ImageButton mute;
     Chronometer timeBonus;
     TextView namberUroven, scoreBonus, nadpUrovenGame;
     ConstraintLayout KartinraZadnegoPlana;
-    MediaPlayer StartZvuk,
-            fonMusicMenu; // Фоновая музыка
-    MediaPlayer mediaMenu1, mediaMenu2, mediaMenu3, mediaMenu4, mediaMenu5, mediaMenu6; // Звук кнопок меню
+    MediaPlayer zvStart, zvMute, zvExitGame;
+    public static MediaPlayer fonMusic; // Фоновая музыка
+    MediaPlayer mediaMenu1, mediaMenu2, mediaMenu4, mediaMenu6; // Звук кнопок меню
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -90,10 +90,10 @@ public class Menu extends AppCompatActivity {
         setContentView(R.layout.menu);
 
 // Задаем цвет верхей строки и строки навигации
-        if (Build.VERSION.SDK_INT >= 21) {
+       /* if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); // строка состояния или временная шкала вверху
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Панель навигации - нижняя часть
-        }
+        }*/
 
         iconSlogn = findViewById(R.id.slogn_viev);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
@@ -102,34 +102,35 @@ public class Menu extends AppCompatActivity {
         scoreBonus = findViewById(R.id.score_viev);
         start = findViewById(R.id.buStart);
         start1 = findViewById(R.id.buStart1);
-        slogn = findViewById(R.id.buSlognost);
         dostigen = findViewById(R.id.buDostigen);
+        newGame = findViewById(R.id.buNewGame);
+        vosstsnovlMaxGame = findViewById(R.id.buVosstsnovlMaxGame);
+        slogn = findViewById(R.id.buSlognost);
+        setting = findViewById(R.id.buSetting);
         exit = findViewById(R.id.buExit);
         mute = findViewById(R.id.buMute);
-        newGame = findViewById(R.id.buNewGame);
         vosstsnovlMaxGame = findViewById(R.id.buVosstsnovlMaxGame);
         namberUroven = findViewById(R.id.NamberUroven_view);
         KartinraZadnegoPlana = findViewById(R.id.fon_menu_view);
         mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
 
 // Задаём звуковые сигналы
-        StartZvuk = MediaPlayer.create(this, R.raw.start1);
-        fonMusicMenu = MediaPlayer.create(this, R.raw.legki_jazz);
-        mediaMenu1 = MediaPlayer.create(this, R.raw.zv_menu_1);
-        mediaMenu2 = MediaPlayer.create(this, R.raw.zv_menu_2);
-        mediaMenu3 = MediaPlayer.create(this, R.raw.zv_menu_3);
-        mediaMenu4 = MediaPlayer.create(this, R.raw.zv_menu_4);
-        mediaMenu5 = MediaPlayer.create(this, R.raw.zv_menu_5);
+        zvStart = MediaPlayer.create(this, R.raw.start1);
+        zvMute = MediaPlayer.create(this, R.raw.mute_1);
+        zvExitGame = MediaPlayer.create(this, R.raw.exit_game);
+        fonMusic = MediaPlayer.create(this, R.raw.legki_jazz);
+        mediaMenu1 = MediaPlayer.create(this, R.raw.dostigen_1);
+        mediaMenu2 = MediaPlayer.create(this, R.raw.new_game_1);
+        mediaMenu4 = MediaPlayer.create(this, R.raw.slognost_1);
         mediaMenu6 = MediaPlayer.create(this, R.raw.zv_menu_6);
+
+        mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
 
         if (pologenieKnopkiMute == true) {
             urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
             mute.setImageResource(R.drawable.mute);
         } else {
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            vklFonMusic();
             mute.setImageResource(R.drawable.zvuk);
         }
 
@@ -173,6 +174,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
+        dostigen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Dostigen();
+            }
+        });
+
         newGame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -194,12 +202,13 @@ public class Menu extends AppCompatActivity {
             }
         });
 
-        dostigen.setOnClickListener(new View.OnClickListener() {
+        setting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Dostigen();
+                setting();
             }
         });
+
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -213,49 +222,49 @@ public class Menu extends AppCompatActivity {
     @Override
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
-
-        fonMusicMenu.pause();
+        pologSostoyanSvernutogoPrilogen = true;
+        fonMusic.pause();
     }
 
+
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
+
+
     public void onStart() {
         super.onStart();
 
+        urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+        regulirovUrovenVolume();
+        timeOnFonMusik = 6000;
         vklFonMusic();
     }
 
     private void startGame() {
         if (pologenieKnopkiMute == true) {
         } else {
-            fonMusicMenu.stop();
-            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            StartZvuk.start();
+            fonMusic.stop();
+            zvStart.start();
         }
 
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, C_MainActivity.class);
         startActivity(i);
     }
 
     private void Dostigen() {
         if (pologenieKnopkiMute == true) {
         } else {
-            fonMusicMenu.pause();
-            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-            regulirovUrovenVolume();
+            fonMusic.stop();
             mediaMenu1.start();
         }
 
-        Intent i = new Intent(this, Dostigenia.class);
+        Intent i = new Intent(this, D_Dostigenia.class);
         startActivity(i);
     }
 
     private void newGame() {
         if (pologenieKnopkiMute == true) {
         } else {
-            fonMusicMenu.pause();
-            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-            regulirovUrovenVolume();
+            fonMusic.stop();
             mediaMenu2.start();
         }
 
@@ -267,17 +276,14 @@ public class Menu extends AppCompatActivity {
         koefPobed = 0;
         onPause();
 
-        Intent i = new Intent(this, Slognost.class);
+        Intent i = new Intent(this, E_Slognost.class);
         startActivity(i);
     }
 
     private void vosstsnovlMaxGame() {
-        if (pologenieKnopkiMute == true) {
-        } else {
-            fonMusicMenu.stop();
-            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            mediaMenu3.start();
+        if (pologenieKnopkiMute == false) {
+            fonMusic.stop();
+            zvStart.start();
         }
 
         promegutGameOverPodrad = 0;
@@ -290,33 +296,41 @@ public class Menu extends AppCompatActivity {
         slognost_game = slognostMax;
         koefPobed = koefPobedMax;
 
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, C_MainActivity.class);
         startActivity(i);
     }
 
     private void slognost() {
-        if (pologenieKnopkiMute == true) {
-        } else {
-            fonMusicMenu.pause();
-            urovenVolume = 30; // Установка уровня громкости звука кнопки (от 1 до 100) в %
-            regulirovUrovenVolume();
+        if (pologenieKnopkiMute == false) {
+            fonMusic.stop();
             mediaMenu4.start();
         }
 
-        Intent i = new Intent(this, Slognost.class);
+        Intent i = new Intent(this, E_Slognost.class);
+        startActivity(i);
+    }
+
+    private void setting() {
+        if (pologenieKnopkiMute == false) {
+            fonMusic.stop();
+            mediaMenu6.start();
+        }
+
+        Intent i = new Intent(this, F_Setting.class);
         startActivity(i);
     }
 
     // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
     public void finish() {
-        if (pologenieKnopkiMute == true) {
-        } else {
-            fonMusicMenu.stop();
-            urovenVolume = 40; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        if (pologenieKnopkiMute == false) {
+            fonMusic.stop();
+            urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
-            /* mediaMenu4.start();*/
+            zvExitGame.start();
         }
+
         this.finishAffinity();
+
     }
 
     public void clickMute(View view) {
@@ -324,14 +338,20 @@ public class Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == false) {
             urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
-            mute.setImageResource(R.drawable.mute);
             pologenieKnopkiMute = true;
+            fonMusic.pause();
+            mute.animate().rotationYBy(180).setDuration(500);
+            mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
             urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
-            vklFonMusic();
+            zvMute.start();
+            timeOnFonMusik = 1500;
+            RegulirovkiPRG.vklFonMusic();
             pologenieKnopkiMute = false;
+
+            mute.animate().rotationXBy(180).setDuration(500);
         }
     }
 
@@ -495,7 +515,7 @@ public class Menu extends AppCompatActivity {
         View a3 = findViewById(R.id.monet_viev);                   // ПОВОРОТ КНОПКИ
         a3.animate().rotationYBy(99720).setDuration(300000);
 
-        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start);
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start_1);
         start.startAnimation(a4);
 
         Animation a5 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
@@ -521,22 +541,6 @@ public class Menu extends AppCompatActivity {
         audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
     }
 
-    private void vklFonMusic() {  //Этот код делает анимацию плавного включения фоновой музыки
-
-        ValueAnimator volumeAnimator = ValueAnimator.ofFloat(0f, 0.6f);
-        volumeAnimator.setDuration(8000); // Длительность анимации в миллисекундах
-        volumeAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                float volume = (float) animation.getAnimatedValue();
-                fonMusicMenu.setVolume(volume, volume);
-            }
-        });
-        volumeAnimator.start();
-
-        fonMusicMenu.start();
-        fonMusicMenu.setLooping(true);  // повтор проигрывания плеера
-    }
 }
 
 // ЗВУКИ из - https://developer.alexanderklimov.ru/android/theory/soundpool.php

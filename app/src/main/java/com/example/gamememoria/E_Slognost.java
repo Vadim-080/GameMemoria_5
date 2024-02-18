@@ -1,37 +1,43 @@
 package com.example.gamememoria;
 
-import static com.example.gamememoria.Menu.Key_Koef_Pobed;
-import static com.example.gamememoria.Menu.Key_Slognost_game;
-import static com.example.gamememoria.Menu.Key_Slognost_step;
-import static com.example.gamememoria.Menu.Key_Slognost_time;
-import static com.example.gamememoria.Menu.koefPobed;
-import static com.example.gamememoria.Menu.koef_slogn_step;
-import static com.example.gamememoria.Menu.koef_slogn_time;
-import static com.example.gamememoria.Menu.mSettings;
+import static com.example.gamememoria.B_Menu.Key_Koef_Pobed;
+import static com.example.gamememoria.B_Menu.Key_Slognost_game;
+import static com.example.gamememoria.B_Menu.Key_Slognost_step;
+import static com.example.gamememoria.B_Menu.Key_Slognost_time;
+import static com.example.gamememoria.B_Menu.fonMusic;
+import static com.example.gamememoria.B_Menu.koefPobed;
+import static com.example.gamememoria.B_Menu.koef_slogn_step;
+import static com.example.gamememoria.B_Menu.koef_slogn_time;
+import static com.example.gamememoria.B_Menu.mSettings;
 
-import static com.example.gamememoria.Menu.slognost_game;
-import static com.example.gamememoria.Zastavka.povtorTriGameOverPodrad;
-import static com.example.gamememoria.Zastavka.promegutGameOverPodrad;
+import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+import static com.example.gamememoria.B_Menu.slognost_game;
+import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
+import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
+import static com.example.gamememoria.A_Zastavka.povtorTriGameOverPodrad;
+import static com.example.gamememoria.A_Zastavka.promegutGameOverPodrad;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.GridView;
+import android.widget.ImageButton;
 
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
-public class Slognost extends AppCompatActivity {
+public class E_Slognost extends AppCompatActivity {
 
     Button zabiv, novi, opit, mast, buMenu;
     ConstraintLayout KartinraZadnegoPlana;
-    MediaPlayer mediaPlayer1;
+    ImageButton mute;
+    int urovenVolume, timeOnFonMusik;
+    MediaPlayer mediaPlayer1, zvPerexV_Menu , zvMute;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -39,20 +45,39 @@ public class Slognost extends AppCompatActivity {
         setContentView(R.layout.slognost);
 
         // Задаем цвет верхей строки и строки навигации
-        if (Build.VERSION.SDK_INT >= 21) {
+       /* if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
-        }
+        }*/
 
         zabiv = findViewById(R.id.buZabiv);
         novi = findViewById(R.id.buNovishok);
         opit = findViewById(R.id.buOpitn);
         mast = findViewById(R.id.buMaster);
         buMenu = findViewById(R.id.buMenu);
+        mute = findViewById(R.id.buMute);
         KartinraZadnegoPlana = findViewById(R.id.fon_slognost_view);
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
 
+        // Задаём звуковые сигналы
+        zvMute = MediaPlayer.create(this, R.raw.mute_1);
+        zvPerexV_Menu = MediaPlayer.create(this, R.raw.zv_perxoda_v_menu_1);
+
         KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_slognost));  // задаем фоновое поле
+
+        mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
+
+        if (pologenieKnopkiMute == true) {
+           /* urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();*/
+            mute.setImageResource(R.drawable.mute);
+        } else {
+           /* urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();*/
+            timeOnFonMusik = 8000;
+            vklFonMusic();
+            mute.setImageResource(R.drawable.zvuk);
+        }
 
         onResume();
         povtorTriGameOverPodrad = false;
@@ -106,7 +131,6 @@ public class Slognost extends AppCompatActivity {
                 Menu();
             }
         });
-
     }
 
     private void Zabiv() {
@@ -116,13 +140,10 @@ public class Slognost extends AppCompatActivity {
         }
 
         slognost_game = 1;
-        koef_slogn_time = 3;
-        koef_slogn_step = 8;
+        koef_slogn_time = 2;
+        koef_slogn_step = 6;
 
-        onPause();
-
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        Pusk();
     }
 
     private void Novi() {
@@ -130,13 +151,10 @@ public class Slognost extends AppCompatActivity {
             promegutGameOverPodrad = 0;
         }
         slognost_game = 2;
-        koef_slogn_time = 1;
-        koef_slogn_step = 4;
+        koef_slogn_time = 0;
+        koef_slogn_step = 3;
 
-        onPause();
-
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        Pusk();
     }
 
     private void Opit() {
@@ -144,28 +162,28 @@ public class Slognost extends AppCompatActivity {
             promegutGameOverPodrad = 0;
         }
         slognost_game = 3;
-        koef_slogn_time = 0;
-        koef_slogn_step = 0;
+        koef_slogn_time = -1;
+        koef_slogn_step = -1;
 
-        onPause();
-
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
+        Pusk();
     }
 
     private void Mast() {
         slognost_game = 4;
-        koef_slogn_time = -1;
-        koef_slogn_step = -2;
+        koef_slogn_time = -2;
+        koef_slogn_step = -3;
 
+        Pusk();
+    }
+
+    private void Pusk() {
         onPause();
-
-        Intent i = new Intent(this, MainActivity.class);
+        Intent i = new Intent(this, C_MainActivity.class);
         startActivity(i);
     }
 
     private void Menu() {
-        Intent i = new Intent(this, Menu.class);
+        Intent i = new Intent(this, B_Menu.class);
         startActivity(i);
     }
 
@@ -199,6 +217,14 @@ public class Slognost extends AppCompatActivity {
         } else koefPobed = 0;
     }
 
+    // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
+    @Override
+    protected void onUserLeaveHint() {
+        super.onUserLeaveHint();
+        pologSostoyanSvernutogoPrilogen = true;
+        /*  fonMusic.pause();*/
+    }
+
     private void BlokZabiv() {
         Button b1 = (Button) findViewById(R.id.buZabiv);  // Блокировка КНОПКИ
         b1.setEnabled(false);
@@ -223,4 +249,32 @@ public class Slognost extends AppCompatActivity {
         a1.animate().alpha(0.2f).setDuration(1500);
     }
 
+    public void clickMute(View view) {
+
+        if (pologenieKnopkiMute == false) {
+            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            pologenieKnopkiMute = true;
+            fonMusic.pause();
+            mute.animate().rotationYBy(180).setDuration(500);
+            mute.setImageResource(R.drawable.mute);
+        } else {
+            mute.setImageResource(R.drawable.zvuk);
+            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            zvMute.start();
+            timeOnFonMusik = 1500;
+            vklFonMusic();
+            pologenieKnopkiMute = false;
+            mute.animate().rotationXBy(180).setDuration(500);
+        }
+    }
+    private void regulirovUrovenVolume() {    //Этот код мгновенно установит громкость на уровень заданной переменной urovenVolume
+
+        AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+
+        int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
+        int a = maxVolume * urovenVolume / 100;
+        audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, a, 0);
+    }
 }

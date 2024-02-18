@@ -1,8 +1,8 @@
 package com.example.gamememoria;
 
-import static com.example.gamememoria.Menu.Shirin_fishek;
-import static com.example.gamememoria.Menu.Visot_fishek;
-import static com.example.gamememoria.Menu.uroven;
+import static com.example.gamememoria.B_Menu.Shirin_fishek;
+import static com.example.gamememoria.B_Menu.Visot_fishek;
+import static com.example.gamememoria.B_Menu.uroven;
 
 import android.content.Context;
 import android.content.res.Resources;

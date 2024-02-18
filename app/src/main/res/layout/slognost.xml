@@ -5,7 +5,7 @@
     android:id="@+id/fon_slognost_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Slognost">
+    tools:context=".E_Slognost">
 
     <TextView
         android:id="@+id/nadpSlognost_viev"
@@ -30,7 +30,7 @@
         android:layout_width="50dp"
         android:layout_height="50dp"
         android:layout_marginLeft="50dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
@@ -95,7 +95,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginLeft="130dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="60dp"
         android:scaleType="fitXY"
         android:text="ЗАБЫВЧИВЫЙ"
         android:textSize="20dp"
@@ -179,5 +179,23 @@
         app:layout_constraintVertical_bias="0.96"
         app:strokeColor="@color/CV3"
         app:strokeWidth="2dp" />
+
+    <ImageButton
+        android:id="@+id/buMute"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:onClick="clickMute"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

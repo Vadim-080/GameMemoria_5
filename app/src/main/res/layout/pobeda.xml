@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fon_pobeda_view"
-    tools:context=".Pobeda">
+    tools:context=".H_Pobeda">
 
     <ImageView
         android:id="@+id/smailPobeda_view"
@@ -30,6 +30,7 @@
         android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
         android:text="П О Б Е Д А"
+        android:paddingRight="10dp"
         android:textColor="@color/CV4"
         android:textSize="50dp"
         android:textStyle="bold"
@@ -56,25 +57,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <Button
-        android:id="@+id/buProdolgitGame"
-        style="@style/styleStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="clickProdolgitGame"
-        android:text="ПРОДОЛЖИТЬ ИГРУ"
-        android:textSize="15dp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.04"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.99"
-        app:strokeColor="@color/CV3"
-        app:strokeWidth="2dp"/>
-
-    <Button
         android:id="@+id/buMenu"
         style="@style/styleStart"
         android:layout_width="wrap_content"
@@ -86,12 +68,49 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.97"
+        app:layout_constraintHorizontal_bias="0.95"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.99"
         app:strokeColor="@color/CV3"
-        app:strokeWidth="2dp"/>
+        app:strokeWidth="3dp" />
+
+    <Button
+        android:id="@+id/buProdolgitGame"
+        style="@style/styleStart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="PovtorGame"
+        android:text="ПОВТОРИТЬ ИГРУ"
+        android:textSize="15dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.37"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.99"
+        app:strokeColor="@color/CV3"
+        app:strokeWidth="3dp" />
+
+    <ImageButton
+        android:id="@+id/buMute"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="10dp"
+        android:autoSizeTextType="uniform"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:onClick="clickMute"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

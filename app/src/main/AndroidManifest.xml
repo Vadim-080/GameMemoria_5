@@ -6,6 +6,25 @@
 
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+
+
+
+
+
+
+    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+        tools:ignore="ProtectedPermissions" />
+
+
+
+
+
+
+
+
+
+
+
     <supports-screens
 
         android:anyDensity="true"
@@ -35,7 +54,7 @@
             android:resource="@color/red" />
 
         <activity
-            android:name=".Zastavka"
+            android:name=".A_Zastavka"
             android:exported="true"
             android:label="@string/app_name"
             android:screenOrientation="portrait">
@@ -47,8 +66,16 @@
         </activity>
 
 
+
+
+
+
+
+
+
+
         <activity
-            android:name=".MainActivity"
+            android:name=".C_MainActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -62,7 +89,7 @@
         </activity>
 
         <activity
-            android:name=".Menu"
+            android:name=".B_Menu"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -74,7 +101,7 @@
         </activity>
 
         <activity
-            android:name=".GameOver"
+            android:name=".G_GameOver"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -86,7 +113,7 @@
         </activity>
 
         <activity
-            android:name=".Pobeda"
+            android:name=".H_Pobeda"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -98,7 +125,7 @@
         </activity>
 
         <activity
-            android:name=".Slognost"
+            android:name=".E_Slognost"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -110,7 +137,7 @@
         </activity>
 
         <activity
-            android:name=".Setting"
+            android:name=".F_Setting"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -122,7 +149,7 @@
         </activity>
 
         <activity
-            android:name=".Dostigenia"
+            android:name=".D_Dostigenia"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -132,6 +159,23 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
+
+
+
+        <activity
+            android:name=".RegulirovkiPRG"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"> <!--Запрет менять ориентацию при повороте телефона-->
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
+
+
 
         <receiver
             android:name=".ReceiverNapomin"
