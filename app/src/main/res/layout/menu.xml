@@ -5,7 +5,9 @@
     android:id="@+id/fon_menu_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     tools:context=".B_Menu">
+
 
     <TextView
         android:id="@+id/nadpUrovenGame_view"

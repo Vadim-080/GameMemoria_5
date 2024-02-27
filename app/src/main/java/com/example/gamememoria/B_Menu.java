@@ -1,9 +1,9 @@
 package com.example.gamememoria;
 
-import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
 import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
 import static com.example.gamememoria.A_Zastavka.povtorTriGameOverPodrad;
 import static com.example.gamememoria.A_Zastavka.promegutGameOverPodrad;
+import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
 
 import android.content.Context;
 import android.content.Intent;
@@ -80,8 +80,13 @@ public class B_Menu extends AppCompatActivity {
     TextView namberUroven, scoreBonus, nadpUrovenGame;
     ConstraintLayout KartinraZadnegoPlana;
     MediaPlayer zvStart, zvMute, zvExitGame;
-    public static MediaPlayer fonMusic; // Фоновая музыка
+    public  static MediaPlayer     fonMusic; // Фоновая музыка
     MediaPlayer mediaMenu1, mediaMenu2, mediaMenu4, mediaMenu6; // Звук кнопок меню
+
+
+
+
+
 
 
     @Override
@@ -227,10 +232,12 @@ public class B_Menu extends AppCompatActivity {
     }
 
 
+
+
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
 
 
-    public void onStart() {
+    public void onStart(){
         super.onStart();
 
         urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
@@ -281,7 +288,8 @@ public class B_Menu extends AppCompatActivity {
     }
 
     private void vosstsnovlMaxGame() {
-        if (pologenieKnopkiMute == false) {
+        if (pologenieKnopkiMute == true) {
+        } else {
             fonMusic.stop();
             zvStart.start();
         }
@@ -301,8 +309,11 @@ public class B_Menu extends AppCompatActivity {
     }
 
     private void slognost() {
-        if (pologenieKnopkiMute == false) {
+        if (pologenieKnopkiMute == true) {
+        } else {
             fonMusic.stop();
+         /*   urovenVolume = 50; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            regulirovUrovenVolume();*/
             mediaMenu4.start();
         }
 
@@ -311,7 +322,9 @@ public class B_Menu extends AppCompatActivity {
     }
 
     private void setting() {
-        if (pologenieKnopkiMute == false) {
+
+        if (pologenieKnopkiMute == true) {
+        } else {
             fonMusic.stop();
             mediaMenu6.start();
         }
@@ -322,15 +335,17 @@ public class B_Menu extends AppCompatActivity {
 
     // СВЕРТЫВАЕТ ПРИЛОЖЕНИЕ
     public void finish() {
-        if (pologenieKnopkiMute == false) {
+        if (pologenieKnopkiMute == true) {
+        } else {
             fonMusic.stop();
-            urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+            urovenVolume = 40; // Установка уровня громкости звука кнопки (от 1 до 100) в %
             regulirovUrovenVolume();
-            zvExitGame.start();
         }
-
+        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+        regulirovUrovenVolume();
+        zvExitGame.start();
+        fonMusic.stop();
         this.finishAffinity();
-
     }
 
     public void clickMute(View view) {

@@ -208,8 +208,12 @@
     <Button
         android:id="@+id/buStart"
         style="@style/styleStartVMainActiv"
+
         android:layout_width="160dp"
         android:layout_height="170dp"
+
+
+
         android:backgroundTint="@color/CV34"
         android:text="СТАРТ"
         android:textSize="45dp"
