@@ -5,6 +5,7 @@ import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -80,6 +81,26 @@ public class A_Zastavka extends AppCompatActivity {
         zvZastavka.start();
 
         KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka1));  // задаем фоновое поле
+
+        byte kartinka = (byte) (Math.random() * 4); // Случайное число от 0 до 3 -- Для выбора фоновое поле
+        switch (kartinka) {
+            case 0:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka1));
+                break;
+            case 1:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka2));
+                stimulirNadp.setTextColor(Color.rgb(160,255,100));
+                break;
+            case 2:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka3));
+                stimulirNadp.setTextColor(Color.rgb(255,215,0));
+                break;
+            case 3:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka4));
+                stimulirNadp.setTextColor(Color.rgb(62,2,92));
+                break;
+
+        }
 
         Typeface type1 = getResources().getFont(R.font.vanowitsch);    // шрифт
         nazvGame.setTypeface(type1);

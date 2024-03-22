@@ -2,11 +2,9 @@ package com.example.gamememoria;
 
 import android.animation.ValueAnimator;
 
-
 import static com.example.gamememoria.B_Menu.fonMusic;
-
 import static com.example.gamememoria.B_Menu.timeOnFonMusik;
-import static com.example.gamememoria.C_MainActivity.musicProdolGame;
+import static com.example.gamememoria.C_MainActivity.musicVsplivOknoProdolGame;
 
 public class RegulirovkiPRG {
 
@@ -25,8 +23,6 @@ public class RegulirovkiPRG {
 
         fonMusic.start();
         fonMusic.setLooping(true);  // повтор проигрывания плеера
-
-
     }
 
     static void vklFonMusicProdolgenGame() {  //Этот код делает анимацию плавного включения фоновой музыки
@@ -37,16 +33,16 @@ public class RegulirovkiPRG {
             @Override
             public void onAnimationUpdate(ValueAnimator animation) {
                 float volume = (float) animation.getAnimatedValue();
-                musicProdolGame.setVolume(volume, volume);
+                musicVsplivOknoProdolGame.setVolume(volume, volume);
             }
         });
         volumeAnimator.start();
 
-        musicProdolGame.start();
-        musicProdolGame.setLooping(true);  // повтор проигрывания плеера
-
-
+        musicVsplivOknoProdolGame.start();
+        musicVsplivOknoProdolGame.setLooping(true);  // повтор проигрывания плеера
     }
+
+
 
 
 

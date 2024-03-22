@@ -131,15 +131,52 @@ public class B_Menu extends AppCompatActivity {
 
         mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
 
-        if (pologenieKnopkiMute == true) {
+
+
+      /*  if (pologenieKnopkiMute == true) {
             urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();
             mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-        }
+            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            timeOnFonMusik = 6000;
+            vklFonMusic();
+        }*/
 
-        KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu2));  // задаем фоновое поле
+
+
+
+      /*  if (pologenieKnopkiMute == true) {
+            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            mute.setImageResource(R.drawable.mute);
+        } else {
+            mute.setImageResource(R.drawable.zvuk);
+        }*/
+
+        byte kartinka = (byte) (Math.random() * 6); // Случайное число от 0 до 5 -- Для выбора фоновое поле
+        switch (kartinka) {
+            case 0:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu2));
+                break;
+            case 1:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu3));
+                break;
+            case 2:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu4));
+                break;
+            case 3:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu5));
+                break;
+            case 4:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu6));
+                break;
+            case 5:
+                KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_menu7));
+                break;
+        }
 
         animButtonMenu();  // Мигание кнопок Меню
         animZnakov();  // Анимация знаков (монет, часы...)
@@ -240,10 +277,18 @@ public class B_Menu extends AppCompatActivity {
     public void onStart(){
         super.onStart();
 
-        urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
-        regulirovUrovenVolume();
-        timeOnFonMusik = 6000;
-        vklFonMusic();
+        if (pologenieKnopkiMute == true) {
+            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            mute.setImageResource(R.drawable.mute);
+        } else {
+            mute.setImageResource(R.drawable.zvuk);
+            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            regulirovUrovenVolume();
+            timeOnFonMusik = 6000;
+            vklFonMusic();
+        }
+
     }
 
     private void startGame() {
@@ -530,7 +575,7 @@ public class B_Menu extends AppCompatActivity {
         View a3 = findViewById(R.id.monet_viev);                   // ПОВОРОТ КНОПКИ
         a3.animate().rotationYBy(99720).setDuration(300000);
 
-        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_start_1);
+        Animation a4 = AnimationUtils.loadAnimation(this, R.anim.anim_bu_game_1);
         start.startAnimation(a4);
 
         Animation a5 = AnimationUtils.loadAnimation(this, R.anim.anim_uroven);
