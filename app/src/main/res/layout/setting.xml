@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fon_setting_view"
     style="@style/styleStart"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -10,7 +11,7 @@
 
     <TextView
         android:id="@+id/nadpSlognost_viev"
-        style="@style/styleNadpSlogn"
+        style="@style/styleNadpSetting"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="50dp"
@@ -18,8 +19,8 @@
         android:layout_marginRight="50dp"
         android:background="@android:color/transparent"
         android:gravity="center_horizontal|center_vertical"
-        android:text="ВЫБИРИТЕ СЛОЖНОСТЬ ИГРЫ"
-        android:textSize="35dp"
+        android:text="НАСТРОЙКИ"
+        android:textSize="40dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,49 +29,88 @@
 
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/textView"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="240dp"
-        android:text="      Установить яркость экрана"
+        android:layout_marginTop="180dp"
+        android:gravity="center"
+        android:text="ЯРКОСТЬ ЭКРАНА"
+        android:textColor="@color/CV28"
+        android:textSize="25dp"
+        android:textStyle="bold"
+
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <SeekBar
         android:id="@+id/seekBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-
-        android:layout_marginEnd="8dp"
+        android:layout_width="320dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/rounded_bridg"
+        android:gravity="center"
         android:max="100"
         android:progress="50"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        app:layout_constraintVertical_bias="0.431" />
-
-
-
-
-
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
     <TextView
         android:id="@+id/textViewSetting"
-        android:layout_width="match_parent"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="468dp"
-        android:text="    0.50"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="0.50"
+        android:textColor="@color/CV28"
+        android:textSize="30dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/seekBar" />
+
+
+    <TextView
+        android:id="@+id/text_Volum"
+        android:layout_width="260dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="80dp"
+        android:gravity="center"
+        android:text="ГРОМКОСТЬ МУЗЫКИ"
+        android:textColor="@color/CV12"
+        android:textSize="24dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSetting" />
+
+    <SeekBar
+        android:id="@+id/volumeControl"
+        android:layout_width="320dp"
+        android:layout_height="30dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/rounded_zvuk"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_Volum" />
+
+    <TextView
+        android:id="@+id/text_urov_vol"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:gravity="center"
+        android:text="0.50"
+        android:textColor="@color/CV12"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/volumeControl" />
 
     <Button
         android:id="@+id/buMenu"

@@ -54,10 +54,25 @@ public class H_Pobeda extends AppCompatActivity {
     ConstraintLayout KartinraZadnegoPlana;
     int urovenVolume, timeOnFonMusik;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pobeda);
+
+// СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
+
+        ConstraintLayout LinearLayout = findViewById(R.id.fon_pobeda_view);
+
+        int currentVis = LinearLayout.getSystemUiVisibility();
+        int newVis;
+        if ((currentVis & View.SYSTEM_UI_FLAG_LOW_PROFILE) == View.SYSTEM_UI_FLAG_LOW_PROFILE) {
+            newVis = View.SYSTEM_UI_FLAG_VISIBLE;
+        } else {
+            newVis = View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
+        LinearLayout.setSystemUiVisibility(newVis);
 
         // Задаем цвет верхей строки и строки навигации
        /* if (Build.VERSION.SDK_INT >= 21) {
@@ -68,6 +83,7 @@ public class H_Pobeda extends AppCompatActivity {
         result = findViewById(R.id.Result_view);
         smailPobeda = findViewById(R.id.smailPobeda_view);
         KartinraZadnegoPlana = findViewById(R.id.fon_pobeda_view);
+        mute= findViewById(R.id.buMute);
 
 // Задаём звуковые сигналы
         zvPerexV_Menu = MediaPlayer.create(this, R.raw.zv_perxoda_v_menu_1);

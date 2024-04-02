@@ -260,10 +260,10 @@
         app:cornerRadius="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
-        app:layout_constraintVertical_bias="1.0"
+        app:layout_constraintVertical_bias="0.105"
         app:rippleColor="@color/CV20"
         app:strokeColor="@color/CV18"
         app:strokeWidth="5dp" />
@@ -282,9 +282,25 @@
         android:scaleType="fitXY"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
-        app:layout_constraintVertical_bias="1" />
+        app:layout_constraintVertical_bias="0.237" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.my.target.ads.MyTargetView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ad_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:myTarget_adSize="banner_320x50"
+            app:myTarget_isRefreshAd="true"
+            app:myTarget_slotId="1531466">
+        </com.my.target.ads.MyTargetView>
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

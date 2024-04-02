@@ -3,26 +3,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
-
     <uses-permission android:name="android.permission.WAKE_LOCK" />
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
-
-
-
-
-
-    <uses-permission android:name="android.permission.WRITE_SETTINGS"
+    <uses-permission
+        android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
-
-
-
-
-
-
-
-
-
 
 
     <supports-screens
@@ -47,6 +35,10 @@
         tools:targetApi="31">
 
         <meta-data
+            android:name="com.my.target.ads.MyTargetView"
+            android:value="true" />
+
+        <meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
             android:resource="@drawable/ic_not" />
         <meta-data
@@ -64,15 +56,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
-
-
-
-
-
-
-
-
 
         <activity
             android:name=".C_MainActivity"
@@ -161,7 +144,6 @@
         </activity>
 
 
-
         <activity
             android:name=".RegulirovkiPRG"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -173,8 +155,6 @@
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
-
-
 
 
         <receiver

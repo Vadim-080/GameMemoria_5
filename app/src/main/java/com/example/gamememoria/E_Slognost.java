@@ -24,12 +24,18 @@ import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.RelativeLayout;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.my.target.ads.MyTargetView;
+import com.my.target.common.models.IAdLoadingError;
 
 public class E_Slognost extends AppCompatActivity {
 
@@ -39,10 +45,66 @@ public class E_Slognost extends AppCompatActivity {
     int urovenVolume, timeOnFonMusik;
     MediaPlayer mediaPlayer1, zvPerexV_Menu , zvMute;
 
+    // Перемен VK рекламы
+    private MyTargetView adView; // Рекламный  экземпляр класса
+    RelativeLayout layout;
+    RelativeLayout.LayoutParams adViewLayoutParams;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slognost);
+
+// СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
+
+        ConstraintLayout LinearLayout = findViewById(R.id.fon_slognost_view);
+
+        int currentVis = LinearLayout.getSystemUiVisibility();
+        int newVis;
+        if ((currentVis & View.SYSTEM_UI_FLAG_LOW_PROFILE) == View.SYSTEM_UI_FLAG_LOW_PROFILE) {
+            newVis = View.SYSTEM_UI_FLAG_VISIBLE;
+        } else {
+            newVis = View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
+        LinearLayout.setSystemUiVisibility(newVis);
+
+        // VK РЕКЛАМА
+        layout =  findViewById(R.id.RelativeLayout);
+        adView = new MyTargetView(this);
+        // Устанавливаем id слота
+
+        adView.setSlotId(1531466);
+
+        // Устанавливаем LayoutParams
+        adViewLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        adViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        adView.setLayoutParams(adViewLayoutParams);
+        // Устанавливаем слушатель событий
+        adView.setListener(new MyTargetView.MyTargetViewListener() {
+            @Override
+            public void onLoad(MyTargetView myTargetView) {
+                // Данные успешно загружены, запускаем показ объявлений
+                layout.addView(adView);
+                /*  layout.addView(adView, adViewLayoutParams );*/
+            }
+
+            /**
+             * @param iAdLoadingError
+             * @param myTargetView
+             */
+            public void onNoAd(@NonNull IAdLoadingError iAdLoadingError, @NonNull MyTargetView myTargetView) {
+            }
+
+            @Override
+            public void onShow(MyTargetView myTargetView) {
+            }
+
+            @Override
+            public void onClick(MyTargetView myTargetView) {
+            }
+        });
+        // Запускаем загрузку данных
+        adView.load();
 
         // Задаем цвет верхей строки и строки навигации
        /* if (Build.VERSION.SDK_INT >= 21) {
@@ -131,6 +193,12 @@ public class E_Slognost extends AppCompatActivity {
                 Menu();
             }
         });
+    }
+
+    @Override  // Остатки VK рекламы
+    protected void onDestroy() {
+        if (adView != null) adView.destroy();
+        super.onDestroy();
     }
 
     private void Zabiv() {

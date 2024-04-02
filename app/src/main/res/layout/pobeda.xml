@@ -95,6 +95,8 @@
         app:strokeColor="@color/CV3"
         app:strokeWidth="3dp" />
 
+
+
     <ImageButton
         android:id="@+id/buMute"
         android:layout_width="40dp"
@@ -107,6 +109,7 @@
         android:gravity="center"
         android:onClick="clickMute"
         android:scaleType="fitXY"
+        android:src="@drawable/mute"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0"

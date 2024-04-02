@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/polezastavka"
-
+    android:id="@+id/fon_dostigen_view"
     tools:context=".D_Dostigenia">
 
     <!-- Card view for displaying the -->
@@ -458,7 +458,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="47dp"
         android:onClick="clickMenu"
         android:text="МЕНЮ"
         android:textColor="@color/CV1"
@@ -473,11 +473,28 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="47dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
         android:onClick="clickMute"
         android:scaleType="fitXY" />
+
+    <RelativeLayout
+        android:id="@+id/RelativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.my.target.ads.MyTargetView
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/ad_View"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:myTarget_adSize="banner_320x50"
+            app:myTarget_isRefreshAd="true"
+            app:myTarget_slotId="1531466">
+        </com.my.target.ads.MyTargetView>
+    </RelativeLayout>
+
 
 </RelativeLayout>

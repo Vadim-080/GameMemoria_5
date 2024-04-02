@@ -49,6 +49,19 @@ public class G_GameOver extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameover);
 
+// СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
+
+        ConstraintLayout LinearLayout = findViewById(R.id.fon_game_over_view);
+
+        int currentVis = LinearLayout.getSystemUiVisibility();
+        int newVis;
+        if ((currentVis & View.SYSTEM_UI_FLAG_LOW_PROFILE) == View.SYSTEM_UI_FLAG_LOW_PROFILE) {
+            newVis = View.SYSTEM_UI_FLAG_VISIBLE;
+        } else {
+            newVis = View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
+        LinearLayout.setSystemUiVisibility(newVis);
+
 // Задаем цвет верхей строки и строки навигации
         /*if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)

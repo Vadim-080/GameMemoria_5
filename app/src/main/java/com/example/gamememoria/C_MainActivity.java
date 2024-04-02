@@ -123,15 +123,6 @@ public class C_MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-// Задаем цвет верхей строки и строки навигации
-      /*  if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
-            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
-        }*/
-
-// Запрет тускнениия экрана телефона и его выключения во время игры
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
         iconSlogn = findViewById(R.id.slogn_viev);
         igrovoePole = findViewById(R.id.igrovoePole);
         namberUroven = findViewById(R.id.NamberUroven_view);
@@ -160,6 +151,28 @@ public class C_MainActivity extends AppCompatActivity {
         namberUroven.setTypeface(getResources().getFont(R.font.vanowitsch));
         timeScreen.setTypeface(getResources().getFont(R.font.ocker));
         stepScreen.setTypeface(getResources().getFont(R.font.ocker));
+
+// СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
+
+        ConstraintLayout LinearLayout = findViewById(R.id.fon_game_view);
+
+        int currentVis = LinearLayout.getSystemUiVisibility();
+        int newVis;
+        if ((currentVis & View.SYSTEM_UI_FLAG_LOW_PROFILE) == View.SYSTEM_UI_FLAG_LOW_PROFILE) {
+            newVis = View.SYSTEM_UI_FLAG_VISIBLE;
+        } else {
+            newVis = View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
+        LinearLayout.setSystemUiVisibility(newVis);
+
+// Задаем цвет верхей строки и строки навигации
+      /*  if (Build.VERSION.SDK_INT >= 21) {
+            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
+            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
+        }*/
+
+// Запрет тускнениия экрана телефона и его выключения во время игры
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
         viborFonKartinki(); // Выбор фоновой картинки

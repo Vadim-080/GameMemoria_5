@@ -14,6 +14,7 @@ import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -22,10 +23,16 @@ import android.widget.Button;
 import android.widget.Chronometer;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.my.target.ads.MyTargetView;
+import com.my.target.common.models.IAdLoadingError;
 
 public class B_Menu extends AppCompatActivity {
 
@@ -79,20 +86,73 @@ public class B_Menu extends AppCompatActivity {
     Chronometer timeBonus;
     TextView namberUroven, scoreBonus, nadpUrovenGame;
     ConstraintLayout KartinraZadnegoPlana;
+
+    // Перемен VK рекламы
+    private MyTargetView adView; // Рекламный  экземпляр класса
+    RelativeLayout layout;
+    RelativeLayout.LayoutParams adViewLayoutParams;
+
+    public static MediaPlayer fonMusic; // Фоновая музыка
     MediaPlayer zvStart, zvMute, zvExitGame;
-    public  static MediaPlayer     fonMusic; // Фоновая музыка
     MediaPlayer mediaMenu1, mediaMenu2, mediaMenu4, mediaMenu6; // Звук кнопок меню
-
-
-
-
-
 
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
+
+// СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
+
+        ConstraintLayout LinearLayout = findViewById(R.id.fon_menu_view);
+
+        int currentVis = LinearLayout.getSystemUiVisibility();
+        int newVis;
+        if ((currentVis & View.SYSTEM_UI_FLAG_LOW_PROFILE) == View.SYSTEM_UI_FLAG_LOW_PROFILE) {
+            newVis = View.SYSTEM_UI_FLAG_VISIBLE;
+        } else {
+            newVis = View.SYSTEM_UI_FLAG_LOW_PROFILE | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION;
+        }
+        LinearLayout.setSystemUiVisibility(newVis);
+
+
+// VK РЕКЛАМА
+        layout =  findViewById(R.id.RelativeLayout);
+        adView = new MyTargetView(this);
+        // Устанавливаем id слота
+
+        adView.setSlotId(1531466);
+
+        // Устанавливаем LayoutParams
+        adViewLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        adViewLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+        adView.setLayoutParams(adViewLayoutParams);
+        // Устанавливаем слушатель событий
+        adView.setListener(new MyTargetView.MyTargetViewListener() {
+            @Override
+            public void onLoad(MyTargetView myTargetView) {
+                // Данные успешно загружены, запускаем показ объявлений
+                layout.addView(adView);
+                /*  layout.addView(adView, adViewLayoutParams );*/
+            }
+
+            /**
+             * @param iAdLoadingError
+             * @param myTargetView
+             */
+            public void onNoAd(@NonNull IAdLoadingError iAdLoadingError, @NonNull MyTargetView myTargetView) {
+            }
+
+            @Override
+            public void onShow(MyTargetView myTargetView) {
+            }
+
+            @Override
+            public void onClick(MyTargetView myTargetView) {
+            }
+        });
+        // Запускаем загрузку данных
+        adView.load();
 
 // Задаем цвет верхей строки и строки навигации
        /* if (Build.VERSION.SDK_INT >= 21) {
@@ -260,6 +320,12 @@ public class B_Menu extends AppCompatActivity {
         });
     }
 
+    @Override  // Остатки VK рекламы
+    protected void onDestroy() {
+        if (adView != null) adView.destroy();
+        super.onDestroy();
+    }
+
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
     @Override
     protected void onUserLeaveHint() {
@@ -269,12 +335,10 @@ public class B_Menu extends AppCompatActivity {
     }
 
 
-
-
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
 
 
-    public void onStart(){
+    public void onStart() {
         super.onStart();
 
         if (pologenieKnopkiMute == true) {

@@ -26,13 +26,12 @@ public class Setting extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
 
+
 // Задаем цвет верхей строки и строки навигации
-        if (Build.VERSION.SDK_INT >= 21) {
+     /*   if (Build.VERSION.SDK_INT >= 21) {
             getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); //status bar or the time bar at the top (see example image1)
             getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Navigation bar the soft bottom of some phones like nexus and some Samsung note series  (see example image2)
-        }
-
-
+        }*/
 
         SeekBar backLightSeekBar = findViewById(R.id.seekBar);
         final TextView settingTextView = findViewById(R.id.textViewSetting);
