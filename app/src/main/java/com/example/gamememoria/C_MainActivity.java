@@ -19,8 +19,10 @@ import static com.example.gamememoria.B_Menu.Key_Slognost_step;
 import static com.example.gamememoria.B_Menu.Key_Slognost_time;
 import static com.example.gamememoria.B_Menu.Key_Time;
 import static com.example.gamememoria.B_Menu.Key_Time_Max;
+import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
 import static com.example.gamememoria.B_Menu.Key_Uroven;
 import static com.example.gamememoria.B_Menu.Key_Uroven_Max;
+import static com.example.gamememoria.B_Menu.Key_pologen_regul_Volum;
 import static com.example.gamememoria.B_Menu.PrichinGameOver;
 import static com.example.gamememoria.B_Menu.Shirin_fishek;
 import static com.example.gamememoria.B_Menu.Visot_fishek;
@@ -34,10 +36,12 @@ import static com.example.gamememoria.B_Menu.koef_slogn_step;
 import static com.example.gamememoria.B_Menu.koef_slogn_time;
 import static com.example.gamememoria.B_Menu.kolvoIgr;
 import static com.example.gamememoria.B_Menu.kolvoPobed;
+import static com.example.gamememoria.B_Menu.zadanUrovVolume;
 import static com.example.gamememoria.B_Menu.kolvoProigrStep;
 import static com.example.gamememoria.B_Menu.kolvoProigrTime;
 import static com.example.gamememoria.B_Menu.mSettings;
 import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+import static com.example.gamememoria.B_Menu.pologenRegulVolum;
 import static com.example.gamememoria.B_Menu.score;
 import static com.example.gamememoria.B_Menu.scoreMax;
 import static com.example.gamememoria.B_Menu.slognostMax;
@@ -393,7 +397,6 @@ public class C_MainActivity extends AppCompatActivity {
 
 
         /*  fonMusicGame.pause();*/
-
 
 
         // Приостанав игры при свертывании приложения*/
@@ -755,6 +758,11 @@ public class C_MainActivity extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr_Time))) {
             kolvoProigrTime = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr_Time), 0);
         } else kolvoProigrTime = 0;
+
+        if (pologenRegulVolum != 0) {
+            zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
+        }
+
     }
 
     // ЗАПУСК ИГРЫ
@@ -858,11 +866,10 @@ public class C_MainActivity extends AppCompatActivity {
             zvTimeOver.stop();
         } else {
 
-                fonMusic.stop();
+            fonMusic.stop();
 
         }
         zvPerexV_Menu.start();
-
 
 
         Intent intent = new Intent(this, B_Menu.class);    // Переход на другой класс
@@ -1094,7 +1101,14 @@ public class C_MainActivity extends AppCompatActivity {
             mute.animate().rotationXBy(180).setDuration(500);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+           /* urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
+
             regulirovUrovenVolume();
             zvMute.start();
 

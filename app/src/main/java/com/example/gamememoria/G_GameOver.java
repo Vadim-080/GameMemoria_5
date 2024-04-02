@@ -15,12 +15,14 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+import static com.example.gamememoria.B_Menu.zadanUrovVolume;
+import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
 import static com.example.gamememoria.B_Menu.Key_Uroven;
 import static com.example.gamememoria.B_Menu.PrichinGameOver;
 import static com.example.gamememoria.B_Menu.fonMusic;
 import static com.example.gamememoria.B_Menu.kolvoGameOverPodrad;
 import static com.example.gamememoria.B_Menu.mSettings;
+import static com.example.gamememoria.B_Menu.pologenRegulVolum;
 import static com.example.gamememoria.B_Menu.uroven;
 import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
 import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
@@ -29,11 +31,17 @@ import static com.example.gamememoria.A_Zastavka.povtorTriGameOverPodrad;
 
 import static java.lang.Thread.sleep;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+
+import com.my.target.ads.Reward;
+import com.my.target.ads.RewardedAd;
+import com.my.target.common.MyTargetManager;
+import com.my.target.common.models.IAdLoadingError;
 
 public class G_GameOver extends AppCompatActivity {
 
@@ -42,12 +50,15 @@ public class G_GameOver extends AppCompatActivity {
     MediaPlayer zvPerexV_Menu, zvMute;
     ConstraintLayout KartinraZadnegoPlana;
     int urovenVolume, timeOnFonMusik;
+    private RewardedAd ad;
 
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.gameover);
+
+        onResume();
 
 // СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
 
@@ -179,7 +190,43 @@ public class G_GameOver extends AppCompatActivity {
         nbutton2.setTextSize(13);
     }
 
+    // VK реклама ВИДЕО
+    private void initAd() {
+        // Включение режима отладки
+        MyTargetManager.setDebugMode(true);
+
+        // Создаем экземпляр RewardedAd
+        ad = new RewardedAd(1535550, this);
+        // Устанавливаем слушатель событий
+        ad.setListener(new RewardedAd.RewardedAdListener() {
+            @Override
+            public void onLoad(RewardedAd ad) { // Запускаем показ
+                ad.show();
+            }
+            @Override
+            public void onNoAd(@NonNull IAdLoadingError iAdLoadingError, @NonNull RewardedAd rewardedAd) {
+            }
+            @Override
+            public void onClick(RewardedAd ad) {
+            }
+            @Override
+            public void onDisplay(RewardedAd ad) {
+            }
+            @Override
+            public void onDismiss(RewardedAd ad) {
+            }
+            @Override
+            public void onReward(@NonNull Reward reward, @NonNull RewardedAd ad) {
+            }
+        });
+        // Запускаем загрузку данных
+        ad.load();
+    }
+
     public void PovtorGame(View view) {
+
+        initAd(); // ВИДЕО РЕКЛАМА VK
+
         Intent intent = new Intent(this, C_MainActivity.class);    // Переход на другой класс
         startActivity(intent);
     }
@@ -199,6 +246,15 @@ public class G_GameOver extends AppCompatActivity {
         a1.apply();
     }
 
+    @Override
+    public void onResume() {    // Получаем число из настроек
+        super.onResume();
+
+        if (pologenRegulVolum != 0) {
+            zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
+        }
+    }
+
     public void clickMute(View view) {
 
         if (pologenieKnopkiMute == false) {
@@ -209,7 +265,14 @@ public class G_GameOver extends AppCompatActivity {
             mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+         /*   urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
+
             regulirovUrovenVolume();
             zvMute.start();
             timeOnFonMusik = 1500;

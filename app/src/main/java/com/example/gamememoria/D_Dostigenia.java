@@ -5,6 +5,7 @@ import static com.example.gamememoria.B_Menu.Key_Kolvo_Igr;
 import static com.example.gamememoria.B_Menu.Key_Kolvo_Pobed;
 import static com.example.gamememoria.B_Menu.Key_Kolvo_Proigr_Step;
 import static com.example.gamememoria.B_Menu.Key_Kolvo_Proigr_Time;
+import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
 import static com.example.gamememoria.B_Menu.Key_Uroven_Max;
 import static com.example.gamememoria.B_Menu.koefDostignSlogn;
 import static com.example.gamememoria.B_Menu.kolvoIgr;
@@ -12,7 +13,9 @@ import static com.example.gamememoria.B_Menu.kolvoPobed;
 import static com.example.gamememoria.B_Menu.kolvoProigrStep;
 import static com.example.gamememoria.B_Menu.kolvoProigrTime;
 import static com.example.gamememoria.B_Menu.mSettings;
+import static com.example.gamememoria.B_Menu.pologenRegulVolum;
 import static com.example.gamememoria.B_Menu.urovenMax;
+import static com.example.gamememoria.B_Menu.zadanUrovVolume;
 import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
 import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
 import static com.example.gamememoria.B_Menu.fonMusic;
@@ -72,8 +75,7 @@ public class D_Dostigenia extends AppCompatActivity {
         }
         LinearLayout.setSystemUiVisibility(newVis);
 
-
-        // VK РЕКЛАМА
+// VK РЕКЛАМА
         layout =  findViewById(R.id.RelativeLayout);
         adView = new MyTargetView(this);
         // Устанавливаем id слота
@@ -241,6 +243,9 @@ public class D_Dostigenia extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Kolvo_Proigr_Time))) {
             kolvoProigrTime = mSettings.getInt(String.valueOf(Key_Kolvo_Proigr_Time), 0);
         } else kolvoProigrTime = 0;
+        if (pologenRegulVolum != 0) {
+            zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
+        }
     }
 
     private void regulirovUrovenVolume() {    //Этот код мгновенно установит громкость на уровень заданной переменной urovenVolume

@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.SystemClock;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -55,6 +56,14 @@ public class B_Menu extends AppCompatActivity {
     public static int Key_Koef_Dostign_Slogn = 15; //  ключ коэфиц достигнутой сложности = уровень*сложность
     public static int Key_Kolvo_Proigr_Time = 16; //  ключ количества поражений всего из за времени
     public static int Key_Koef_Pobed_Max = 17; //  ключ Сложность Игры Максимальн
+    public static int Key_Urov_Volum = 18; //  ключ Уровня громкости
+    public static int Key_pologen_regul_Volum = 19; //  ключ положения Уровня громкости
+    public static int Key_Urov_Bridgs = 20; //  ключ Уровня Яркости
+    public static int Key_pologen_regul_Bridgs = 21; //  ключ положения Уровня Яркости
+    public static int pologenRegulVolum;  // Задаём положение Уровня громкости
+    public static int zadanUrovVolume;  // Задаём уровень громкости по всей игре
+    public static int pologenRegulBridgs;  // Задаём положение Уровня Яркости
+    public static int zadanUrovBridgs;  // Задаём уровень Яркости по всей игре
     public static int uroven;  // Задаём уровень в игре
     public static int koefPobed = 0;  // Сколько раз победил всю игру
     public static int koefPobedMax = 0;  // Сколько раз победил всю игру Максимальн
@@ -76,7 +85,7 @@ public class B_Menu extends AppCompatActivity {
     public static int kolvoGameOverPodrad; // количество проигрышей подряд
     public static int koef_slogn_time, koef_slogn_step; // коэф времени и хожов для уровня игры
     private ImageView iconSlogn, timeZnashok;
-    int urovenVolume;
+    public static int urovenVolume;
     public static int timeOnFonMusik;
     public static boolean pologSostoyanSvernutogoPrilogen = false;
 
@@ -87,7 +96,7 @@ public class B_Menu extends AppCompatActivity {
     TextView namberUroven, scoreBonus, nadpUrovenGame;
     ConstraintLayout KartinraZadnegoPlana;
 
-    // Перемен VK рекламы
+// Перемен VK рекламы
     private MyTargetView adView; // Рекламный  экземпляр класса
     RelativeLayout layout;
     RelativeLayout.LayoutParams adViewLayoutParams;
@@ -96,16 +105,23 @@ public class B_Menu extends AppCompatActivity {
     MediaPlayer zvStart, zvMute, zvExitGame;
     MediaPlayer mediaMenu1, mediaMenu2, mediaMenu4, mediaMenu6; // Звук кнопок меню
 
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.menu);
 
+        onResume(); // Вывод данных из памяти
+
+ // Задаём уровень яркости
+
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.screenBrightness = zadanUrovBridgs;
+        getWindow().setAttributes(layoutParams);
+
+
 // СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
 
         ConstraintLayout LinearLayout = findViewById(R.id.fon_menu_view);
-
         int currentVis = LinearLayout.getSystemUiVisibility();
         int newVis;
         if ((currentVis & View.SYSTEM_UI_FLAG_LOW_PROFILE) == View.SYSTEM_UI_FLAG_LOW_PROFILE) {
@@ -115,9 +131,8 @@ public class B_Menu extends AppCompatActivity {
         }
         LinearLayout.setSystemUiVisibility(newVis);
 
-
 // VK РЕКЛАМА
-        layout =  findViewById(R.id.RelativeLayout);
+        layout = findViewById(R.id.RelativeLayout);
         adView = new MyTargetView(this);
         // Устанавливаем id слота
 
@@ -154,12 +169,6 @@ public class B_Menu extends AppCompatActivity {
         // Запускаем загрузку данных
         adView.load();
 
-// Задаем цвет верхей строки и строки навигации
-       /* if (Build.VERSION.SDK_INT >= 21) {
-            getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.black)); // строка состояния или временная шкала вверху
-            getWindow().setNavigationBarColor(ContextCompat.getColor(this, R.color.black)); // Панель навигации - нижняя часть
-        }*/
-
         iconSlogn = findViewById(R.id.slogn_viev);
         nadpUrovenGame = findViewById(R.id.nadpUrovenGame_view);
         timeZnashok = findViewById(R.id.time_viev);
@@ -191,31 +200,6 @@ public class B_Menu extends AppCompatActivity {
 
         mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
 
-
-
-      /*  if (pologenieKnopkiMute == true) {
-            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            mute.setImageResource(R.drawable.mute);
-        } else {
-            mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            timeOnFonMusik = 6000;
-            vklFonMusic();
-        }*/
-
-
-
-
-      /*  if (pologenieKnopkiMute == true) {
-            urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();
-            mute.setImageResource(R.drawable.mute);
-        } else {
-            mute.setImageResource(R.drawable.zvuk);
-        }*/
-
         byte kartinka = (byte) (Math.random() * 6); // Случайное число от 0 до 5 -- Для выбора фоновое поле
         switch (kartinka) {
             case 0:
@@ -241,7 +225,6 @@ public class B_Menu extends AppCompatActivity {
         animButtonMenu();  // Мигание кнопок Меню
         animZnakov();  // Анимация знаков (монет, часы...)
         shrift();  // Шрифты
-        onResume(); // Вывод данных из памяти
 
         switch (slognost_game) {
             case 1:
@@ -334,9 +317,7 @@ public class B_Menu extends AppCompatActivity {
         fonMusic.pause();
     }
 
-
     // ВОЗОБНОВЛЯЕТ Музыку при возобновления работы после свертывании приложения
-
 
     public void onStart() {
         super.onStart();
@@ -347,12 +328,17 @@ public class B_Menu extends AppCompatActivity {
             mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+
             regulirovUrovenVolume();
             timeOnFonMusik = 6000;
             vklFonMusic();
         }
-
     }
 
     private void startGame() {
@@ -447,10 +433,25 @@ public class B_Menu extends AppCompatActivity {
         if (pologenieKnopkiMute == true) {
         } else {
             fonMusic.stop();
-            urovenVolume = 40; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 40; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+
+            /*   urovenVolume = 40; // Установка уровня громкости звука кнопки (от 1 до 100) в %*/
             regulirovUrovenVolume();
         }
-        urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %
+
+        if (pologenRegulVolum != 0) {
+            urovenVolume = zadanUrovVolume;
+        } else {
+            urovenVolume = 60; // Установка уровня громкости музыки (от 1 до 100) в %
+        }
+        /*  urovenVolume = 60; // Установка уровня громкости звука кнопки (от 1 до 100) в %*/
+
+
         regulirovUrovenVolume();
         zvExitGame.start();
         fonMusic.stop();
@@ -468,7 +469,14 @@ public class B_Menu extends AppCompatActivity {
             mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+            /* urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
+
             regulirovUrovenVolume();
             zvMute.start();
             timeOnFonMusik = 1500;
@@ -519,6 +527,13 @@ public class B_Menu extends AppCompatActivity {
             koefPobed = mSettings.getInt(String.valueOf(Key_Koef_Pobed), 0);
         } else koefPobed = 0;
 
+        if (pologenRegulVolum != 0) {
+            zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
+        }
+
+        if (pologenRegulBridgs != 0) {
+            zadanUrovBridgs = mSettings.getInt(String.valueOf(Key_Urov_Bridgs), 0);
+        }
     }
 
     @Override
@@ -540,7 +555,6 @@ public class B_Menu extends AppCompatActivity {
         SharedPreferences.Editor a4 = mSettings.edit();
         a4.putInt(String.valueOf(Key_Koef_Pobed), koefPobed);
         a4.apply();
-
     }
 
     private void animButtonMenu() {// Мигание кнопок Меню

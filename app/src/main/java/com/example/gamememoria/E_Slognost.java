@@ -4,6 +4,7 @@ import static com.example.gamememoria.B_Menu.Key_Koef_Pobed;
 import static com.example.gamememoria.B_Menu.Key_Slognost_game;
 import static com.example.gamememoria.B_Menu.Key_Slognost_step;
 import static com.example.gamememoria.B_Menu.Key_Slognost_time;
+import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
 import static com.example.gamememoria.B_Menu.fonMusic;
 import static com.example.gamememoria.B_Menu.koefPobed;
 import static com.example.gamememoria.B_Menu.koef_slogn_step;
@@ -11,7 +12,9 @@ import static com.example.gamememoria.B_Menu.koef_slogn_time;
 import static com.example.gamememoria.B_Menu.mSettings;
 
 import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+import static com.example.gamememoria.B_Menu.pologenRegulVolum;
 import static com.example.gamememoria.B_Menu.slognost_game;
+import static com.example.gamememoria.B_Menu.zadanUrovVolume;
 import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
 import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
 import static com.example.gamememoria.A_Zastavka.povtorTriGameOverPodrad;
@@ -283,6 +286,10 @@ public class E_Slognost extends AppCompatActivity {
         if (mSettings.contains(String.valueOf(Key_Koef_Pobed))) {
             koefPobed = mSettings.getInt(String.valueOf(Key_Koef_Pobed), 0);
         } else koefPobed = 0;
+
+        if (pologenRegulVolum != 0) {
+            zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
+        }
     }
 
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
@@ -328,7 +335,14 @@ public class E_Slognost extends AppCompatActivity {
             mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+           /* urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
+
             regulirovUrovenVolume();
             zvMute.start();
             timeOnFonMusik = 1500;

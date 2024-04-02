@@ -1,7 +1,10 @@
 package com.example.gamememoria;
 
 import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
+import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
 import static com.example.gamememoria.B_Menu.fonMusic;
+import static com.example.gamememoria.B_Menu.pologenRegulVolum;
+import static com.example.gamememoria.B_Menu.zadanUrovVolume;
 import static com.example.gamememoria.C_MainActivity.StepCountIspolz;
 import static com.example.gamememoria.C_MainActivity.bonusStep;
 import static com.example.gamememoria.C_MainActivity.bonusTimeViv;
@@ -54,12 +57,12 @@ public class H_Pobeda extends AppCompatActivity {
     ConstraintLayout KartinraZadnegoPlana;
     int urovenVolume, timeOnFonMusik;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pobeda);
+
+        onResume();
 
 // СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
 
@@ -206,6 +209,15 @@ public class H_Pobeda extends AppCompatActivity {
         a9.apply();
     }
 
+    @Override
+    public void onResume() {    // Получаем число из настроек
+        super.onResume();
+
+        if (pologenRegulVolum != 0) {
+            zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
+        }
+    }
+
     public void clickMute(View view) {
 
         if (pologenieKnopkiMute == false) {
@@ -216,7 +228,14 @@ public class H_Pobeda extends AppCompatActivity {
             mute.setImageResource(R.drawable.mute);
         } else {
             mute.setImageResource(R.drawable.zvuk);
-            urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
+           /* urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
+
             regulirovUrovenVolume();
             zvMute.start();
             timeOnFonMusik = 1500;

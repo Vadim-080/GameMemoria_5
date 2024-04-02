@@ -1,16 +1,28 @@
 package com.example.gamememoria;
 
+import static com.example.gamememoria.B_Menu.APP_PREFERENCES;
+import static com.example.gamememoria.B_Menu.Key_Urov_Bridgs;
+import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
+import static com.example.gamememoria.B_Menu.Key_pologen_regul_Bridgs;
+import static com.example.gamememoria.B_Menu.Key_pologen_regul_Volum;
+import static com.example.gamememoria.B_Menu.mSettings;
 import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+import static com.example.gamememoria.B_Menu.pologenRegulBridgs;
+import static com.example.gamememoria.B_Menu.pologenRegulVolum;
+import static com.example.gamememoria.B_Menu.zadanUrovBridgs;
+import static com.example.gamememoria.B_Menu.zadanUrovVolume;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
@@ -32,11 +44,26 @@ public class A_Zastavka extends AppCompatActivity {
     ConstraintLayout KartinraZadnegoPlana;
     MediaPlayer zvZastavka;
 
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.zastavka);
+
+// Задаём уровень яркости
+        zadanUrovBridgs = 80; // задаём уровень яркости при первом запуске Игры
+
+        WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
+        layoutParams.screenBrightness = zadanUrovBridgs;
+        getWindow().setAttributes(layoutParams);
+
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE); // Внутри метода onCreate() вы инициализируете переменную  mSettings
+
+        pologenRegulVolum = 0;
+        pologenRegulBridgs = 0;
+        onPause();
 
 // СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
 
@@ -103,15 +130,15 @@ public class A_Zastavka extends AppCompatActivity {
                 break;
             case 1:
                 KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka2));
-                stimulirNadp.setTextColor(Color.rgb(160,255,100));
+                stimulirNadp.setTextColor(Color.rgb(160, 255, 100));
                 break;
             case 2:
                 KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka3));
-                stimulirNadp.setTextColor(Color.rgb(255,215,0));
+                stimulirNadp.setTextColor(Color.rgb(255, 215, 0));
                 break;
             case 3:
                 KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_zastavka4));
-                stimulirNadp.setTextColor(Color.rgb(62,2,92));
+                stimulirNadp.setTextColor(Color.rgb(62, 2, 92));
                 break;
 
         }
@@ -143,6 +170,23 @@ public class A_Zastavka extends AppCompatActivity {
         };
 
         timer.start();
+    }
+
+    @Override
+    public void onPause() {    // Запоминаем данные
+        super.onPause();
+
+        SharedPreferences.Editor a1 = mSettings.edit();
+        a1.putInt(String.valueOf(Key_pologen_regul_Bridgs), pologenRegulBridgs);
+        a1.apply();
+
+        SharedPreferences.Editor a2 = mSettings.edit();
+        a2.putInt(String.valueOf(Key_pologen_regul_Volum), pologenRegulVolum);
+        a2.apply();
+
+        SharedPreferences.Editor a3 = mSettings.edit();
+        a3.putInt(String.valueOf(Key_Urov_Bridgs), zadanUrovBridgs);
+        a3.apply();
     }
 
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
