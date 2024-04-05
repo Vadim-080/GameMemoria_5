@@ -89,21 +89,21 @@ public class B_Menu extends AppCompatActivity {
     public static int timeOnFonMusik;
     public static boolean pologSostoyanSvernutogoPrilogen = false;
 
-    Button start, start1, exit, newGame, slogn, setting, vosstsnovlMaxGame, dostigen;
+    Button start, start1, exit, newGame, slogn, setting, vosstsnovlMaxGame, dostigen, pravila;
 
     ImageButton mute;
     Chronometer timeBonus;
     TextView namberUroven, scoreBonus, nadpUrovenGame;
     ConstraintLayout KartinraZadnegoPlana;
 
-// Перемен VK рекламы
+    // Перемен VK рекламы
     private MyTargetView adView; // Рекламный  экземпляр класса
     RelativeLayout layout;
     RelativeLayout.LayoutParams adViewLayoutParams;
 
     public static MediaPlayer fonMusic; // Фоновая музыка
     MediaPlayer zvStart, zvMute, zvExitGame;
-    MediaPlayer mediaMenu1, mediaMenu2, mediaMenu4, mediaMenu6; // Звук кнопок меню
+    MediaPlayer mediaMenu1, mediaMenu2, mediaMenu4, mediaMenu6, mediaMenu7; // Звук кнопок меню
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -112,7 +112,7 @@ public class B_Menu extends AppCompatActivity {
 
         onResume(); // Вывод данных из памяти
 
- // Задаём уровень яркости
+        // Задаём уровень яркости
 
         WindowManager.LayoutParams layoutParams = getWindow().getAttributes();
         layoutParams.screenBrightness = zadanUrovBridgs;
@@ -180,6 +180,7 @@ public class B_Menu extends AppCompatActivity {
         newGame = findViewById(R.id.buNewGame);
         vosstsnovlMaxGame = findViewById(R.id.buVosstsnovlMaxGame);
         slogn = findViewById(R.id.buSlognost);
+        pravila= findViewById(R.id.buPravila);
         setting = findViewById(R.id.buSetting);
         exit = findViewById(R.id.buExit);
         mute = findViewById(R.id.buMute);
@@ -197,6 +198,7 @@ public class B_Menu extends AppCompatActivity {
         mediaMenu2 = MediaPlayer.create(this, R.raw.new_game_1);
         mediaMenu4 = MediaPlayer.create(this, R.raw.slognost_1);
         mediaMenu6 = MediaPlayer.create(this, R.raw.zv_menu_6);
+        mediaMenu7 = MediaPlayer.create(this, R.raw.ravno);
 
         mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
 
@@ -294,6 +296,12 @@ public class B_Menu extends AppCompatActivity {
             }
         });
 
+        pravila.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pravila();
+            }
+        });
 
         exit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -425,6 +433,18 @@ public class B_Menu extends AppCompatActivity {
         }
 
         Intent i = new Intent(this, F_Setting.class);
+        startActivity(i);
+    }
+
+    private void pravila() {
+
+        if (pologenieKnopkiMute == true) {
+        } else {
+            fonMusic.stop();
+            mediaMenu7.start();
+        }
+
+        Intent i = new Intent(this, J_PravilaGame.class);
         startActivity(i);
     }
 

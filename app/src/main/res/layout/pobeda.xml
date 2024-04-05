@@ -47,7 +47,6 @@
         android:layout_marginTop="270dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="80dp"
-
         android:textStyle="bold"
         android:background="@android:color/transparent"
         android:textSize="23dp"
@@ -79,12 +78,13 @@
     <Button
         android:id="@+id/buProdolgitGame"
         style="@style/styleStart"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="PovtorGame"
-        android:text="ПОВТОРИТЬ ИГРУ"
-        android:textSize="15dp"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:onClick="clickProdolgitGame"
+        android:text="ПРОДОЛЖИТЬ ИГРУ"
         android:textStyle="bold"
+        android:gravity="center"
+        android:autoSizeTextType="uniform"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.37"
@@ -94,8 +94,6 @@
         app:layout_constraintVertical_bias="0.99"
         app:strokeColor="@color/CV3"
         app:strokeWidth="3dp" />
-
-
 
     <ImageButton
         android:id="@+id/buMute"

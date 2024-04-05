@@ -27,6 +27,21 @@
         app:layout_constraintVertical_bias="0.00" />
 
     <TextView
+        android:id="@+id/text_Slognost_viev"
+        style="@style/styleNadpPravilGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="СЛОЖНОСТЬ"
+        android:textStyle="bold"
+        android:textColor="@color/CV35"
+        android:textSize="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
         android:id="@+id/NamberUroven_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -52,11 +67,11 @@
         android:src="@drawable/slogn1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.015" />
 
     <TextView
         android:id="@+id/nadpStep_view"

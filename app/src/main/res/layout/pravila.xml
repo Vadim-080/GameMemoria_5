@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fon_pravil_view"
+    style="@style/styleStart"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/pole_pravila"
+    tools:context=".J_PravilaGame">
+
+    <TextView
+        android:id="@+id/nadpSlognost_viev"
+        style="@style/styleNadpPravilGame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_horizontal|center_vertical"
+        android:text="ПРАВИЛА ИГРЫ"
+        android:textSize="40dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069" />
+
+    <TextView
+        android:id="@+id/text_pravil1"
+        style="@style/styleTextPravil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nadpSlognost_viev" />
+
+    <TextView
+        android:id="@+id/text_pravil2"
+        style="@style/styleTextPravil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_pravil1" />
+
+    <TextView
+        android:id="@+id/text_pravil3"
+        style="@style/styleTextPravil"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="50dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="50dp"
+        android:background="@android:color/transparent"
+        android:gravity="center_vertical"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.494"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_pravil2" />
+
+    <!-- <ScrollView
+         android:id="@+id/ScrollView01"
+         android:layout_width="wrap_content"
+         android:layout_height="150dip">
+
+         <TextView
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"/>
+
+     </ScrollView>
+ -->
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

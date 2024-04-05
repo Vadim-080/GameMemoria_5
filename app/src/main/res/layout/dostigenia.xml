@@ -473,7 +473,7 @@
         android:layout_height="40dp"
         android:layout_alignParentBottom="true"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="47dp"
+        android:layout_marginBottom="50dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"

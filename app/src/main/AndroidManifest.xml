@@ -12,7 +12,6 @@
         android:name="android.permission.WRITE_SETTINGS"
         tools:ignore="ProtectedPermissions" />
 
-
     <supports-screens
 
         android:anyDensity="true"
@@ -27,9 +26,9 @@
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
-        android:icon="@mipmap/icon_pril_foreground"
+        android:icon="@drawable/icon_2"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/icon_pril_foreground"
+        android:roundIcon="@drawable/icon_2"
         android:supportsRtl="true"
         android:theme="@style/Theme.GameMemoria"
         tools:targetApi="31">
@@ -132,7 +131,7 @@
         </activity>
 
         <activity
-            android:name=".D_Dostigenia"
+            android:name=".J_PravilaGame"
             android:configChanges="orientation|keyboardHidden|screenSize"
             android:exported="true"
             android:label="@string/app_name"
@@ -143,6 +142,17 @@
                 android:value="" />
         </activity>
 
+        <activity
+            android:name=".D_Dostigenia"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"> <!--Запрет менять ориентацию при повороте телефона-->
+            >
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
 
         <activity
             android:name=".RegulirovkiPRG"

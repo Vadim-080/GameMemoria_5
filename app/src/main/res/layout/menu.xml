@@ -5,9 +5,7 @@
     android:id="@+id/fon_menu_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
     tools:context=".B_Menu">
-
 
     <TextView
         android:id="@+id/nadpUrovenGame_view"
@@ -28,6 +26,21 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/text_Slognost_viev"
+        style="@style/styleNadpPravilGame"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="СЛОЖНОСТЬ"
+        android:textStyle="bold"
+        android:textColor="@color/CV35"
+        android:textSize="6dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.96"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/NamberUroven_view"
@@ -55,11 +68,11 @@
         android:src="@drawable/slogn1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.99"
+        app:layout_constraintHorizontal_bias="0.98"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.005" />
+        app:layout_constraintVertical_bias="0.015" />
 
     <ImageView
         android:id="@+id/monet_viev"
@@ -250,8 +263,8 @@
         android:id="@+id/buExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="20dp"
+
+
         android:text="ВЫХОД"
         android:textAppearance="@color/CV20"
         android:textColorHighlight="@color/CV12"
@@ -263,7 +276,7 @@
         app:layout_constraintHorizontal_bias="0.941"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
-        app:layout_constraintVertical_bias="0.105"
+        app:layout_constraintVertical_bias="0.60"
         app:rippleColor="@color/CV20"
         app:strokeColor="@color/CV18"
         app:strokeWidth="5dp" />
@@ -273,8 +286,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="10dp"
+
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
@@ -285,7 +297,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buPravila"
-        app:layout_constraintVertical_bias="0.237" />
+        app:layout_constraintVertical_bias="0.60" />
 
     <RelativeLayout
         android:id="@+id/RelativeLayout"

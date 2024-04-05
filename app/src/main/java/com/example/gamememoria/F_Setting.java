@@ -35,7 +35,6 @@ import com.my.target.common.models.IAdLoadingError;
 
 public class F_Setting extends AppCompatActivity {
 
-    Button zabiv, novi, opit, mast, buMenu;
     MediaPlayer zvPerexV_Menu;
 
     AudioManager urovVolumR;
@@ -51,6 +50,8 @@ public class F_Setting extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.setting);
+
+        onResume();
 
 // СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
 
@@ -118,7 +119,6 @@ public class F_Setting extends AppCompatActivity {
 
         int maxVolume = urovVolumR.getStreamMaxVolume(AudioManager.STREAM_MUSIC); // определение кол-во ступеней регулир громкости устройства
         int volumeNachaln = ((100 * tekUrovVolume) / maxVolume);
-      /*  urovVolumR.setStreamVolume(AudioManager.STREAM_MUSIC, volumeNachaln, 0);*/
 
         settingVolum.setText((String.valueOf(volumeNachaln)) + "  %");
 
@@ -154,8 +154,7 @@ public class F_Setting extends AppCompatActivity {
         SeekBar backLightSeekBar = findViewById(R.id.seekBar);
         final TextView settingTextView = findViewById(R.id.textViewSetting);
 
-
-        onResume();
+     /*   onResume();*/
 
         backLightSeekBar.setProgress(zadanUrovBridgs);
 

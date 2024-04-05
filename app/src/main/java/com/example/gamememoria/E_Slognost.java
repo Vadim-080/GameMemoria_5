@@ -5,6 +5,7 @@ import static com.example.gamememoria.B_Menu.Key_Slognost_game;
 import static com.example.gamememoria.B_Menu.Key_Slognost_step;
 import static com.example.gamememoria.B_Menu.Key_Slognost_time;
 import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
+import static com.example.gamememoria.B_Menu.Key_Urov_Bridgs;
 import static com.example.gamememoria.B_Menu.fonMusic;
 import static com.example.gamememoria.B_Menu.koefPobed;
 import static com.example.gamememoria.B_Menu.koef_slogn_step;
@@ -12,9 +13,11 @@ import static com.example.gamememoria.B_Menu.koef_slogn_time;
 import static com.example.gamememoria.B_Menu.mSettings;
 
 import static com.example.gamememoria.B_Menu.pologSostoyanSvernutogoPrilogen;
+import static com.example.gamememoria.B_Menu.pologenRegulBridgs;
 import static com.example.gamememoria.B_Menu.pologenRegulVolum;
 import static com.example.gamememoria.B_Menu.slognost_game;
 import static com.example.gamememoria.B_Menu.zadanUrovVolume;
+import static com.example.gamememoria.B_Menu.zadanUrovBridgs;
 import static com.example.gamememoria.RegulirovkiPRG.vklFonMusic;
 import static com.example.gamememoria.A_Zastavka.pologenieKnopkiMute;
 import static com.example.gamememoria.A_Zastavka.povtorTriGameOverPodrad;
@@ -46,7 +49,7 @@ public class E_Slognost extends AppCompatActivity {
     ConstraintLayout KartinraZadnegoPlana;
     ImageButton mute;
     int urovenVolume, timeOnFonMusik;
-    MediaPlayer mediaPlayer1, zvPerexV_Menu , zvMute;
+    MediaPlayer mediaPlayer1, zvPerexV_Menu , zvMute, zvSlogn1, zvSlogn2, zvSlogn3, zvSlogn4;
 
     // Перемен VK рекламы
     private MyTargetView adView; // Рекламный  экземпляр класса
@@ -57,6 +60,8 @@ public class E_Slognost extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.slognost);
+
+        onResume(); // Вывод данных из памяти
 
 // СКРЫВАЕМ ВЕРХНЮЮ И НИЖНЮЮ СТРОКИ НАВИГАЦИИ
 
@@ -123,22 +128,31 @@ public class E_Slognost extends AppCompatActivity {
         mute = findViewById(R.id.buMute);
         KartinraZadnegoPlana = findViewById(R.id.fon_slognost_view);
         mediaPlayer1 = MediaPlayer.create(this, R.raw.elektron1);
+        zvSlogn1 = MediaPlayer.create(this, R.raw.slogn_1);
+        zvSlogn2 = MediaPlayer.create(this, R.raw.slogn_2);
+        zvSlogn3 = MediaPlayer.create(this, R.raw.slogn_3);
+        zvSlogn4 = MediaPlayer.create(this, R.raw.slogn_4);
 
         // Задаём звуковые сигналы
         zvMute = MediaPlayer.create(this, R.raw.mute_1);
         zvPerexV_Menu = MediaPlayer.create(this, R.raw.zv_perxoda_v_menu_1);
+        fonMusic = MediaPlayer.create(this, R.raw.muz_slogn_1);
 
         KartinraZadnegoPlana.setBackground(getResources().getDrawable(R.drawable.pole_slognost));  // задаем фоновое поле
 
         mute.setAlpha(0.7f);    // ПРОЗРАЧНОСТЬ КНОПКИ Mute
 
         if (pologenieKnopkiMute == true) {
+
            /* urovenVolume = 0; // Установка уровня громкости музыки (от 1 до 100) в %
             regulirovUrovenVolume();*/
             mute.setImageResource(R.drawable.mute);
         } else {
-           /* urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
-            regulirovUrovenVolume();*/
+            if (pologenRegulVolum != 0) {
+                urovenVolume = zadanUrovVolume;
+            } else {
+                urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
+            }
             timeOnFonMusik = 8000;
             vklFonMusic();
             mute.setImageResource(R.drawable.zvuk);
@@ -206,6 +220,9 @@ public class E_Slognost extends AppCompatActivity {
 
     private void Zabiv() {
 
+        fonMusic.pause();
+        zvSlogn1.start();
+
         if (slognost_game > 1) {
             promegutGameOverPodrad = 0;
         }
@@ -218,6 +235,10 @@ public class E_Slognost extends AppCompatActivity {
     }
 
     private void Novi() {
+
+        fonMusic.pause();
+        zvSlogn2.start();
+
         if (slognost_game > 2) {
             promegutGameOverPodrad = 0;
         }
@@ -229,6 +250,10 @@ public class E_Slognost extends AppCompatActivity {
     }
 
     private void Opit() {
+
+        fonMusic.pause();
+        zvSlogn3.start();
+
         if (slognost_game > 3) {
             promegutGameOverPodrad = 0;
         }
@@ -240,6 +265,8 @@ public class E_Slognost extends AppCompatActivity {
     }
 
     private void Mast() {
+        fonMusic.pause();
+        zvSlogn4.start();
         slognost_game = 4;
         koef_slogn_time = -2;
         koef_slogn_step = -3;
@@ -254,6 +281,9 @@ public class E_Slognost extends AppCompatActivity {
     }
 
     private void Menu() {
+
+        zvPerexV_Menu.start();
+
         Intent i = new Intent(this, B_Menu.class);
         startActivity(i);
     }
@@ -290,6 +320,10 @@ public class E_Slognost extends AppCompatActivity {
         if (pologenRegulVolum != 0) {
             zadanUrovVolume = mSettings.getInt(String.valueOf(Key_Urov_Volum), 0);
         }
+
+        if (pologenRegulBridgs != 0) {
+            zadanUrovBridgs = mSettings.getInt(String.valueOf(Key_Urov_Bridgs), 0);
+        }
     }
 
     // ПРЕКРАЩЕНИЕ Музыки при свертывании приложения
@@ -297,7 +331,7 @@ public class E_Slognost extends AppCompatActivity {
     protected void onUserLeaveHint() {
         super.onUserLeaveHint();
         pologSostoyanSvernutogoPrilogen = true;
-        /*  fonMusic.pause();*/
+          fonMusic.pause();
     }
 
     private void BlokZabiv() {
