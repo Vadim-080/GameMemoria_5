@@ -43,10 +43,18 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+
+import com.my.target.ads.MyTargetView;
+import com.my.target.ads.Reward;
+import com.my.target.ads.RewardedAd;
+import com.my.target.common.MyTargetManager;
+import com.my.target.common.models.IAdLoadingError;
 
 public class H_Pobeda extends AppCompatActivity {
 
@@ -56,6 +64,9 @@ public class H_Pobeda extends AppCompatActivity {
     ImageButton mute;
     ConstraintLayout KartinraZadnegoPlana;
     int urovenVolume, timeOnFonMusik;
+
+    // Перемен VK рекламы
+    private RewardedAd ad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -155,7 +166,42 @@ public class H_Pobeda extends AppCompatActivity {
         fonMusic.pause();
     }
 
+    // VK реклама ВИДЕО
+    private void initAd() {
+        // Включение режима отладки
+        MyTargetManager.setDebugMode(true);
+
+        // Создаем экземпляр RewardedAd
+        ad = new RewardedAd(1539029, this);
+        // Устанавливаем слушатель событий
+        ad.setListener(new RewardedAd.RewardedAdListener() {
+            @Override
+            public void onLoad(RewardedAd ad) { // Запускаем показ
+                ad.show();
+            }
+            @Override
+            public void onNoAd(@NonNull IAdLoadingError iAdLoadingError, @NonNull RewardedAd rewardedAd) {
+            }
+            @Override
+            public void onClick(RewardedAd ad) {
+            }
+            @Override
+            public void onDisplay(RewardedAd ad) {
+            }
+            @Override
+            public void onDismiss(RewardedAd ad) {
+            }
+            @Override
+            public void onReward(@NonNull Reward reward, @NonNull RewardedAd ad) {
+            }
+        });
+        // Запускаем загрузку данных
+        ad.load();
+    }
+
     public void clickMenu(View v) {
+
+        initAd(); // ВИДЕО РЕКЛАМА VK
 
         zvPerexV_Menu.start();
 
@@ -164,6 +210,9 @@ public class H_Pobeda extends AppCompatActivity {
     }
 
     public void clickProdolgitGame(View v) {
+
+        initAd(); // ВИДЕО РЕКЛАМА VK
+
         Intent intent = new Intent(this, C_MainActivity.class);   // Переход на другой класс
         startActivity(intent);
     }

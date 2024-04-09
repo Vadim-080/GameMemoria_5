@@ -36,7 +36,7 @@
         android:text="СЛОЖНОСТЬ"
         android:textStyle="bold"
         android:textColor="@color/CV35"
-        android:textSize="6dp"
+        android:textSize="7dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.96"
         app:layout_constraintStart_toStartOf="parent"
@@ -117,10 +117,7 @@
         android:gravity="center"
         android:scaleType="fitXY"
         android:src="@drawable/time"
-
         app:layout_constraintEnd_toStartOf="@+id/timeBonus_view"
-
-
         app:layout_constraintTop_toBottomOf="@id/nadpUrovenGame_view" />
 
     <Chronometer
@@ -146,7 +143,6 @@
         android:layout_marginStart="44dp"
         android:layout_marginTop="20dp"
         android:backgroundTint="@color/CV31"
-
         android:text="ИГРА"
         android:textSize="31dp"
         android:textStyle="bold"
@@ -174,7 +170,6 @@
         android:layout_marginTop="25dp"
         android:autoSizeTextType="uniform"
         android:backgroundTint="@color/CV19"
-
         android:text="ДОСТИЖЕНИЯ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -205,7 +200,6 @@
         android:layout_marginTop="10dp"
         android:autoSizeTextType="uniform"
         android:backgroundTint="@color/CV19"
-
         android:text="ВОССТАНОВЛЕНИЕ ИГРЫ"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -237,7 +231,6 @@
         android:autoSizeTextType="uniform"
         android:backgroundTint="@color/CV19"
         android:text="СЛОЖНОСТЬ"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buVosstsnovlMaxGame"
@@ -263,8 +256,6 @@
         android:id="@+id/buExit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-
         android:text="ВЫХОД"
         android:textAppearance="@color/CV20"
         android:textColorHighlight="@color/CV12"
@@ -286,7 +277,6 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
-
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
@@ -311,7 +301,7 @@
             android:layout_height="wrap_content"
             app:myTarget_adSize="banner_320x50"
             app:myTarget_isRefreshAd="true"
-            app:myTarget_slotId="1531466">
+            app:myTarget_slotId="1539026">
         </com.my.target.ads.MyTargetView>
     </RelativeLayout>
 

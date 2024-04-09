@@ -84,13 +84,40 @@
         <item name="android:shadowRadius">10</item>
     </style>
 
-    <style name="styleTextPravil">
-        <item name="android:textColor">@color/CV2</item>
+    <style name="styleTextPravil1">
+        <item name="android:textColor">@color/CV41</item>
         <item name="android:textSize">22sp</item>
-        <item name="android:shadowColor">@color/CV19</item>
-        <item name="android:shadowDx">20</item>
-        <item name="android:shadowDy">15</item>
+        <item name="android:shadowColor">@color/CV42</item>
+        <item name="android:shadowDx">10</item>
+        <item name="android:shadowDy">10</item>
         <item name="android:shadowRadius">10</item>
+    </style>
+
+    <style name="styleTextPravil2">
+        <item name="android:textColor">@color/CV43</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:shadowColor">@color/CV44</item>
+        <item name="android:shadowDx">10</item>
+        <item name="android:shadowDy">10</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+
+    <style name="styleTextPravil3">
+        <item name="android:textColor">@color/CV45</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:shadowColor">@color/CV46</item>
+        <item name="android:shadowDx">10</item>
+        <item name="android:shadowDy">10</item>
+        <item name="android:shadowRadius">10</item>
+    </style>
+
+    <style name="styleTextPravil4">
+        <item name="android:textColor">@color/CV47</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:shadowColor">@color/CV48</item>
+        <item name="android:shadowDx">20</item>
+        <item name="android:shadowDy">20</item>
+        <item name="android:shadowRadius">20</item>
     </style>
 
     <style name="styleNadpDostigen">

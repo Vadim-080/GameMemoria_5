@@ -15,6 +15,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
+
 import static com.example.gamememoria.B_Menu.zadanUrovVolume;
 import static com.example.gamememoria.B_Menu.Key_Urov_Volum;
 import static com.example.gamememoria.B_Menu.Key_Uroven;
@@ -196,25 +197,30 @@ public class G_GameOver extends AppCompatActivity {
         MyTargetManager.setDebugMode(true);
 
         // Создаем экземпляр RewardedAd
-        ad = new RewardedAd(1535550, this);
+        ad = new RewardedAd(1539029, this);
         // Устанавливаем слушатель событий
         ad.setListener(new RewardedAd.RewardedAdListener() {
             @Override
             public void onLoad(RewardedAd ad) { // Запускаем показ
                 ad.show();
             }
+
             @Override
             public void onNoAd(@NonNull IAdLoadingError iAdLoadingError, @NonNull RewardedAd rewardedAd) {
             }
+
             @Override
             public void onClick(RewardedAd ad) {
             }
+
             @Override
             public void onDisplay(RewardedAd ad) {
             }
+
             @Override
             public void onDismiss(RewardedAd ad) {
             }
+
             @Override
             public void onReward(@NonNull Reward reward, @NonNull RewardedAd ad) {
             }
@@ -232,7 +238,10 @@ public class G_GameOver extends AppCompatActivity {
     }
 
     public void clickMenu(View view) {
+
         zvPerexV_Menu.start();
+
+        initAd(); // ВИДЕО РЕКЛАМА VK
 
         Intent intent = new Intent(this, B_Menu.class);    // Переход на другой класс (сдесь класс Vvod)
         startActivity(intent);
@@ -271,7 +280,7 @@ public class G_GameOver extends AppCompatActivity {
             } else {
                 urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %
             }
-         /*   urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
+            /*   urovenVolume = 30; // Установка уровня громкости музыки (от 1 до 100) в %*/
 
             regulirovUrovenVolume();
             zvMute.start();
@@ -282,7 +291,6 @@ public class G_GameOver extends AppCompatActivity {
             mute.animate().rotationXBy(180).setDuration(500);
         }
     }
-
 
 
     private void regulirovUrovenVolume() {    //Этот код мгновенно установит громкость на уровень заданной переменной urovenVolume

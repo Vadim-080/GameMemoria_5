@@ -80,7 +80,7 @@ public class D_Dostigenia extends AppCompatActivity {
         adView = new MyTargetView(this);
         // Устанавливаем id слота
 
-        adView.setSlotId(1531466);
+        adView.setSlotId(1539538);
 
         // Устанавливаем LayoutParams
         adViewLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);

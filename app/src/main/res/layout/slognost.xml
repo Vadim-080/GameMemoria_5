@@ -125,7 +125,6 @@
         app:strokeColor="@color/CV32"
         app:strokeWidth="3dp" />
 
-
     <Button
         android:id="@+id/buOpitn"
         style="@style/styleButtonMenu"
@@ -176,7 +175,7 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.94"
+        app:layout_constraintVertical_bias="0.93"
         app:strokeColor="@color/CV3"
         app:strokeWidth="2dp" />
 
@@ -185,7 +184,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:layout_marginLeft="10dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="60dp"
         android:autoSizeTextType="uniform"
         android:background="@android:color/transparent"
         android:gravity="center"
@@ -208,7 +207,7 @@
             android:layout_height="wrap_content"
             app:myTarget_adSize="banner_320x50"
             app:myTarget_isRefreshAd="true"
-            app:myTarget_slotId="1531466">
+            app:myTarget_slotId="1539026">
         </com.my.target.ads.MyTargetView>
     </RelativeLayout>
 
