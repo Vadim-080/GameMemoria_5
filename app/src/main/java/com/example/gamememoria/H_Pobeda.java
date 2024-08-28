@@ -172,7 +172,7 @@ public class H_Pobeda extends AppCompatActivity {
         MyTargetManager.setDebugMode(true);
 
         // Создаем экземпляр RewardedAd
-        ad = new RewardedAd(1539029, this);
+        ad = new RewardedAd(1675169, this);
         // Устанавливаем слушатель событий
         ad.setListener(new RewardedAd.RewardedAdListener() {
             @Override

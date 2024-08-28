@@ -207,7 +207,7 @@
             android:layout_height="wrap_content"
             app:myTarget_adSize="banner_320x50"
             app:myTarget_isRefreshAd="true"
-            app:myTarget_slotId="1539026">
+            app:myTarget_slotId="1675164">
         </com.my.target.ads.MyTargetView>
     </RelativeLayout>
 

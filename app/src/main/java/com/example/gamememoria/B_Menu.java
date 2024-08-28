@@ -136,7 +136,7 @@ public class B_Menu extends AppCompatActivity {
         adView = new MyTargetView(this);
         // Устанавливаем id слота
 
-        adView.setSlotId(1539026);
+        adView.setSlotId(1675164);
 
         // Устанавливаем LayoutParams
         adViewLayoutParams = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
